@@ -1,0 +1,24 @@
+{
+  "connectionStrings": {
+    "DefaultConnectionString": "Server=.\\SQL2017;Database=ApiIntercap;User Id=sa;Password=Password1!"
+  },
+  "SeriLog": {
+    "SerilogConnectionString": "Server=.\\SQL2017;Database=ApiIntercap;User Id=sa;Password=Password1!",
+    "TableName": "RESTClientVTEXLog"
+  },
+  "VTEX": {
+    "BaseAddress": "https://motomercadoar.vtexcommercestable.com.br",
+    "AppKey": "vtexappkey-motomercadoar-YGWANH",
+    "AppToken": "LSQVQRPKZKJBNWZBCHGRPMYMHBHQNRHCFZJKLFAJJCRTMKLSIWLRETHYUDOPJZXICHVONOPWHXHNVFAXPOHQFPXMRKQHRLZJEIQEOXFTHOKHMUDODQZVSGDNJJWCYHEW",
+    "Specifications": {
+      "Path": "api/catalog/pvt/specification"
+    }
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Information",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  }
+}
