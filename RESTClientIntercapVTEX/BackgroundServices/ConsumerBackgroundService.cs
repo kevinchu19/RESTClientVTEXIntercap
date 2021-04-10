@@ -29,12 +29,12 @@ namespace RESTClientIntercapVTEX.BackgroundServices
         private readonly TimeSpan PERIOD = TimeSpan.FromMinutes(1);
         private readonly Serilog.ILogger _logger;
 
-        private IServiceVTEX _specificationsService { get; set; }
+        private IServiceVTEX _service{ get; set; }
 
-        public ConsumerBackgroundService(Serilog.ILogger logger, TService specificationsService)
+        public ConsumerBackgroundService(Serilog.ILogger logger, TService service)
         {
             _logger = logger;
-            _specificationsService= (IServiceVTEX)specificationsService;
+            _service = (IServiceVTEX)service;
         }
 
 
@@ -62,7 +62,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
 
                         _logger.Debug("Executing");
 
-                        hasMoreInThisMinute = await _specificationsService.DequeueProcessAndCheckIfContinueAsync(cancellationTokenLinked.Token);
+                        hasMoreInThisMinute = await _service.DequeueProcessAndCheckIfContinueAsync(cancellationTokenLinked.Token);
                         _logger.Debug("Executed and {debugText} more items", hasMoreInThisMinute ? "has" : "hasn'nt");
 
                         _ = Task.Delay(PERIOD).ContinueWith(task =>

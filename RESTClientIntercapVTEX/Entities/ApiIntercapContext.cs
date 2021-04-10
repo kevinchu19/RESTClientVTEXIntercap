@@ -1089,6 +1089,24 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasMaxLength(60)
                     .IsUnicode(false)
                     .HasColumnName("USR_STTCAS_DESCRP");
+
+                entity.Property(e => e.Usr_Sttcas_Keywor)
+                    .HasMaxLength(150)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAS_KEYWOR");
+
+                entity.Property(e => e.Usr_Sttcas_Descri)
+                    .HasMaxLength(120)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAS_DESCRI");
+
+                entity.Property(e => e.Usr_Sttcas_Scores)
+                    .HasColumnName("USR_STTCAS_SCORES");
+
+                entity.Property(e => e.Usr_Sttcas_Isacti)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAS_ISACTI");
             });
 
             modelBuilder.Entity<Usr_Sttcaa>(entity =>
@@ -1229,6 +1247,19 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasMaxLength(60)
                     .IsUnicode(false)
                     .HasColumnName("USR_STTCAH_DESCRP");
+
+                entity.Property(e => e.Usr_Sttcah_Keywor)
+                    .HasMaxLength(150)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAH_KEYWOR");
+
+                entity.Property(e => e.Usr_Sttcah_Descri)
+                    .HasMaxLength(120)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAH_DESCRI");
+
+                entity.Property(e => e.Usr_Sttcah_Scores)
+                    .HasColumnName("USR_STTCAH_SCORES");
             });
 
             modelBuilder.Entity<Usr_Sttcai>(entity =>
@@ -1282,6 +1313,25 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasMaxLength(60)
                     .IsUnicode(false)
                     .HasColumnName("USR_STTCAI_DESCRP");
+
+                entity.Property(e => e.Usr_Sttcai_Keywor)
+                    .HasMaxLength(150)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAI_KEYWOR");
+
+                entity.Property(e => e.Usr_Sttcai_Descri)
+                    .HasMaxLength(120)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAI_DESCRI");
+
+                entity.Property(e => e.Usr_Sttcai_Scores)
+                    .HasColumnName("USR_STTCAI_SCORES");
+
+                entity.Property(e => e.Usr_Sttcai_Isacti)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAI_ISACTI");
+
             });
 
             OnModelCreatingPartial(modelBuilder);

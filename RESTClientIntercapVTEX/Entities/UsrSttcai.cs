@@ -10,6 +10,10 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_Sttcai_Deptos { get; set; }
         public string Usr_Sttcai_Catego { get; set; }
         public string Usr_Sttcai_Descrp { get; set; }
+        public string Usr_Sttcai_Keywor { get; set; }
+        public string Usr_Sttcai_Descri { get; set; }
+        public int Usr_Sttcai_Scores { get; set; }
+        public string Usr_Sttcai_Isacti { get; set; }
         public DateTime? Usr_St_Fecalt { get; set; }
         public DateTime? Usr_St_Fecmod { get; set; }
         public string Usr_St_Userid { get; set; }

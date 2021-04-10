@@ -12,6 +12,9 @@
     "AppToken": "LSQVQRPKZKJBNWZBCHGRPMYMHBHQNRHCFZJKLFAJJCRTMKLSIWLRETHYUDOPJZXICHVONOPWHXHNVFAXPOHQFPXMRKQHRLZJEIQEOXFTHOKHMUDODQZVSGDNJJWCYHEW",
     "Specifications": {
       "Path": "api/catalog/pvt/specification"
+    },
+    "Categorys": {
+      "Path": "api/catalog/pvt/category"
     }
   },
   "Logging": {

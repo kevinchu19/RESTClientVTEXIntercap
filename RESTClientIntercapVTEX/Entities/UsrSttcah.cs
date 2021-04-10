@@ -9,6 +9,9 @@ namespace RESTClientIntercapVTEX.Entities
     {
         public string Usr_Sttcah_Deptos { get; set; }
         public string Usr_Sttcah_Descrp { get; set; }
+        public string Usr_Sttcah_Keywor{ get; set; }
+        public string Usr_Sttcah_Descri { get; set; }
+        public int Usr_Sttcah_Scores  { get; set; }
         public DateTime? Usr_St_Fecalt { get; set; }
         public DateTime? Usr_St_Fecmod { get; set; }
         public string Usr_St_Userid { get; set; }

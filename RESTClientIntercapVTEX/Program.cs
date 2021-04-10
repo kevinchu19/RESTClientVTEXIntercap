@@ -53,12 +53,17 @@ namespace RESTClientIntercapVTEX
             // Print connection string to demonstrate configuration object is populated
             Console.WriteLine(Configuration.GetConnectionString("DataConnection"));
 
-            try
+                        try
             {
-                Log.Information("Starting service");
+                
+                Log.Information("Comenzando servicio de categorias");
+                await serviceProvider.GetService<ConsumerBackgroundService<CategorysService<CategoryDTO>>>().RunAsync(new CancellationTokenSource()
+                                                                                            .Token);
+                Log.Information("Terminando servicio de categorias");
+                Log.Information("Comenzando servicio de especificaciones");
                 await serviceProvider.GetService<ConsumerBackgroundService<SpecificationsService<SpecificationDTO>>>().RunAsync(new CancellationTokenSource()
                                                                                             .Token);
-                Log.Information("Ending service");
+                Log.Information("Terminando servicio de especificaciones");
             }
             catch (Exception ex)
             {
@@ -102,6 +107,14 @@ namespace RESTClientIntercapVTEX
 
             serviceCollection.AddLogging();
 
+            Serilog.ILogger _logger =  new LoggerConfiguration()
+                                        .WriteTo
+                                        .MSSqlServer(
+                                            connectionString: Configuration["Serilog:SerilogConnectionString"],
+                                            sinkOptions: new MSSqlServerSinkOptions { TableName = Configuration["Serilog:TableName"], AutoCreateSqlTable = true },
+                                            restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Debug)
+                                        .CreateLogger();
+
             //Add DbContext
             serviceCollection.AddDbContext<ApiIntercapContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")).EnableSensitiveDataLogging());
@@ -112,9 +125,15 @@ namespace RESTClientIntercapVTEX
             // Add Services
             serviceCollection.AddTransient<SpecificationsService<SpecificationDTO>>();
             serviceCollection.AddTransient(provider =>
-                new SpecificationsClient<SpecificationDTO>(new HttpClient() { },Configuration, Configuration["VTEX:Specifications:Path"]));
+                new SpecificationsClient<SpecificationDTO>(new HttpClient() { },Configuration, Configuration["VTEX:Specifications:Path"], _logger));
+            
+            serviceCollection.AddTransient<CategorysService<CategoryDTO>>();
+            serviceCollection.AddTransient(provider =>
+                new CategorysClient<CategoryDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:Categorys:Path"], _logger));
+            
             // Add app
             serviceCollection.AddTransient<ConsumerBackgroundService<SpecificationsService<SpecificationDTO>>>();
+            serviceCollection.AddTransient<ConsumerBackgroundService<CategorysService<CategoryDTO>>>();
 
 
             //Unit of work
@@ -129,16 +148,46 @@ namespace RESTClientIntercapVTEX
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Usr_Sttcaa_Codatr))
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Usr_Sttcaa_Descrp))
                 .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.Usr_Sttcaa_Positi))
-                .ForMember(dest => dest.IsFilter, opt => opt.MapFrom(src => src.Usr_Sttcaa_Isfilt =="S"))
+                .ForMember(dest => dest.IsFilter, opt => opt.MapFrom(src => src.Usr_Sttcaa_Isfilt == "S"))
                 .ForMember(dest => dest.IsRequired, opt => opt.MapFrom(src => src.Usr_Sttcaa_Isrequ == "S"))
                 .ForMember(dest => dest.IsOnProductDetails, opt => opt.MapFrom(src => src.Usr_Sttcaa_Isonpr == "S"))
                 .ForMember(dest => dest.IsStockKeepingUnit, opt => opt.MapFrom(src => src.Usr_Sttcaa_Isssku == "S"))
                 .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.Usr_Sttcaa_Isacti == "S"))
                 .ForMember(dest => dest.IsTopMenuLinkActive, opt => opt.MapFrom(src => src.Usr_Sttcaa_Topmen == "S"))
                 .ForMember(dest => dest.IsSideMenuLinkActive, opt => opt.MapFrom(src => src.Usr_Sttcaa_Sidmen == "S"))
-                .ForMember(dest => dest.DefaultValue, opt => opt.MapFrom(src => src.Usr_Sttcaa_Defaul))
-                .ReverseMap();
+                .ForMember(dest => dest.DefaultValue, opt => opt.MapFrom(src => src.Usr_Sttcaa_Defaul));
 
+                configuration.CreateMap<Usr_Sttcah, CategoryDTO>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Convert.ToInt32(src.Usr_Sttcah_Deptos)))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Usr_Sttcah_Descrp))
+                .ForMember(dest => dest.Keywords, opt => opt.MapFrom(src => src.Usr_Sttcah_Keywor))
+                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Usr_Sttcah_Descrp))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Usr_Sttcah_Descri))
+                .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.Usr_St_Debaja == "N"))
+                .ForMember(dest => dest.Score, opt => opt.MapFrom(src => src.Usr_Sttcah_Scores));
+
+                configuration.CreateMap<Usr_Sttcai, CategoryDTO>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Convert.ToInt32(src.Usr_Sttcai_Deptos).ToString() + src.Usr_Sttcai_Catego))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Usr_Sttcai_Descrp))
+                .ForMember(dest => dest.Keywords, opt => opt.MapFrom(src => src.Usr_Sttcai_Keywor))
+                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Usr_Sttcai_Descrp))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Usr_Sttcai_Descri))
+                .ForMember(dest => dest.FatherCategoryId, opt => opt.MapFrom(src => Convert.ToInt32(src.Usr_Sttcai_Deptos).ToString()))
+                .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.Usr_Sttcai_Isacti == "S"))
+                .ForMember(dest => dest.Score, opt => opt.MapFrom(src => src.Usr_Sttcai_Scores));
+
+                configuration.CreateMap<Usr_Sttcas, CategoryDTO>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Convert.ToInt32(src.Usr_Sttcas_Deptos).ToString() + 
+                                                                      src.Usr_Sttcas_Catego +
+                                                                      src.Usr_Sttcas_Subcat))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Usr_Sttcas_Descrp))
+                .ForMember(dest => dest.Keywords, opt => opt.MapFrom(src => src.Usr_Sttcas_Keywor))
+                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Usr_Sttcas_Descrp))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Usr_Sttcas_Descri))
+                .ForMember(dest => dest.FatherCategoryId, opt => opt.MapFrom(src => Convert.ToInt32(src.Usr_Sttcas_Deptos).ToString() +
+                                                                                    src.Usr_Sttcas_Catego))
+                .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.Usr_Sttcas_Isacti == "S"))
+                .ForMember(dest => dest.Score, opt => opt.MapFrom(src => src.Usr_Sttcas_Scores));
             }
                 , typeof(Program));
         }
