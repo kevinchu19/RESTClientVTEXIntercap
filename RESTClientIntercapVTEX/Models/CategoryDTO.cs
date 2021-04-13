@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,6 +20,14 @@ namespace RESTClientIntercapVTEX.Models
         public bool ShowBrandFilter { get; set; } = true;
         public int Score { get; set; }
         public string StockKeepingUnitSelectionMode { get; set; } = "SPECIFICATION";
+        [JsonIgnore]
+        public DateTime Sfl_LoginDateTime { get; set; }
+        [JsonIgnore]
+        public string Sfl_TableOperation  { get; set; }
+        [JsonIgnore]
+        public string Usr_St_Oalias { get; set; }
+        [JsonIgnore]
+        public int RowId { get; set; }
 
     }
 }

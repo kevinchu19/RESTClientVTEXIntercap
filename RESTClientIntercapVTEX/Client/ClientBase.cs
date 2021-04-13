@@ -1,4 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////// TODO: Marcar datos enviados como transferidos /////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+using Microsoft.Extensions.Configuration;
 using RESTClientIntercapVTEX.Models;
 using Serilog;
 using System;
@@ -48,7 +53,43 @@ namespace RESTClientIntercapVTEX.Client
             return JsonSerializer.Deserialize<IEnumerable<TResource>>(contentString, jsonSerializerOptions);
         }
 
-        public async Task PostAsync (TResource data, CancellationToken cancellationToken)
+        public async Task<bool> PutAsync(TResource data,string id, CancellationToken cancellationToken)
+        {
+            {
+                var contentString = JsonSerializer.Serialize(data);
+                var request = new HttpRequestMessage(HttpMethod.Put, $"{_path}/{id}")
+                {
+                    Content = new StringContent(contentString, Encoding.UTF8, "application/json")
+                };
+                request.Headers.Add("X-VTEX-API-AppKey", _appKey);
+                request.Headers.Add("X-VTEX-API-AppToken", _appToken);
+                request.Headers.Add("Accept", "application/json");
+
+                var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+                if (!response.IsSuccessStatusCode)
+                {
+                    try
+                    {
+                        var content = await JsonSerializer.DeserializeAsync<VTEXErrorResponse>(await response.Content.ReadAsStreamAsync());
+                        _logger.Error($"No se puede actualizar el recurso {contentString} en la ruta `{_path}`, el statuscode fue `{response.StatusCode}` y el mensaje de VTEX:`{content.Message}`");
+                    }
+                    catch 
+                    {
+                        _logger.Error($"No se puede actualizar el recurso {contentString} en la ruta `{_path}`, el statuscode fue `{response.StatusCode}`");
+                    }
+                }
+                else
+                {
+                    _logger.Information($"Recurso {contentString} actualizado en la ruta {_path} exitosamente ");
+                }
+
+                return response.IsSuccessStatusCode;
+
+            }
+        }
+
+
+        public async Task<bool> PostAsync (TResource data, CancellationToken cancellationToken)
         {
             var contentString = JsonSerializer.Serialize(data);
             var request = new HttpRequestMessage(HttpMethod.Post, _path)
@@ -65,18 +106,19 @@ namespace RESTClientIntercapVTEX.Client
                 try
                 {
                     var content = await JsonSerializer.DeserializeAsync<VTEXErrorResponse>(await response.Content.ReadAsStreamAsync());
-                    _logger.Error($"No se pudo dar de alta el recurso en la ruta `{_path}`, el statuscode fue `{response.StatusCode}` y el mensaje de VTEX:`{content.Message}`");
+                    _logger.Error($"No se pudo dar de alta el recurso {contentString} en la ruta `{_path}`, el statuscode fue `{response.StatusCode}` y el mensaje de VTEX:`{content.Message}`");
                 }
                 catch(Exception ex)
                 {
-                    _logger.Error($"No se pudo dar de alta el recurso en la ruta `{_path}`, el statuscode fue `{response.StatusCode}`");
+                    _logger.Error($"No se pudo dar de alta el recurso {contentString} en la ruta `{_path}`, el statuscode fue `{response.StatusCode}`");
                 }
             }
             else
             {
-                _logger.Information($"Recurso {data} dado de alta en la ruta {_path} exitosamente ");
+                _logger.Information($"Recurso {contentString} dado de alta en la ruta {_path} exitosamente ");
             }
             
+            return response.IsSuccessStatusCode;
         }
 
     }

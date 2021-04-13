@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace RESTClientIntercapVTEX.BackgroundServices
 {
-    internal class ConsumerBackgroundService<TService> //: BackgroundService
+    internal class ConsumerBackgroundService //: BackgroundService
     {
 
         // Max execution per period
-        const int MAX_PER_PERIOD = 1;
+        const int MAX_PER_PERIOD = 2;
         // This is the number os concurrent action that will be release in the first few milliseconds of each minute
         // You can set another inital value if you don't want to have a peek in each minute
         const int MAX_ACTION_CONCURRENT = 1;
@@ -28,13 +28,15 @@ namespace RESTClientIntercapVTEX.BackgroundServices
         // All throttlings are rest every minute
         private readonly TimeSpan PERIOD = TimeSpan.FromMinutes(1);
         private readonly Serilog.ILogger _logger;
+        public CategorysService _categoryService { get; }
+        public SpecificationsService _specificationService { get; }
 
-        private IServiceVTEX _service{ get; set; }
-
-        public ConsumerBackgroundService(Serilog.ILogger logger, TService service)
+        public ConsumerBackgroundService(Serilog.ILogger logger, CategorysService categoryService, 
+                                                                 SpecificationsService specificationService)
         {
             _logger = logger;
-            _service = (IServiceVTEX)service;
+            _categoryService = categoryService;
+            _specificationService = specificationService;
         }
 
 
@@ -57,24 +59,8 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                     var hasMoreInThisMinute = false;
                     try
                     {
-                        using var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(5));
-                        using var cancellationTokenLinked = CancellationTokenSource.CreateLinkedTokenSource(stoppingToken, cancellationTokenSource.Token);
-
-                        _logger.Debug("Executing");
-
-                        hasMoreInThisMinute = await _service.DequeueProcessAndCheckIfContinueAsync(cancellationTokenLinked.Token);
-                        _logger.Debug("Executed and {debugText} more items", hasMoreInThisMinute ? "has" : "hasn'nt");
-
-                        _ = Task.Delay(PERIOD).ContinueWith(task =>
-                        {
-                            _logger.Debug("Release period sempahore");
-                            _semaphoreSlimPeriod.Release(1);
-                            if (!hasMoreInThisMinute)
-                            {
-                                _logger.Debug("Release action sempahore after no more items");
-                                _semaphoreSlimAction.Release(1);
-                            }
-                        });
+                        await ExecServiceAsync(_categoryService, stoppingToken);
+                        await ExecServiceAsync(_specificationService, stoppingToken);
                     }
                     catch (Exception ex)
                     {
@@ -84,7 +70,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                     {
                         if (hasMoreInThisMinute)
                         {
-                            _logger.Debug("Release action sempahore");
+                            //_logger.Information("Release action sempahore");
                             _semaphoreSlimAction.Release(1);
                         }
                     }
@@ -97,6 +83,27 @@ namespace RESTClientIntercapVTEX.BackgroundServices
             }
         }
 
+        private async Task ExecServiceAsync(IServiceVTEX _service, CancellationToken stoppingToken)
+        {
+            using var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(5));
+            using var cancellationTokenLinked = CancellationTokenSource.CreateLinkedTokenSource(stoppingToken, cancellationTokenSource.Token);
+
+            //_logger.Information($"Ejecutando servicio {_service}");
+
+            bool hasMoreInThisMinute = await _service.DequeueProcessAndCheckIfContinueAsync(cancellationTokenLinked.Token);
+            //_logger.Information($"Ejecutado y {(hasMoreInThisMinute ? "tiene" : "no tiene")} más items");
+
+            _ = Task.Delay(PERIOD).ContinueWith(task =>
+            {
+                //_logger.Debug("Release period sempahore");
+                _semaphoreSlimPeriod.Release(1);
+                if (!hasMoreInThisMinute)
+                {
+                    //_logger.Information("Release action sempahore after no more items");
+                    _semaphoreSlimAction.Release(1);
+                }
+            });
+        }
     }
 
 }

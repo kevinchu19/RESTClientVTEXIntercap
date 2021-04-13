@@ -8,7 +8,7 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        Task<TEntity> Get(CancellationToken cancellationToken, string id);
+        Task<TEntity> Get(CancellationToken cancellationToken, int id);
         Task<IEnumerable<TEntity>> GetAll(CancellationToken cancellationToken);
 
         Task Add(CancellationToken cancellationToken, TEntity entity);

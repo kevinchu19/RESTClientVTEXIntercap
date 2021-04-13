@@ -3,6 +3,7 @@ using RESTClientIntercapVTEX.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace RESTClientIntercapVTEX.Repositories.Persistance
 {
@@ -67,6 +68,12 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
                 return _specifications;
             }
         }
+
+        public async Task<int> Complete()
+        {
+            return await Context.SaveChangesAsync();
+        }
+
 
         public void Dispose()
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,7 +9,7 @@ namespace RESTClientIntercapVTEX.Models
     {
         public int FieldTypeId { get; set; }
         public int CategoryId { get; set; }
-        public int FieldGroupId { get; set; }
+        public int FieldGroupId { get; set; } = 8;
         public string Name { get; set; }
         public string Description { get; set; }
         public int Position { get; set; }
@@ -21,5 +22,13 @@ namespace RESTClientIntercapVTEX.Models
         public bool IsSideMenuLinkActive { get; set; }
         public string DefaultValue { get; set; }
 
+        [JsonIgnore]
+        public DateTime Sfl_LoginDateTime { get; set; }
+        [JsonIgnore]
+        public string Sfl_TableOperation { get; set; }
+        [JsonIgnore]
+        public string Usr_St_Oalias { get; set; }
+        [JsonIgnore]
+        public int RowId { get; set; }
     }
 }

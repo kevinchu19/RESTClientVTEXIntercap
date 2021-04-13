@@ -1035,9 +1035,9 @@ namespace RESTClientIntercapVTEX.Entities
 
             modelBuilder.Entity<Usr_Sttcas>(entity =>
             {
-                entity.HasKey(e => new { e.Usr_Sttcas_Deptos, e.Usr_Sttcas_Catego, e.Usr_Sttcas_Subcat });
+                entity.HasKey(e => new { e.RowId });
 
-                entity.ToTable("USR_STTCAS");
+                entity.ToTable("USR_STTCASlog");
 
                 entity.Property(e => e.Usr_Sttcas_Deptos)
                     .HasMaxLength(6)
@@ -1107,13 +1107,27 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasMaxLength(1)
                     .IsUnicode(false)
                     .HasColumnName("USR_STTCAS_ISACTI");
+
+                entity.Property(e => e.Sfl_TableOperation)
+                  .HasMaxLength(30)
+                  .IsUnicode(false)
+                  .HasColumnName("Sfl_TableOperation");
+
+                entity.Property(e => e.Sfl_LoginDateTime)
+                   .HasColumnType("datetime")
+                   .HasColumnName("Sfl_LoginDateTime");
+
+                entity.Property(e => e.Usr_Vtex_Transf)
+                   .HasMaxLength(1)
+                   .IsUnicode(false)
+                   .HasColumnName("USR_VTEX_TRANSF");
             });
 
             modelBuilder.Entity<Usr_Sttcaa>(entity =>
             {
-                entity.HasKey(e => new { e.Usr_Sttcaa_Deptos, e.Usr_Sttcaa_Codatr });
+                entity.HasKey(e => new { e.RowId});
 
-                entity.ToTable("USR_STTCAA");
+                entity.ToTable("USR_STTCAAlog");
 
                 entity.Property(e => e.Usr_Sttcaa_Deptos)
                     .HasMaxLength(6)
@@ -1199,13 +1213,27 @@ namespace RESTClientIntercapVTEX.Entities
                     .IsUnicode(false)
                     .HasColumnName("USR_STTCAA_ISACTI");
 
+                entity.Property(e => e.Sfl_TableOperation)
+                  .HasMaxLength(30)
+                  .IsUnicode(false)
+                  .HasColumnName("Sfl_TableOperation");
+
+                entity.Property(e => e.Sfl_LoginDateTime)
+                   .HasColumnType("datetime")
+                   .HasColumnName("Sfl_LoginDateTime");
+
+                entity.Property(e => e.Usr_Vtex_Transf)
+                   .HasMaxLength(1)
+                   .IsUnicode(false)
+                   .HasColumnName("USR_VTEX_TRANSF");
+
             });
 
             modelBuilder.Entity<Usr_Sttcah>(entity =>
             {
-                entity.HasKey(e => e.Usr_Sttcah_Deptos);
+                entity.HasKey(e => e.RowId);
 
-                entity.ToTable("USR_STTCAH");
+                entity.ToTable("USR_STTCAHlog");
 
                 entity.Property(e => e.Usr_Sttcah_Deptos)
                     .HasMaxLength(6)
@@ -1260,13 +1288,27 @@ namespace RESTClientIntercapVTEX.Entities
 
                 entity.Property(e => e.Usr_Sttcah_Scores)
                     .HasColumnName("USR_STTCAH_SCORES");
+
+                entity.Property(e => e.Sfl_TableOperation)
+                  .HasMaxLength(30)
+                  .IsUnicode(false)
+                  .HasColumnName("Sfl_TableOperation");
+
+                entity.Property(e => e.Sfl_LoginDateTime)
+                   .HasColumnType("datetime")
+                   .HasColumnName("Sfl_LoginDateTime");
+
+                entity.Property(e => e.Usr_Vtex_Transf)
+                   .HasMaxLength(1)
+                   .IsUnicode(false)
+                   .HasColumnName("USR_VTEX_TRANSF");
             });
 
             modelBuilder.Entity<Usr_Sttcai>(entity =>
             {
-                entity.HasKey(e => new { e.Usr_Sttcai_Deptos, e.Usr_Sttcai_Catego });
+                entity.HasKey(e => new { e.RowId});
 
-                entity.ToTable("USR_STTCAI");
+                entity.ToTable("USR_STTCAIlog");
 
                 entity.Property(e => e.Usr_Sttcai_Deptos)
                     .HasMaxLength(6)
@@ -1331,6 +1373,20 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasMaxLength(1)
                     .IsUnicode(false)
                     .HasColumnName("USR_STTCAI_ISACTI");
+
+                entity.Property(e => e.Sfl_TableOperation)
+                   .HasMaxLength(30)
+                   .IsUnicode(false)
+                   .HasColumnName("Sfl_TableOperation");
+
+                entity.Property(e => e.Sfl_LoginDateTime)
+                   .HasColumnType("datetime")
+                   .HasColumnName("Sfl_LoginDateTime");
+                
+                entity.Property(e => e.Usr_Vtex_Transf)
+                   .HasMaxLength(1)
+                   .IsUnicode(false)
+                   .HasColumnName("USR_VTEX_TRANSF");
 
             });
 

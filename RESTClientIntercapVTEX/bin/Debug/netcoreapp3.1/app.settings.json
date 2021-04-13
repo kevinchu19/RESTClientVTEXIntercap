@@ -15,6 +15,9 @@
     },
     "Categorys": {
       "Path": "api/catalog/pvt/category"
+    },
+    "SpecificationsGroup": {
+      "Path": "api/catalog_system/pvt/specification/group"
     }
   },
   "Logging": {

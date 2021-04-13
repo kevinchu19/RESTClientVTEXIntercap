@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace RESTClientIntercapVTEX.Repositories.Interfaces
 {
@@ -10,6 +11,7 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
         IDepartmentsRepository Departments { get; }
         ICategorysRepository Categorys { get; }
         ISubcategorysRepository Subcategorys { get; }
+        Task<int> Complete();
 
     }
 }
