@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using RESTClientIntercapVTEX.Models;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,9 @@ namespace RESTClientIntercapVTEX.Client
 
         }
 
-      
+        public override Task<VTEXNewIDResponse> PostWithNewIDAsync(CategoryDTO data, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

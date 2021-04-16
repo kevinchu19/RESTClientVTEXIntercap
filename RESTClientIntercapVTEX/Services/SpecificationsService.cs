@@ -28,8 +28,12 @@ namespace RESTClientIntercapVTEX.Services
         {
             bool succesOperation = false;
 
-            var items = _mapper.Map<IEnumerable<Usr_Sttcaa>, IEnumerable<SpecificationDTO>>(await _repository.Specifications.GetForVTEX(cancellationToken));
+            var departmentSpecification = _mapper.Map<IEnumerable<Usr_Sttcaa>, IEnumerable<SpecificationDTO>>(await _repository.DepartmentsSpecifications.GetForVTEX(cancellationToken));
+            var categorySpecification = _mapper.Map<IEnumerable<Usr_Sttcax>, IEnumerable<SpecificationDTO>>(await _repository.CategorySpecifications.GetForVTEX(cancellationToken));
+            var subcategorySpecification = _mapper.Map<IEnumerable<Usr_Sttcay>, IEnumerable<SpecificationDTO>>(await _repository.SubcategorySpecifications.GetForVTEX(cancellationToken));
 
+            IEnumerable<SpecificationDTO> items = departmentSpecification.Concat(categorySpecification).Concat(subcategorySpecification).OrderBy(c => c.Sfl_LoginDateTime);
+            
             if (!items.Any()) return false;
 
             foreach (var item in items)
@@ -50,15 +54,44 @@ namespace RESTClientIntercapVTEX.Services
 
                 if (succesOperation)
                 {
-                    Usr_Sttcaa specificationTransfered = await _repository.Specifications.Get(cancellationToken, item.RowId);
-                    specificationTransfered.Usr_Vtex_Transf = "S";
-                     
+                    switch (item.Usr_St_Oalias)
+                    {
+                        case "USR_STTCAA":
+                            Usr_Sttcaa departmentSpecificationTransfered = await _repository.DepartmentsSpecifications.Get(cancellationToken, new object[] { item.RowId });
+                            departmentSpecificationTransfered.Usr_Vtex_Transf = "S";
+                            break;
+                        case "USR_STTCAX":
+                            Usr_Sttcax categorySpecificationTransfered = await _repository.CategorySpecifications.Get(cancellationToken, new object[] { item.RowId });
+                            categorySpecificationTransfered.Usr_Vtex_Transf = "S";
+                            break;
+                        case "USR_STTCAY":
+                            Usr_Sttcay subcategorySpecificationTransfered = await _repository.SubcategorySpecifications.Get(cancellationToken, new object[] { item.RowId });
+                            subcategorySpecificationTransfered.Usr_Vtex_Transf = "S";
+                            break;
+                        default:
+                            break;
+                    }
                     await _repository.Complete();
                 }
                 else
                 {
-                    Usr_Sttcaa specificationTransfered = await _repository.Specifications.Get(cancellationToken, item.RowId);
-                    specificationTransfered.Usr_Vtex_Transf = "E";
+                    switch (item.Usr_St_Oalias)
+                    {
+                        case "USR_STTCAA":
+                            Usr_Sttcaa departmentSpecificationTransfered = await _repository.DepartmentsSpecifications.Get(cancellationToken, new object[] { item.RowId });
+                            departmentSpecificationTransfered.Usr_Vtex_Transf = "E";
+                            break;
+                        case "USR_STTCAX":
+                            Usr_Sttcax categorySpecificationTransfered = await _repository.CategorySpecifications.Get(cancellationToken, new object[] { item.RowId });
+                            categorySpecificationTransfered.Usr_Vtex_Transf = "E";
+                            break;
+                        case "USR_STTCAY":
+                            Usr_Sttcay subcategorySpecificationTransfered = await _repository.SubcategorySpecifications.Get(cancellationToken, new object[] { item.RowId });
+                            subcategorySpecificationTransfered.Usr_Vtex_Transf = "E";
+                            break;
+                        default:
+                            break;
+                    }
 
                     await _repository.Complete();
                 }

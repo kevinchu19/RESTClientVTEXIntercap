@@ -10,13 +10,26 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
     public class UnitOfWork: IUnitOfWork
     {
         public ApiIntercapContext Context { get; }
-        private ISpecificationsRepository _specifications { get; set; }
-        public IDepartmentsRepository _departments { get; set; }
+        private IDepartmentSpecificationsRepository _departmentSpecifications { get; set; }
+        public IDepartmentsRepository _department { get; set; }
 
         public ICategorysRepository _categorys { get; set; }
 
         public ISubcategorysRepository _subcategorys { get; set; }
 
+        public IBrandsRepository _brands { get; set; }
+
+        public ICategorySpecificationsRepository _categorySpecifications { get; set; }
+
+        public IProductsFatherRepository _productsFather { get; set; }
+
+        public IProductsSKURepository _productsSKU { get; set; }
+
+        public ISpecificationsGroupRepository _specificationsGroup { get; set; }
+
+        public ISubcategorySpecificationsRepository _subcategorySpecifications { get; set; }
+
+        public ISpecificationsGroupRealRepository _specificationsGroupReal { get; set; }
 
         public UnitOfWork(ApiIntercapContext context)
         {
@@ -27,11 +40,11 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
         {
             get
             {
-                if (_departments == null)
+                if (_department == null)
                 {
-                    _departments = new DepartmentsRepository(Context);
+                    _department = new DepartmentsRepository(Context);
                 }
-                return _departments;
+                return _department;
             }
         }
 
@@ -57,17 +70,103 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
                 return _subcategorys;
             }
         }
-        public ISpecificationsRepository Specifications
+        public IDepartmentSpecificationsRepository DepartmentsSpecifications
         {
             get
             {
-                if (_specifications == null)
+                if (_departmentSpecifications == null)
                 {
-                    _specifications = new SpecificationsRepository(Context);
+                    _departmentSpecifications = new DepartmentSpecificationsRepository(Context);
                 }
-                return _specifications;
+                return _departmentSpecifications;
             }
         }
+
+        public IBrandsRepository Brands
+        {
+            get
+            {
+                if (_brands == null)
+                {
+                    _brands = new BrandsRepository(Context);
+                }
+                return _brands;
+            }
+        }
+
+        public ICategorySpecificationsRepository CategorySpecifications
+        {
+            get
+            {
+                if (_categorySpecifications == null)
+                {
+                    _categorySpecifications = new CategorySpecificationsRepository(Context);
+                }
+                return _categorySpecifications;
+            }
+        }
+
+        public IProductsFatherRepository ProductsFather
+        {
+            get
+            {
+                if (_productsFather == null)
+                {
+                    _productsFather = new ProductsFatherRepository(Context);
+                }
+                return _productsFather;
+            }
+        }
+
+        public IProductsSKURepository ProductsSKU
+        {
+            get
+            {
+                if (_productsSKU == null)
+                {
+                    _productsSKU = new ProductsSKURepository(Context);
+                }
+                return _productsSKU;
+            }
+        }
+
+        public ISpecificationsGroupRepository SpecificationsGroup
+        {
+            get
+            {
+                if (_specificationsGroup == null)
+                {
+                    _specificationsGroup = new SpecificationsGroupRepository(Context);
+                }
+                return _specificationsGroup;
+            }
+        }
+        public ISpecificationsGroupRealRepository SpecificationsGroupReal
+        {
+            get
+            {
+                if (_specificationsGroupReal == null)
+                {
+                    _specificationsGroupReal = new SpecificationsGroupRealRepository(Context);
+                }
+                return _specificationsGroupReal;
+            }
+        }
+
+
+        public ISubcategorySpecificationsRepository SubcategorySpecifications
+        {
+            get
+            {
+                if (_subcategorySpecifications == null)
+                {
+                    _subcategorySpecifications = new SubcategorySpecificationsRepository(Context);
+                }
+                return _subcategorySpecifications;
+            }
+        }
+
+        
 
         public async Task<int> Complete()
         {

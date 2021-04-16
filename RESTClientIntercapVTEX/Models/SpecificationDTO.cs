@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +9,7 @@ namespace RESTClientIntercapVTEX.Models
     {
         public int FieldTypeId { get; set; }
         public int CategoryId { get; set; }
-        public int FieldGroupId { get; set; } = 8;
+        public int FieldGroupId { get; set; } 
         public string Name { get; set; }
         public string Description { get; set; }
         public int Position { get; set; }

@@ -17,7 +17,7 @@ namespace RESTClientIntercapVTEX.Repositories
         {
             Context = context;
         }
-        public async Task<TEntity> Get(CancellationToken cancellationToken, int id) => await Context.Set<TEntity>().FindAsync(id);
+        public async Task<TEntity> Get(CancellationToken cancellationToken, object[] id) => await Context.Set<TEntity>().FindAsync(id);
 
         public async Task<IEnumerable<TEntity>> GetAll(CancellationToken cancellationToken) => await Context.Set<TEntity>()
                                                                          .ToListAsync();

@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace RESTClientIntercapVTEX.Client
 {
@@ -14,6 +16,11 @@ namespace RESTClientIntercapVTEX.Client
             base(httpClient, configuration, path, logger)
         {
 
+        }
+
+        public override Task<VTEXNewIDResponse> PostWithNewIDAsync(SpecificationDTO data, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

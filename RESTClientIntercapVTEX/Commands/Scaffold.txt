@@ -1,1 +1,1 @@
-﻿Scaffold-DbContext "server=.\SQL2017;user=sa;password=Password1!;database=ApiIntercap" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entities -Tables STMPDH, USR_STTCAH, USR_STTCAI, USR_STTCAS, USR_STTCAA, USR_PRATRI
+﻿Scaffold-DbContext "server=.\SQL2017;user=sa;password=Password1!;database=ApiIntercap" Microsoft.EntityFrameworkCore.SqlServer -OutputDir NewEntities -Tables USR_STTGSH

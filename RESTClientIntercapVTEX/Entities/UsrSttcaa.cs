@@ -8,7 +8,7 @@ namespace RESTClientIntercapVTEX.Entities
     public partial class Usr_Sttcaa
     {
         public string Usr_Sttcaa_Deptos { get; set; }
-        public string Usr_Sttcaa_Codatr { get; set; }
+        public string Usr_Sttcaa_Nombre { get; set; }
         public string Usr_Sttcaa_Descrp { get; set; }
         public int? Usr_Sttcaa_Positi { get; set; }
         public string Usr_Sttcaa_Isfilt { get; set; }
@@ -20,6 +20,7 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_Sttcaa_Defaul { get; set; }
         public string Usr_Sttcaa_Fieldt { get; set; }
         public string Usr_Sttcaa_Isacti{ get; set; }
+        public int Usr_Sttcaa_Grunam { get; set; }
         public DateTime? Usr_St_Fecalt { get; set; }
         public DateTime? Usr_St_Fecmod { get; set; }
         public string Usr_St_Userid { get; set; }

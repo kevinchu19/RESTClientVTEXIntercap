@@ -30,13 +30,22 @@ namespace RESTClientIntercapVTEX.BackgroundServices
         private readonly Serilog.ILogger _logger;
         public CategorysService _categoryService { get; }
         public SpecificationsService _specificationService { get; }
+        public SpecificationsGroupService _specificationGroupService { get; }
+        public BrandsService _brandsService { get; }
+        public ProductsService _productService { get; }
 
         public ConsumerBackgroundService(Serilog.ILogger logger, CategorysService categoryService, 
-                                                                 SpecificationsService specificationService)
+                                                                 SpecificationsService specificationService,
+                                                                 SpecificationsGroupService specificationGroupService,
+                                                                 BrandsService brandsService,
+                                                                 ProductsService productService)
         {
             _logger = logger;
             _categoryService = categoryService;
             _specificationService = specificationService;
+            _specificationGroupService = specificationGroupService;
+            _brandsService = brandsService;
+            _productService = productService;
         }
 
 
@@ -60,7 +69,10 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                     try
                     {
                         await ExecServiceAsync(_categoryService, stoppingToken);
+                        await ExecServiceAsync(_brandsService, stoppingToken);
+                        await ExecServiceAsync(_specificationGroupService, stoppingToken);
                         await ExecServiceAsync(_specificationService, stoppingToken);
+                        await ExecServiceAsync(_productService, stoppingToken);
                     }
                     catch (Exception ex)
                     {
@@ -90,7 +102,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
 
             //_logger.Information($"Ejecutando servicio {_service}");
 
-            bool hasMoreInThisMinute = await _service.DequeueProcessAndCheckIfContinueAsync(cancellationTokenLinked.Token);
+           bool hasMoreInThisMinute = await _service.DequeueProcessAndCheckIfContinueAsync(cancellationTokenLinked.Token);
             //_logger.Information($"Ejecutado y {(hasMoreInThisMinute ? "tiene" : "no tiene")} más items");
 
             _ = Task.Delay(PERIOD).ContinueWith(task =>

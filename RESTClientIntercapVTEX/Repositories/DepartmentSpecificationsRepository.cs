@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace RESTClientIntercapVTEX.Repositories
 {
-    public class SpecificationsRepository: RepositoryBase<Usr_Sttcaa>, ISpecificationsRepository
+    public class DepartmentSpecificationsRepository: RepositoryBase<Usr_Sttcaa>, IDepartmentSpecificationsRepository
     {
-        public SpecificationsRepository(ApiIntercapContext context) : base(context)
+        public DepartmentSpecificationsRepository(ApiIntercapContext context) : base(context)
         { }
 
         public async Task<IEnumerable<Usr_Sttcaa>> GetForVTEX(CancellationToken cancellationToken)
