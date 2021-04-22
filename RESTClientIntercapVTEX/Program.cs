@@ -151,6 +151,7 @@ namespace RESTClientIntercapVTEX
             serviceCollection.AddAutoMapper(configuration =>
             {
                 configuration.CreateMap<Usr_Sttgsh, SpecificationGroupDTO>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src=> src.Usr_Sttgsh_Idvtex))
                 .ForMember(dest => dest.CategoryId, opt => opt.MapFrom<MapperHelp.SpecificationsGroupResolver.IdCategoryResolver>())
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Usr_Sttgsh_Nombre))
                 .ForMember(dest => dest.Position, opt => opt.MapFrom(src => Convert.ToInt32(src.Usr_Sttgsh_Positi)));
@@ -247,6 +248,7 @@ namespace RESTClientIntercapVTEX
                 .ForMember(dest => dest.LinkId, opt => opt.MapFrom(src => src.Usr_Sttmah_Descrp.Replace(' ', '-')));
 
                 configuration.CreateMap<Stmpdh, ProductDTO>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Stmpdh_Idvtex))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Stmpdh_Descrp))
                 .ForMember(dest => dest.CategoryId, opt => opt.MapFrom<MapperHelp.ProductsSKUResolver.IdCategoryVTEXResolver>())
                 .ForMember(dest => dest.BrandId, opt => opt.MapFrom(src => src.Usr_Stmpdh_Marcas))
@@ -259,6 +261,7 @@ namespace RESTClientIntercapVTEX
                 .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.Stmpdh_Debaja == "N"));
 
                 configuration.CreateMap<Usr_Stmpph, ProductDTO>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Stmpph_Idvtex))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Usr_Stmpph_Descrp))
                 .ForMember(dest => dest.CategoryId, opt => opt.MapFrom<MapperHelp.ProductsFatherResolver.IdCategoryVTEXResolver>())
                 .ForMember(dest => dest.BrandId, opt => opt.MapFrom(src => src.Usr_Stmpph_Marcas))

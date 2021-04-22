@@ -12,25 +12,17 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
         public ApiIntercapContext Context { get; }
         private IDepartmentSpecificationsRepository _departmentSpecifications { get; set; }
         public IDepartmentsRepository _department { get; set; }
-
         public ICategorysRepository _categorys { get; set; }
-
         public ISubcategorysRepository _subcategorys { get; set; }
-
         public IBrandsRepository _brands { get; set; }
-
         public ICategorySpecificationsRepository _categorySpecifications { get; set; }
-
         public IProductsFatherRepository _productsFather { get; set; }
-
         public IProductsSKURepository _productsSKU { get; set; }
-
         public ISpecificationsGroupRepository _specificationsGroup { get; set; }
-
         public ISubcategorySpecificationsRepository _subcategorySpecifications { get; set; }
-
         public ISpecificationsGroupRealRepository _specificationsGroupReal { get; set; }
-
+        public IProductsFatherRealRepository _productsFatherReal { get; set; }
+        public IProductsSKURealRepository _productsSKUReal { get; set; }
         public UnitOfWork(ApiIntercapContext context)
         {
             Context = context;
@@ -153,6 +145,29 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
             }
         }
 
+        public IProductsFatherRealRepository ProductsFatherReal
+        {
+            get
+            {
+                if (_productsFatherReal == null)
+                {
+                    _productsFatherReal = new ProductsFatherRealRepository(Context);
+                }
+                return _productsFatherReal;
+            }
+        }
+
+        public IProductsSKURealRepository ProductsSKUReal
+        {
+            get
+            {
+                if (_productsSKUReal == null)
+                {
+                    _productsSKUReal = new ProductsSKURealRepository(Context);
+                }
+                return _productsSKUReal;
+            }
+        }
 
         public ISubcategorySpecificationsRepository SubcategorySpecifications
         {
@@ -165,6 +180,8 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
                 return _subcategorySpecifications;
             }
         }
+
+
 
         
 

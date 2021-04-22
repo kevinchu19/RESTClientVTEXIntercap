@@ -7,6 +7,8 @@ namespace RESTClientIntercapVTEX.Entities
 {
     public partial class Stmpdh_Real
     {
+        public string Stmpdh_Tippro { get; set; }
+        public string Stmpdh_Artcod { get; set; }
         public string Stmpdh_Descrp { get; set; }
         public string Stmpdh_Indcod { get; set; }
         public string Usr_Stmpdh_Intnet { get; set; }
@@ -22,5 +24,6 @@ namespace RESTClientIntercapVTEX.Entities
         public string Stmpdh_Oalias { get; set; }
         public string Usr_Vtex_Transf { get; set; }
         public string Usr_Stmpdh_Father { get; set; }
+        public int Usr_Stmpdh_Idvtex { get; set; }
     }
 }

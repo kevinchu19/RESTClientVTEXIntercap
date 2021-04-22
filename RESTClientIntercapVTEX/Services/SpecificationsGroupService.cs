@@ -46,7 +46,14 @@ namespace RESTClientIntercapVTEX.Services
                         succesOperationWithNewID = await _client.PostWithNewIDAsync(item, cancellationToken);
                         break;
                     case "UPDATE":
-                        succesOperation = await _client.PutAsync(item, item.Id.ToString(), cancellationToken);
+                        if (item.Id == 0) //Quiere decir que no se dio de alta en vtex aun
+                        {
+                            succesOperationWithNewID = await _client.PostWithNewIDAsync(item, cancellationToken);
+                        }
+                        else
+                        {
+                            succesOperation = await _client.PutAsync(item, item.Id.ToString(), cancellationToken);
+                        }
                         break;
                     default:
                         break;

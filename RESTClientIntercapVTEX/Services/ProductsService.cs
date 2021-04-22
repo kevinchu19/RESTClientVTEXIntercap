@@ -30,6 +30,7 @@ namespace RESTClientIntercapVTEX.Services
         public async Task<bool> DequeueProcessAndCheckIfContinueAsync(CancellationToken cancellationToken)
         {
             bool succesOperation = false;
+            VTEXNewIDResponse succesOperationWithNewID = new VTEXNewIDResponse();
 
             var productsFather = _mapper.Map<IEnumerable<Usr_Stmpph>, IEnumerable<ProductDTO>>(await _repository.ProductsFather.GetForVTEX(cancellationToken));
             var productsSKU = _mapper.Map<IEnumerable<Stmpdh>, IEnumerable<ProductDTO>>(await _repository.ProductsSKU.GetProductForVTEX(cancellationToken));
@@ -44,27 +45,51 @@ namespace RESTClientIntercapVTEX.Services
                 switch (item.Sfl_TableOperation)
                 {
                     case "INSERT":
-                        succesOperation = await _client.PostAsync(item, cancellationToken);
+                        succesOperationWithNewID = await _client.PostWithNewIDAsync(item, cancellationToken);
                         break;
                     case "UPDATE":
-                        succesOperation = await _client.PutAsync(item, item.RefId.ToString(), cancellationToken);
+                        if (item.Id == 0) //Quiere decir que no se dio de alta en vtex aun
+                        {
+                            succesOperationWithNewID = await _client.PostWithNewIDAsync(item, cancellationToken);
+                        }
+                        else
+                        {
+                            succesOperation = await _client.PutAsync(item, item.Id.ToString(), cancellationToken);
+                        }
                         break;
                     default:
                         break;
                 }
 
-                if (succesOperation)
+                if (succesOperation || succesOperationWithNewID.Success)
                 {
 
                     switch (item.Stmpdh_Oalias)
                     {
                         case "STMPDH":
-                            Stmpdh productSKU = await _repository.ProductsSKU.Get(cancellationToken, new object[] {item.RowId});
-                            productSKU.Usr_Vtex_Transf = "S";
+                            Stmpdh productSKUTransfered = await _repository.ProductsSKU.Get(cancellationToken, new object[] {item.RowId});
+                            Stmpdh_Real productSKUReal = await _repository.ProductsSKUReal
+                                                                            .Get(cancellationToken, new object[] { productSKUTransfered.Stmpdh_Tippro, 
+                                                                                                                   productSKUTransfered.Stmpdh_Artcod });
+
+
+                            productSKUTransfered.Usr_Vtex_Transf = "S";
+                            if (succesOperationWithNewID.Success)
+                            {
+                                productSKUReal.Usr_Stmpdh_Idvtex = succesOperationWithNewID.NewId;
+                            }
                             break;
                         case "USR_STMPPH":
-                            Usr_Stmpph productFather = await _repository.ProductsFather.Get(cancellationToken, new object[] {item.RowId});
-                            productFather.Usr_Vtex_Transf = "S";
+                            Usr_Stmpph productFatherTransfered = await _repository.ProductsFather.Get(cancellationToken, new object[] { item.RowId });
+                            Usr_Stmpph_Real productFatherReal = await _repository.ProductsFatherReal
+                                                                            .Get(cancellationToken, new object[] { productFatherTransfered.Usr_Stmpph_Indcod});
+
+                            
+                            productFatherTransfered.Usr_Vtex_Transf = "S";
+                            if (succesOperationWithNewID.Success)
+                            {
+                                productFatherReal.Usr_Stmpph_Idvtex = succesOperationWithNewID.NewId;
+                            }
                             break;
                       
                         default:

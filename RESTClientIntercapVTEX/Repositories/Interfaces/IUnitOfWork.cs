@@ -18,6 +18,8 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
         ISpecificationsGroupRepository SpecificationsGroup { get; }
         ISpecificationsGroupRealRepository SpecificationsGroupReal { get; }
         ISubcategorySpecificationsRepository SubcategorySpecifications { get; }
+        IProductsFatherRealRepository ProductsFatherReal { get; }
+        IProductsSKURealRepository ProductsSKUReal { get; }
         Task<int> Complete();
 
     }

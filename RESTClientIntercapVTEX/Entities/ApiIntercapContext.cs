@@ -44,6 +44,18 @@ namespace RESTClientIntercapVTEX.Entities
 
                 entity.ToTable("STMPDHlog");
 
+                entity.Property(e => e.Stmpdh_Tippro)
+                    .IsRequired()
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("STMPDH_TIPPRO");
+
+                entity.Property(e => e.Stmpdh_Artcod)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("STMPDH_ARTCOD");
+
                 entity.Property(e => e.Stmpdh_Debaja)
                     .HasMaxLength(1)
                     .IsUnicode(false)
@@ -109,6 +121,8 @@ namespace RESTClientIntercapVTEX.Entities
 
                 entity.Property(e => e.Usr_Stmpdh_Marcas).HasColumnName("USR_STMPDH_MARCAS");
 
+                entity.Property(e => e.Usr_Stmpdh_Idvtex).HasColumnName("USR_STMPDH_IDVTEX");
+
                 entity.Property(e => e.Usr_Stmpdh_Subcat)
                     .HasMaxLength(6)
                     .IsUnicode(false)
@@ -123,15 +137,27 @@ namespace RESTClientIntercapVTEX.Entities
 
             modelBuilder.Entity<Stmpdh_Real>(entity =>
             {
-                entity.HasKey(e => new { e.RowId });
+                entity.HasKey(e => new { e.Stmpdh_Tippro, e.Stmpdh_Artcod });
 
-                entity.ToTable("STMPDHlog");
+                entity.ToTable("STMPDH");
 
                 entity.Property(e => e.Stmpdh_Debaja)
                     .HasMaxLength(1)
                     .IsUnicode(false)
                     .HasColumnName("STMPDH_DEBAJA")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.Stmpdh_Tippro)
+                    .IsRequired()
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("STMPDH_TIPPRO");
+
+                entity.Property(e => e.Stmpdh_Artcod)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("STMPDH_ARTCOD");
 
                 entity.Property(e => e.Stmpdh_Descrp)
                     .IsRequired()
@@ -690,6 +716,7 @@ namespace RESTClientIntercapVTEX.Entities
                     .IsFixedLength(true);
 
                 entity.Property(e => e.Usr_Stmpph_Marcas).HasColumnName("USR_STMPPH_MARCAS");
+                entity.Property(e => e.Usr_Stmpph_Idvtex).HasColumnName("USR_STMPPH_IDVTEX");
 
                 entity.Property(e => e.Usr_Stmpph_Subcat)
                     .HasMaxLength(6)
