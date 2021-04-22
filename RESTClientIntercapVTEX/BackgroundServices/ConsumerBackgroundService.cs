@@ -1,4 +1,5 @@
-﻿using RESTClientIntercapVTEX.Models;
+﻿using Microsoft.Extensions.Hosting;
+using RESTClientIntercapVTEX.Models;
 using RESTClientIntercapVTEX.Repositories.Interfaces;
 using RESTClientIntercapVTEX.Services;
 using RESTClientIntercapVTEX.Services.Interfaces;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace RESTClientIntercapVTEX.BackgroundServices
 {
-    internal class ConsumerBackgroundService //: BackgroundService
+    internal class ConsumerBackgroundService: BackgroundService
     {
 
         // Max execution per period
@@ -49,7 +50,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
         }
 
 
-        public async Task RunAsync(CancellationToken stoppingToken)
+        protected async override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             if (MAX_PER_PERIOD < MAX_ACTION_CONCURRENT)
             {
