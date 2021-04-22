@@ -34,12 +34,14 @@ namespace RESTClientIntercapVTEX.BackgroundServices
         public SpecificationsGroupService _specificationGroupService { get; }
         public BrandsService _brandsService { get; }
         public ProductsService _productService { get; }
+        public SKUService _SKUService { get; private set; }
 
         public ConsumerBackgroundService(Serilog.ILogger logger, CategorysService categoryService, 
                                                                  SpecificationsService specificationService,
                                                                  SpecificationsGroupService specificationGroupService,
                                                                  BrandsService brandsService,
-                                                                 ProductsService productService)
+                                                                 ProductsService productService,
+                                                                 SKUService SKUService)
         {
             _logger = logger;
             _categoryService = categoryService;
@@ -47,6 +49,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
             _specificationGroupService = specificationGroupService;
             _brandsService = brandsService;
             _productService = productService;
+            _SKUService = SKUService;
         }
 
 
@@ -74,6 +77,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                         await ExecServiceAsync(_specificationGroupService, stoppingToken);
                         await ExecServiceAsync(_specificationService, stoppingToken);
                         await ExecServiceAsync(_productService, stoppingToken);
+                        await ExecServiceAsync(_SKUService, stoppingToken);
                     }
                     catch (Exception ex)
                     {

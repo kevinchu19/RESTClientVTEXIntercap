@@ -8,6 +8,7 @@ namespace RESTClientIntercapVTEX.Models
     public class SpecificationGroupDTO
     {
         public int CategoryId { get; set; }
+        [JsonIgnore]
         public int Id { get; set; }
         public string Name { get; set; }
         public int Position { get; set; }

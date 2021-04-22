@@ -19,5 +19,10 @@ namespace RESTClientIntercapVTEX.Repositories
         {
             return await Context.Set<Stmpdh>().FromSqlRaw("EXEC Alm_StmpdhProductGetForVTEX").ToListAsync();
         }
+
+        public async Task<IEnumerable<Stmpdh>> GetSKUForVTEX(CancellationToken cancellationToken)
+        {
+            return await Context.Set<Stmpdh>().FromSqlRaw("EXEC Alm_StmpdhSKUGetForVTEX").ToListAsync();
+        }
     }
 }

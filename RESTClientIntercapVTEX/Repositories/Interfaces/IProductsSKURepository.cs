@@ -11,5 +11,6 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
     public interface IProductsSKURepository : IRepository<Stmpdh>
     {
         Task<IEnumerable<Stmpdh>> GetProductForVTEX(CancellationToken cancellationToken);
+        Task<IEnumerable<Stmpdh>> GetSKUForVTEX(CancellationToken cancellationToken);
     }
 }

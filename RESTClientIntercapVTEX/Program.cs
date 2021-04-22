@@ -112,6 +112,11 @@ namespace RESTClientIntercapVTEX
                    services.AddTransient(provider =>
                        new ProductsClient<ProductDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:Products:Path"], _logger));
 
+                   services.AddTransient<SKUService>();
+                   services.AddTransient(provider =>
+                       new SKUClient<SkuDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:SKU:Path"], _logger));
+
+
                    // Add app
                    services.AddSingleton<ConsumerBackgroundService>();
 
@@ -244,6 +249,15 @@ namespace RESTClientIntercapVTEX
                        .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Usr_Stmpph_Descrp))
                        .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.Usr_St_Debaja == "N"))
                        .ForMember(dest => dest.Stmpdh_Oalias, opt => opt.MapFrom(src => src.Usr_St_Oalias));
+
+                       configuration.CreateMap<Stmpdh, SkuDTO>()
+                       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Stmpdh_IdSKUvtex))
+                       .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Usr_Stmpdh_Father))
+                       .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Stmpdh_Descrp))
+                       .ForMember(dest => dest.RefId, opt => opt.MapFrom(src => src.Stmpdh_Indcod))
+                       .ForMember(dest => dest.IsKit, opt => opt.MapFrom(src => src.Stmpdh_Kitsfc == "S"))
+                       .ForMember(dest => dest.CreationDate, opt => opt.MapFrom(src => src.Stmpdh_Fecalt))
+                       .ForMember(dest => dest.MeasurementUnit, opt => opt.MapFrom(src => src.Stmpdh_Unimed));
                    }
                        , typeof(Program));
 

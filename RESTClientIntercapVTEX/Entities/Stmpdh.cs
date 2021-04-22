@@ -11,6 +11,8 @@ namespace RESTClientIntercapVTEX.Entities
         public string Stmpdh_Artcod { get; set; }
         public string Stmpdh_Descrp { get; set; }
         public string Stmpdh_Indcod { get; set; }
+        public string Stmpdh_Kitsfc { get; set; }
+        public string Stmpdh_Unimed { get; set; }
         public string Usr_Stmpdh_Intnet { get; set; }
         public string Usr_Stmpdh_Deptos { get; set; }
         public string Usr_Stmpdh_Catego { get; set; }
@@ -23,8 +25,9 @@ namespace RESTClientIntercapVTEX.Entities
         public string Stmpdh_Debaja { get; set; }
         public string Stmpdh_Oalias { get; set; }
         public string Usr_Vtex_Transf { get; set; }
-        public string Usr_Stmpdh_Father { get; set; }
+        public int Usr_Stmpdh_Father { get; set; }
         public int Usr_Stmpdh_Idvtex { get; set; }
+        public int Usr_Stmpdh_IdSKUvtex { get; set; }
         public DateTime Sfl_LoginDateTime { get; set; }
         public string Sfl_TableOperation { get; set; }
         public int RowId { get; set; }

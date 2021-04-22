@@ -73,6 +73,17 @@ namespace RESTClientIntercapVTEX.Entities
                     .IsUnicode(false)
                     .HasColumnName("STMPDH_INDCOD");
 
+                entity.Property(e => e.Stmpdh_Kitsfc)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("STMPDH_KITSFC");
+
+                entity.Property(e => e.Stmpdh_Unimed)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("STMPDH_UNIMED");
+
+
                 entity.Property(e => e.Stmpdh_Fecalt)
                                     .HasColumnType("datetime")
                                     .HasColumnName("STMPDH_FECALT");
@@ -122,6 +133,8 @@ namespace RESTClientIntercapVTEX.Entities
                 entity.Property(e => e.Usr_Stmpdh_Marcas).HasColumnName("USR_STMPDH_MARCAS");
 
                 entity.Property(e => e.Usr_Stmpdh_Idvtex).HasColumnName("USR_STMPDH_IDVTEX");
+
+                entity.Property(e => e.Usr_Stmpdh_IdSKUvtex).HasColumnName("USR_STMPDH_IDSKUVTEX");
 
                 entity.Property(e => e.Usr_Stmpdh_Subcat)
                     .HasMaxLength(6)
@@ -230,6 +243,8 @@ namespace RESTClientIntercapVTEX.Entities
                     .IsFixedLength(true);
 
                 entity.Property(e => e.Usr_Stmpdh_Idvtex).HasColumnName("USR_STMPDH_IDVTEX");
+                
+                entity.Property(e => e.Usr_Stmpdh_IdSKUvtex).HasColumnName("USR_STMPDH_IDSKUVTEX");
             });
 
             modelBuilder.Entity<Usr_Pratri>(entity =>
