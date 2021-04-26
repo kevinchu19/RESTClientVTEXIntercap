@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dattaguest\\source\\repos\\RestClientIntercapVTEX\\RESTClientIntercapVTEX\\RESTClientIntercapVTEX.csproj": {}
+    "C:\\Users\\dattaguest\\source\\repos\\RESTClientIntercapVTEX\\RESTClientIntercapVTEX\\RESTClientIntercapVTEX.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dattaguest\\source\\repos\\RestClientIntercapVTEX\\RESTClientIntercapVTEX\\RESTClientIntercapVTEX.csproj": {
+    "C:\\Users\\dattaguest\\source\\repos\\RESTClientIntercapVTEX\\RESTClientIntercapVTEX\\RESTClientIntercapVTEX.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dattaguest\\source\\repos\\RestClientIntercapVTEX\\RESTClientIntercapVTEX\\RESTClientIntercapVTEX.csproj",
+        "projectUniqueName": "C:\\Users\\dattaguest\\source\\repos\\RESTClientIntercapVTEX\\RESTClientIntercapVTEX\\RESTClientIntercapVTEX.csproj",
         "projectName": "RESTClientIntercapVTEX",
-        "projectPath": "C:\\Users\\dattaguest\\source\\repos\\RestClientIntercapVTEX\\RESTClientIntercapVTEX\\RESTClientIntercapVTEX.csproj",
+        "projectPath": "C:\\Users\\dattaguest\\source\\repos\\RESTClientIntercapVTEX\\RESTClientIntercapVTEX\\RESTClientIntercapVTEX.csproj",
         "packagesPath": "C:\\Users\\dattaguest\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dattaguest\\source\\repos\\RestClientIntercapVTEX\\RESTClientIntercapVTEX\\obj\\",
+        "outputPath": "C:\\Users\\dattaguest\\source\\repos\\RESTClientIntercapVTEX\\RESTClientIntercapVTEX\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dattaguest\\AppData\\Roaming\\NuGet\\NuGet.Config",
