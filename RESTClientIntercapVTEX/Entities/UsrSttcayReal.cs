@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace RESTClientIntercapVTEX.Entities
 {
-    public partial class Usr_Sttcay
+    public partial class Usr_Sttcay_Real
     {
         public string Usr_Sttcay_Deptos { get; set; }
         public string Usr_Sttcay_Catego { get; set; }

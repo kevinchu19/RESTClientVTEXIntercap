@@ -135,6 +135,7 @@ namespace RESTClientIntercapVTEX
 
 
                        configuration.CreateMap<Usr_Sttcaa, SpecificationDTO>()
+                       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Sttcaa_Idvtex))
                        .ForMember(dest => dest.FieldTypeId, opt => opt.MapFrom(src => Convert.ToInt32(src.Usr_Sttcaa_Fieldt)))
                        .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => Convert.ToInt32(src.Usr_Sttcaa_Deptos)))
                        .ForMember(dest => dest.FieldGroupId, opt => opt.MapFrom(src => src.Usr_Sttcaa_Grunam))
@@ -151,6 +152,8 @@ namespace RESTClientIntercapVTEX
                        .ForMember(dest => dest.DefaultValue, opt => opt.MapFrom(src => src.Usr_Sttcaa_Defaul));
 
                        configuration.CreateMap<Usr_Sttcax, SpecificationDTO>()
+
+                       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Sttcax_Idvtex))
                        .ForMember(dest => dest.FieldTypeId, opt => opt.MapFrom(src => Convert.ToInt32(src.Usr_Sttcax_Fieldt)))
                        .ForMember(dest => dest.CategoryId, opt => opt.MapFrom<MapperHelp.SpecificationsResolver.IdCategoryResolver>())
                        .ForMember(dest => dest.FieldGroupId, opt => opt.MapFrom(src => src.Usr_Sttcax_Grunam))
@@ -167,6 +170,7 @@ namespace RESTClientIntercapVTEX
                        .ForMember(dest => dest.DefaultValue, opt => opt.MapFrom(src => src.Usr_Sttcax_Defaul));
 
                        configuration.CreateMap<Usr_Sttcay, SpecificationDTO>()
+                       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Sttcay_Idvtex))
                        .ForMember(dest => dest.FieldTypeId, opt => opt.MapFrom(src => Convert.ToInt32(src.Usr_Sttcay_Fieldt)))
                        .ForMember(dest => dest.CategoryId, opt => opt.MapFrom<MapperHelp.SpecificationsResolver.IdSubcategoryResolver>())
                        .ForMember(dest => dest.FieldGroupId, opt => opt.MapFrom(src => src.Usr_Sttcay_Grunam))

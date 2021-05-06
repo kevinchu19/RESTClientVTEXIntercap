@@ -30,9 +30,10 @@ namespace RESTClientIntercapVTEX.Entities
         public virtual DbSet<Usr_Sttcay> Usr_Sttcay { get; set; }
         public virtual DbSet<Usr_Sttgsh> Usr_Sttgsh { get; set; }
         public virtual DbSet<Usr_Sttmah> Usr_Sttmah { get; set; }
-
         public virtual DbSet<Usr_Sttgsh_Real> Usr_Sttgsh_Real { get; set; }
-
+        public virtual DbSet<Usr_Sttcaa_Real> Usr_Sttcaa_Real { get; set; }
+        public virtual DbSet<Usr_Sttcax_Real> Usr_Sttcax_Real { get; set; }
+        public virtual DbSet<Usr_Sttcay_Real> Usr_Sttcay_Real { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -488,6 +489,8 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasColumnName("USR_STTCAA_ISACTI");
 
                 entity.Property(e => e.Usr_Sttcaa_Grunam).HasColumnName("USR_STTCAA_GRUNAM");
+
+                entity.Property(e => e.Usr_Sttcaa_Idvtex).HasColumnName("USR_STTCAA_IDVTEX");
 
                 entity.Property(e => e.Sfl_TableOperation)
                   .HasMaxLength(30)
@@ -947,6 +950,8 @@ namespace RESTClientIntercapVTEX.Entities
                     .IsUnicode(false)
                     .HasColumnName("USR_VTEX_TRANSF")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcax_Idvtex).HasColumnName("USR_STTCAX_IDVTEX");
             });
 
             modelBuilder.Entity<Usr_Sttcay>(entity =>
@@ -1075,6 +1080,8 @@ namespace RESTClientIntercapVTEX.Entities
                     .IsUnicode(false)
                     .HasColumnName("USR_VTEX_TRANSF")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcay_Idvtex).HasColumnName("USR_STTCAY_IDVTEX");
             });
 
             modelBuilder.Entity<Usr_Sttgsh>(entity =>
@@ -1284,6 +1291,363 @@ namespace RESTClientIntercapVTEX.Entities
                     .IsUnicode(false)
                     .HasColumnName("USR_VTEX_TRANSF")
                     .IsFixedLength(true);
+            });
+
+            modelBuilder.Entity<Usr_Sttcaa_Real>(entity =>
+            {
+                entity.HasKey(e => new { e.RowId });
+
+                entity.ToTable("USR_STTCAA");
+
+                entity.Property(e => e.Usr_Sttcaa_Deptos)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAA_DEPTOS");
+
+                entity.Property(e => e.Usr_Sttcaa_Nombre)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAA_NOMBRE");
+
+                entity.Property(e => e.Usr_St_Oalias)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_ST_OALIAS");
+
+                entity.Property(e => e.Usr_St_Ultopr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_ST_ULTOPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_St_Userid)
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_ST_USERID");
+
+                entity.Property(e => e.Usr_Sttcaa_Defaul)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAA_DEFAUL");
+
+                entity.Property(e => e.Usr_Sttcaa_Descrp)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAA_DESCRP");
+
+                entity.Property(e => e.Usr_Sttcaa_Isfilt)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAA_ISFILT")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcaa_Isonpr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAA_ISONPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcaa_Isrequ)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAA_ISREQU")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcaa_Isssku)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAA_ISSSKU")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcaa_Positi).HasColumnName("USR_STTCAA_POSITI");
+
+                entity.Property(e => e.Usr_Sttcaa_Sidmen)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAA_SIDMEN")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcaa_Topmen)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAA_TOPMEN")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcaa_Fieldt)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAA_FIELDT");
+
+                entity.Property(e => e.Usr_Sttcaa_Isacti)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAA_ISACTI");
+
+                entity.Property(e => e.Usr_Sttcaa_Grunam).HasColumnName("USR_STTCAA_GRUNAM");
+
+                entity.Property(e => e.Usr_Vtex_Transf)
+                   .HasMaxLength(1)
+                   .IsUnicode(false)
+                   .HasColumnName("USR_VTEX_TRANSF");
+
+                entity.Property(e => e.Usr_Sttcaa_Idvtex).HasColumnName("USR_STTCAA_IDVTEX");
+
+            });
+
+            modelBuilder.Entity<Usr_Sttcax_Real>(entity =>
+            {
+                entity.HasKey(e => e.RowId);
+
+                entity.ToTable("USR_STTCAX");
+
+                entity.Property(e => e.Usr_Sttcax_Deptos)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAX_DEPTOS");
+
+                entity.Property(e => e.Usr_Sttcax_Catego)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAX_CATEGO");
+
+                entity.Property(e => e.Usr_Sttcax_Nombre)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAX_NOMBRE");
+
+
+                entity.Property(e => e.Usr_St_Debaja)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_ST_DEBAJA")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_St_Fecalt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_ST_FECALT");
+
+                entity.Property(e => e.Usr_St_Fecmod)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_ST_FECMOD");
+
+
+                entity.Property(e => e.Usr_St_Oalias)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_ST_OALIAS");
+
+                entity.Property(e => e.Usr_St_Ultopr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_ST_ULTOPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_St_Userid)
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_ST_USERID");
+
+                entity.Property(e => e.Usr_Sttcax_Defaul)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAX_DEFAUL");
+
+                entity.Property(e => e.Usr_Sttcax_Descrp)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAX_DESCRP");
+
+                entity.Property(e => e.Usr_Sttcax_Fieldt)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAX_FIELDT");
+
+                entity.Property(e => e.Usr_Sttcax_Grunam)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAX_GRUNAM");
+
+                entity.Property(e => e.Usr_Sttcax_Isacti)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAX_ISACTI")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcax_Isfilt)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAX_ISFILT")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcax_Isonpr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAX_ISONPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcax_Isrequ)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAX_ISREQU")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcax_Isssku)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAX_ISSSKU")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcax_Positi).HasColumnName("USR_STTCAX_POSITI");
+
+                entity.Property(e => e.Usr_Sttcax_Sidmen)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAX_SIDMEN")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcax_Topmen)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAX_TOPMEN")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Vtex_Transf)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VTEX_TRANSF")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcax_Idvtex).HasColumnName("USR_STTCAX_IDVTEX");
+            });
+
+            modelBuilder.Entity<Usr_Sttcay_Real>(entity =>
+            {
+                entity.HasKey(e => e.RowId);
+
+                entity.ToTable("USR_STTCAY");
+
+                entity.Property(e => e.Usr_Sttcay_Deptos)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAY_DEPTOS");
+
+                entity.Property(e => e.Usr_Sttcay_Catego)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAY_CATEGO");
+
+                entity.Property(e => e.Usr_Sttcay_Subcat)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAY_SUBCAT");
+
+                entity.Property(e => e.Usr_Sttcay_Nombre)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAY_NOMBRE");
+
+                entity.Property(e => e.Usr_St_Debaja)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_ST_DEBAJA")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_St_Fecalt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_ST_FECALT");
+
+                entity.Property(e => e.Usr_St_Fecmod)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_ST_FECMOD");
+
+
+                entity.Property(e => e.Usr_St_Oalias)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_ST_OALIAS");
+
+                entity.Property(e => e.Usr_St_Ultopr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_ST_ULTOPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_St_Userid)
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_ST_USERID");
+
+                entity.Property(e => e.Usr_Sttcay_Defaul)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAY_DEFAUL");
+
+                entity.Property(e => e.Usr_Sttcay_Descrp)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAY_DESCRP");
+
+                entity.Property(e => e.Usr_Sttcay_Fieldt)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAY_FIELDT");
+
+                entity.Property(e => e.Usr_Sttcay_Grunam)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAY_GRUNAM");
+
+                entity.Property(e => e.Usr_Sttcay_Isacti)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAY_ISACTI")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcay_Isfilt)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAY_ISFILT")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcay_Isonpr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAY_ISONPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcay_Isrequ)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAY_ISREQU")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcay_Isssku)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAY_ISSSKU")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcay_Positi).HasColumnName("USR_STTCAY_POSITI");
+
+                entity.Property(e => e.Usr_Sttcay_Sidmen)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAY_SIDMEN")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcay_Topmen)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STTCAY_TOPMEN")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Vtex_Transf)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VTEX_TRANSF")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Sttcay_Idvtex).HasColumnName("USR_STTCAY_IDVTEX");
             });
 
             OnModelCreatingPartial(modelBuilder);

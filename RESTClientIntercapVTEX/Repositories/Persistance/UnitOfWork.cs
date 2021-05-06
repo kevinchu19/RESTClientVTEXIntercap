@@ -23,6 +23,9 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
         public ISpecificationsGroupRealRepository _specificationsGroupReal { get; set; }
         public IProductsFatherRealRepository _productsFatherReal { get; set; }
         public IProductsSKURealRepository _productsSKUReal { get; set; }
+        public IDepartmentSpecificationsRealRepository _departmentsSpecificationsReal { get; set; }
+        public ICategorySpecificationsRealRepository _categorySpecificationsReal { get; set; }
+        public ISubcategorySpecificationsRealRepository _subcategorySpecificationsReal { get; set; }
         public UnitOfWork(ApiIntercapContext context)
         {
             Context = context;
@@ -181,9 +184,43 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
             }
         }
 
+        public IDepartmentSpecificationsRealRepository DepartmentSpecificationsReal
+        {
+            get
+            {
+                if (_departmentsSpecificationsReal == null)
+                {
+                    _departmentsSpecificationsReal = new DepartmentSpecificationsRealRepository(Context);
+                }
+                return _departmentsSpecificationsReal;
+            }
+        }
+
+        public ISubcategorySpecificationsRealRepository SubcategorySpecificationsReal
+        {
+            get
+            {
+                if (_subcategorySpecificationsReal == null)
+                {
+                    _subcategorySpecificationsReal = new SubcategorySpecificationsRealRepository(Context);
+                }
+                return _subcategorySpecificationsReal;
+            }
+        }
+
+        public ICategorySpecificationsRealRepository CategorySpecificationsReal
+        {
+            get
+            {
+                if (_categorySpecificationsReal == null)
+                {
+                    _categorySpecificationsReal = new CategorySpecificationsRealRepository(Context);
+                }
+                return _categorySpecificationsReal;
+            }
+        }
 
 
-        
 
         public async Task<int> Complete()
         {

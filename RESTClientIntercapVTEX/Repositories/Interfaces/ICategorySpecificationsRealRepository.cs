@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RESTClientIntercapVTEX.Repositories.Interfaces
 {
-    public interface IDepartmentSpecificationsRealRepository : IRepository<Usr_Sttcaa_Real>
-    {
+    public interface ICategorySpecificationsRealRepository : IRepository<Usr_Sttcax_Real>
+    {        
     }
 }

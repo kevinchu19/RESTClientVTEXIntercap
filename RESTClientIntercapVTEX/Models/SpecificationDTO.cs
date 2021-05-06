@@ -7,6 +7,7 @@ namespace RESTClientIntercapVTEX.Models
 {
     public class SpecificationDTO
     {
+        public int Id { get; set; }
         public int FieldTypeId { get; set; }
         public int CategoryId { get; set; }
         public int FieldGroupId { get; set; } 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace RESTClientIntercapVTEX.Entities
 {
-    public partial class Usr_Sttcaa
+    public partial class Usr_Sttcaa_Real
     {
         public string Usr_Sttcaa_Deptos { get; set; }
         public string Usr_Sttcaa_Nombre { get; set; }
@@ -21,6 +21,7 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_Sttcaa_Fieldt { get; set; }
         public string Usr_Sttcaa_Isacti{ get; set; }
         public int Usr_Sttcaa_Grunam { get; set; }
+
         public int Usr_Sttcaa_Idvtex { get; set; }
         public DateTime? Usr_St_Fecalt { get; set; }
         public DateTime? Usr_St_Fecmod { get; set; }

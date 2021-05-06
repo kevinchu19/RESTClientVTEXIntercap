@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace RESTClientIntercapVTEX.Repositories.Interfaces
 {
-    public interface IDepartmentSpecificationsRealRepository : IRepository<Usr_Sttcaa_Real>
+    public interface IDepartmentSpecificationsRepository : IRepository<Usr_Sttcaa>
     {
+        Task<IEnumerable<Usr_Sttcaa>> GetForVTEX(CancellationToken cancellationToken);
     }
 }
