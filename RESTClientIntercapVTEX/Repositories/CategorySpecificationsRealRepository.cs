@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace RESTClientIntercapVTEX.Repositories
 {
-    public class CategorySpecificationsRealRepository : RepositoryBase<Usr_Sttcax>, ICategorySpecificationsRealRepository
+    public class CategorySpecificationsRealRepository : RepositoryBase<Usr_Sttcax_Real>, ICategorySpecificationsRealRepository
     {
         public CategorySpecificationsRealRepository(ApiIntercapContext context) : base(context)
         { }

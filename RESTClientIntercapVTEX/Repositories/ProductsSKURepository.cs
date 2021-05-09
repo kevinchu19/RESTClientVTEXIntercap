@@ -22,7 +22,8 @@ namespace RESTClientIntercapVTEX.Repositories
 
         public async Task<IEnumerable<Stmpdh>> GetSKUForVTEX(CancellationToken cancellationToken)
         {
-            return await Context.Set<Stmpdh>().FromSqlRaw("EXEC Alm_StmpdhSKUGetForVTEX").ToListAsync();
+            IEnumerable<Stmpdh> a = await Context.Set<Stmpdh>().FromSqlRaw("EXEC Alm_StmpdhSKUGetForVTEX").ToListAsync();
+            return a;
         }
     }
 }

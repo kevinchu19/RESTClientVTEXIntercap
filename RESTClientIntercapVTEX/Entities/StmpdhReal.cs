@@ -23,6 +23,7 @@ namespace RESTClientIntercapVTEX.Entities
         public string Stmpdh_Debaja { get; set; }
         public string Stmpdh_Oalias { get; set; }
         public string Usr_Vtex_Transf { get; set; }
+        public string Usr_Vtex_Skutra { get; set; }
         public string Usr_Stmpdh_Father { get; set; }
         public int Usr_Stmpdh_Idvtex { get; set; }
         public int Usr_Stmpdh_IdSKUvtex { get; set; }

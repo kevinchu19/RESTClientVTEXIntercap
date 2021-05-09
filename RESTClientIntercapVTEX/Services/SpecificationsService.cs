@@ -80,7 +80,8 @@ namespace RESTClientIntercapVTEX.Services
                             Usr_Sttcax CategorySpecificationTransfered = await _repository.CategorySpecifications.Get(cancellationToken, new object[] { item.RowId });
                             Usr_Sttcax_Real CategorySpecificationReal = await _repository.CategorySpecificationsReal
                                                                                     .Get(cancellationToken, new object[] { CategorySpecificationTransfered.Usr_Sttcax_Deptos,
-                                                                                                                           CategorySpecificationTransfered.Usr_Sttcax_Nombre});
+                                                                                                                           CategorySpecificationTransfered.Usr_Sttcax_Catego,
+                                                                                                                           CategorySpecificationTransfered.Usr_Sttcax_Nombre}); ;
                             CategorySpecificationTransfered.Usr_Vtex_Transf = "S";
                             if (succesOperationWithNewID.Success)
                             {
@@ -92,6 +93,8 @@ namespace RESTClientIntercapVTEX.Services
                             Usr_Sttcay SubcategorySpecificationTransfered = await _repository.SubcategorySpecifications.Get(cancellationToken, new object[] { item.RowId });
                             Usr_Sttcay_Real SubcategorySpecificationReal = await _repository.SubcategorySpecificationsReal
                                                                                     .Get(cancellationToken, new object[] { SubcategorySpecificationTransfered.Usr_Sttcay_Deptos,
+                                                                                                                           SubcategorySpecificationTransfered.Usr_Sttcay_Catego,
+                                                                                                                           SubcategorySpecificationTransfered.Usr_Sttcay_Subcat,
                                                                                                                            SubcategorySpecificationTransfered.Usr_Sttcay_Nombre});
                             SubcategorySpecificationTransfered.Usr_Vtex_Transf = "S";
                             if (succesOperationWithNewID.Success)

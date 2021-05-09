@@ -35,13 +35,22 @@ namespace RESTClientIntercapVTEX.BackgroundServices
         public BrandsService _brandsService { get; }
         public ProductsService _productService { get; }
         public SKUService _SKUService { get; private set; }
+        public SpecificationValuesService _specificationValuesService { get; }
+        public ProductSpecificationsService _productSpecificationsService{ get; }
+        public SKUSpecificationsService _SKUSpecificationsService { get; }
+
+        public SKUFilesService _SKUFilesService { get; }
 
         public ConsumerBackgroundService(Serilog.ILogger logger, CategorysService categoryService, 
                                                                  SpecificationsService specificationService,
                                                                  SpecificationsGroupService specificationGroupService,
                                                                  BrandsService brandsService,
                                                                  ProductsService productService,
-                                                                 SKUService SKUService)
+                                                                 SKUService SKUService,
+                                                                 SpecificationValuesService specificationValuesService,
+                                                                 ProductSpecificationsService productSpecificationsService,
+                                                                 SKUSpecificationsService SKUSpecificationsService,
+                                                                 SKUFilesService SKUFilesService)
         {
             _logger = logger;
             _categoryService = categoryService;
@@ -50,6 +59,10 @@ namespace RESTClientIntercapVTEX.BackgroundServices
             _brandsService = brandsService;
             _productService = productService;
             _SKUService = SKUService;
+            _specificationValuesService = specificationValuesService;
+            _productSpecificationsService = productSpecificationsService;
+            _SKUSpecificationsService = SKUSpecificationsService;
+            _SKUFilesService = SKUFilesService;
         }
 
 
@@ -78,6 +91,10 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                         await ExecServiceAsync(_specificationService, stoppingToken);
                         await ExecServiceAsync(_productService, stoppingToken);
                         await ExecServiceAsync(_SKUService, stoppingToken);
+                        await ExecServiceAsync(_specificationValuesService, stoppingToken);
+                        await ExecServiceAsync(_productSpecificationsService, stoppingToken);
+                        await ExecServiceAsync(_SKUSpecificationsService, stoppingToken);
+                        await ExecServiceAsync(_SKUFilesService, stoppingToken);
                     }
                     catch (Exception ex)
                     {

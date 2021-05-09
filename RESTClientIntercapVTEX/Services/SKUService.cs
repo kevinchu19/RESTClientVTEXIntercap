@@ -67,7 +67,7 @@ namespace RESTClientIntercapVTEX.Services
                                                                                                             SKUTransfered.Stmpdh_Artcod });
 
 
-                    SKUTransfered.Usr_Vtex_Transf = "S";
+                    SKUTransfered.Usr_Vtex_Skutra = "S";
                     if (succesOperationWithNewID.Success)
                     {
                         SKUReal.Usr_Stmpdh_IdSKUvtex = succesOperationWithNewID.NewId;
@@ -78,7 +78,7 @@ namespace RESTClientIntercapVTEX.Services
                 else
                 {
                     Stmpdh Sku = await _repository.ProductsSKU.Get(cancellationToken, new object[] { item.RowId });
-                    Sku.Usr_Vtex_Transf = "E";
+                    Sku.Usr_Vtex_Skutra = "E";
                     await _repository.Complete();
                 }
 

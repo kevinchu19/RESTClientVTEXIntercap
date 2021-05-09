@@ -77,6 +77,7 @@ namespace RESTClientIntercapVTEX.Services
                             if (succesOperationWithNewID.Success)
                             {
                                 productSKUReal.Usr_Stmpdh_Idvtex = succesOperationWithNewID.NewId;
+                                productSKUTransfered.Usr_Stmpdh_Idvtex = succesOperationWithNewID.NewId;
                             }
                             break;
                         case "USR_STMPPH":

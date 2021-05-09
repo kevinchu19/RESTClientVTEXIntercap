@@ -20,8 +20,7 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_Sttcaa_Defaul { get; set; }
         public string Usr_Sttcaa_Fieldt { get; set; }
         public string Usr_Sttcaa_Isacti{ get; set; }
-        public int Usr_Sttcaa_Grunam { get; set; }
-
+        public string Usr_Sttcaa_Grunam { get; set; }
         public int Usr_Sttcaa_Idvtex { get; set; }
         public DateTime? Usr_St_Fecalt { get; set; }
         public DateTime? Usr_St_Fecmod { get; set; }
@@ -29,11 +28,8 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_St_Ultopr { get; set; }
         public string Usr_St_Debaja { get; set; }
         public string Usr_St_Oalias { get; set; }
-        public DateTime Sfl_LoginDateTime { get; set; }
-        public string Sfl_TableOperation { get; set; }
         public string Usr_Vtex_Transf { get; set; }
-        public int RowId { get; set; }
-
+        
     }
 }
 

@@ -23,7 +23,7 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_Sttcax_Isacti { get; set; }
         public int Usr_Sttcax_Idvtex { get; set; }
         public string Usr_Vtex_Transf { get; set; }
-        public string Usr_Sttcax_Grunam { get; set; }
+        public int Usr_Sttcax_Grunam { get; set; }
         public DateTime? Usr_St_Fecalt { get; set; }
         public DateTime? Usr_St_Fecmod { get; set; }
         public string Usr_St_Userid { get; set; }

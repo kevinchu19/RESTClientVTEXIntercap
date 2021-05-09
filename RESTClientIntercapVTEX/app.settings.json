@@ -8,6 +8,7 @@
   },
   "VTEX": {
     "BaseAddress": "https://motomercadoar.vtexcommercestable.com.br",
+    "ImagesBasePath": "https://intercap.com.ar/imagenes/productos",
     "AppKey": "vtexappkey-motomercadoar-YGWANH",
     "AppToken": "LSQVQRPKZKJBNWZBCHGRPMYMHBHQNRHCFZJKLFAJJCRTMKLSIWLRETHYUDOPJZXICHVONOPWHXHNVFAXPOHQFPXMRKQHRLZJEIQEOXFTHOKHMUDODQZVSGDNJJWCYHEW",
     "Specifications": {
@@ -27,6 +28,9 @@
     },
     "SKU": {
       "Path": "api/catalog/pvt/stockkeepingunit"
+    },
+    "SpecificationValues": {
+      "Path": "api/catalog/pvt/specificationvalue"
     }
 
   },

@@ -27,6 +27,9 @@
     },
     "SKU": {
       "Path": "api/catalog/pvt/stockkeepingunit"
+    },
+    "SpecificationValues": {
+      "Path": "api/catalog/pvt/specificationvalue"
     }
 
   },

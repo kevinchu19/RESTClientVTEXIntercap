@@ -116,6 +116,21 @@ namespace RESTClientIntercapVTEX
                    services.AddTransient(provider =>
                        new SKUClient<SkuDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:SKU:Path"], _logger));
 
+                   services.AddTransient<SpecificationValuesService>();
+                   services.AddTransient(provider =>
+                       new SpecificationValuesClient<SpecificationValueDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:SpecificationValues:Path"], _logger));
+
+                   services.AddTransient<ProductSpecificationsService>();
+                   services.AddTransient(provider =>
+                       new ProductAndSKUSpecificationsClient<ProductSpecificationDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:Products:Path"], _logger));
+
+                   services.AddTransient<SKUSpecificationsService>();
+                   services.AddTransient(provider =>
+                       new ProductAndSKUSpecificationsClient<SKUSpecificationDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:SKU:Path"], _logger));
+
+                   services.AddTransient<SKUFilesService>();
+                   services.AddTransient(provider =>
+                       new SKUFilesClient<SKUFileDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:SKU:Path"], _logger));
 
                    // Add app
                    services.AddSingleton<ConsumerBackgroundService>();
@@ -262,6 +277,39 @@ namespace RESTClientIntercapVTEX
                        .ForMember(dest => dest.IsKit, opt => opt.MapFrom(src => src.Stmpdh_Kitsfc == "S"))
                        .ForMember(dest => dest.CreationDate, opt => opt.MapFrom(src => src.Stmpdh_Fecalt))
                        .ForMember(dest => dest.MeasurementUnit, opt => opt.MapFrom(src => src.Stmpdh_Unimed));
+
+                       configuration.CreateMap<Usr_Sttvai, SpecificationValueDTO>()
+                       .ForMember(dest => dest.FieldValueId, opt => opt.MapFrom(src => src.Usr_Sttvai_Idvtex))
+                       .ForMember(dest => dest.FieldId, opt => opt.MapFrom(src => src.Usr_Sttvai_Fielid))
+                       .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Usr_Sttvai_Valor))
+                       .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Usr_Sttvai_Textos))
+                       .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.Usr_St_Debaja == "N"))
+                       .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.Usr_Sttvai_Positi));
+
+                       configuration.CreateMap<Usr_Pratri, ProductSpecificationDTO>()
+                       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Pratri_Idvtex))
+                       .ForMember(dest => dest.FieldId, opt => opt.MapFrom(src => src.Usr_Pratri_Campo))
+                       .ForMember(dest => dest.FieldValueId, opt => opt.MapFrom(src => src.Usr_Pratri_Valor))
+                       .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Usr_Pratri_Textos));
+
+
+                       configuration.CreateMap<Usr_Pratri, SKUSpecificationDTO>()
+                       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Pratri_Idvtex))
+                       .ForMember(dest => dest.FieldId, opt => opt.MapFrom(src => src.Usr_Pratri_Campo))
+                       .ForMember(dest => dest.FieldValueId, opt => opt.MapFrom(src => src.Usr_Pratri_Valor))
+                       .ForMember(dest => dest.SKUId, opt => opt.MapFrom(src => src.ProductId));
+
+                       configuration.CreateMap<Usr_Stmppa, ProductSpecificationDTO>()
+                       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Stmppa_Idvtex))
+                       .ForMember(dest => dest.FieldId, opt => opt.MapFrom(src => src.Usr_Stmppa_Campo))
+                       .ForMember(dest => dest.FieldValueId, opt => opt.MapFrom(src => src.Usr_Stmppa_Valor))
+                       .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Usr_Stmppa_Textos));
+
+                       configuration.CreateMap<Usr_Stimpr, SKUFileDTO>()
+                       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Stimpr_Idvtex))
+                       .ForMember(dest => dest.IsMain, opt => opt.MapFrom(src => src.Usr_Stimpr_Orden == 1))
+                       .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Usr_Stimpr_Name))
+                       .ForMember(dest => dest.Url, opt => opt.MapFrom(src => src.Usr_Stimpr_Imgdps));
                    }
                        , typeof(Program));
 

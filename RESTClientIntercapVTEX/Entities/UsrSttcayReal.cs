@@ -32,8 +32,5 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_St_Debaja { get; set; }
         public string Usr_St_Oalias { get; set; }
 
-        public DateTime Sfl_LoginDateTime { get; set; }
-        public string Sfl_TableOperation { get; set; }
-        public int RowId { get; set; }
     }
 }

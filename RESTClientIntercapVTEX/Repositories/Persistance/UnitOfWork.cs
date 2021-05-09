@@ -26,6 +26,14 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
         public IDepartmentSpecificationsRealRepository _departmentsSpecificationsReal { get; set; }
         public ICategorySpecificationsRealRepository _categorySpecificationsReal { get; set; }
         public ISubcategorySpecificationsRealRepository _subcategorySpecificationsReal { get; set; }
+        public ISpecificationValueRepository _specificationValues { get; set; }
+        public ISpecificationValueRealRepository _specificationValuesReal { get; set; }
+        public IProductsAndSKUSpecificationsRepository _productsAndSKUSpecifications { get; set; }
+        public IProductsAndSKUSpecificationsRealRepository _productsAndSKUSpecificationsReal { get; set; }
+        public IProductsFatherSpecificationsRealRepository _productsFatherSpecificationsReal { get; set; }
+        public IProductsFatherSpecificationsRepository _productsFatherSpecifications { get; set; }
+        public ISKUFilesRepository _SKUFiles { get; set; }
+        public ISKUFilesRealRepository _SKUFilesReal { get; set; }
         public UnitOfWork(ApiIntercapContext context)
         {
             Context = context;
@@ -184,7 +192,7 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
             }
         }
 
-        public IDepartmentSpecificationsRealRepository DepartmentSpecificationsReal
+        public IDepartmentSpecificationsRealRepository DepartmentsSpecificationsReal
         {
             get
             {
@@ -220,7 +228,100 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
             }
         }
 
+        public ISpecificationValueRepository SpecificationValues
+        {
+            get
+            {
+                if (_specificationValues == null)
+                {
+                    _specificationValues = new SpecificationValuesRepository(Context);
+                }
+                return _specificationValues;
+            }
+        }
 
+        public ISpecificationValueRealRepository SpecificationValuesReal
+        {
+            get
+            {
+                if (_specificationValuesReal == null)
+                {
+                    _specificationValuesReal = new SpecificationValuesRealRepository(Context);
+                }
+                return _specificationValuesReal;
+            }
+        }
+
+        public IProductsAndSKUSpecificationsRepository ProductsAndSKUSpecifications
+        {
+            get
+            {
+                if (_productsAndSKUSpecifications == null)
+                {
+                    _productsAndSKUSpecifications = new ProductsAndSKUSpecificationsRepository(Context);
+                }
+                return _productsAndSKUSpecifications;
+            }
+        }
+
+        public IProductsAndSKUSpecificationsRealRepository ProductsAndSKUSpecificationsReal
+        {
+            get
+            {
+                if (_productsAndSKUSpecificationsReal == null)
+                {
+                    _productsAndSKUSpecificationsReal = new ProductsAndSKUSpecificationsRealRepository(Context);
+                }
+                return _productsAndSKUSpecificationsReal;
+            }
+        }
+
+        public IProductsFatherSpecificationsRealRepository ProductsFatherSpecificationsReal
+        {
+            get
+            {
+                if (_productsFatherSpecificationsReal == null)
+                {
+                    _productsFatherSpecificationsReal = new ProductsFatherSpecificationsRealRepository(Context);
+                }
+                return _productsFatherSpecificationsReal;
+            }
+        }
+
+        public IProductsFatherSpecificationsRepository ProductsFatherSpecifications
+        {
+            get
+            {
+                if (_productsFatherSpecifications == null)
+                {
+                    _productsFatherSpecifications = new ProductsFatherSpecificationsRepository(Context);
+                }
+                return _productsFatherSpecifications;
+            }
+        }
+
+        public ISKUFilesRepository SKUFiles
+        {
+            get
+            {
+                if (_SKUFiles == null)
+                {
+                    _SKUFiles = new SKUFilesRepository(Context);
+                }
+                return _SKUFiles;
+            }
+        }
+        public ISKUFilesRealRepository SKUFilesReal
+        {
+            get
+            {
+                if (_SKUFilesReal == null)
+                {
+                    _SKUFilesReal = new SKUFilesRealRepository(Context);
+                }
+                return _SKUFilesReal;
+            }
+        }
 
         public async Task<int> Complete()
         {

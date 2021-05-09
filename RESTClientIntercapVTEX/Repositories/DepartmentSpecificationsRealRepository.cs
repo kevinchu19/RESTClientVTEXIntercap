@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RESTClientIntercapVTEX.Repositories
 {
-    public class DepartmentSpecificationsRealRepository: RepositoryBase<Usr_Sttcaa>, IDepartmentSpecificationsRealRepository
+    public class DepartmentSpecificationsRealRepository: RepositoryBase<Usr_Sttcaa_Real>, IDepartmentSpecificationsRealRepository
     {
         public DepartmentSpecificationsRealRepository(ApiIntercapContext context) : base(context)
         { }
