@@ -65,6 +65,9 @@ namespace RESTClientIntercapVTEX.Entities
                     .IsUnicode(false)
                     .HasColumnName("STMPDH_ARTCOD");
 
+                entity.Property(e => e.ProductId)
+                    .HasColumnName("ProductId");
+
                 entity.Property(e => e.Stmpdh_Debaja)
                     .HasMaxLength(1)
                     .IsUnicode(false)
@@ -128,7 +131,7 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasColumnName("USR_STMPDH_DEPTOS");
 
 
-                entity.Property(e => e.Usr_Stmpdh_Father).IsUnicode(false).HasColumnName("USR_STMPDH_FATHER");
+                entity.Property(e => e.Usr_Stmpdh_Father).HasColumnName("USR_STMPDH_FATHER");
 
                 entity.Property(e => e.Usr_Stmpdh_Intnet)
                     .HasMaxLength(1)
@@ -136,11 +139,11 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasColumnName("USR_STMPDH_INTNET")
                     .IsFixedLength(true);
 
-                entity.Property(e => e.Usr_Stmpdh_Marcas).IsUnicode(false).HasColumnName("USR_STMPDH_MARCAS");
+                entity.Property(e => e.Usr_Stmpdh_Marcas).HasColumnName("USR_STMPDH_MARCAS");
 
-                entity.Property(e => e.Usr_Stmpdh_Idvtex).IsUnicode(false).HasColumnName("USR_STMPDH_IDVTEX");
+                entity.Property(e => e.Usr_Stmpdh_Idvtex).HasColumnName("USR_STMPDH_IDVTEX");
 
-                entity.Property(e => e.Usr_Stmpdh_IdSKUvtex).IsUnicode(false).HasColumnName("USR_STMPDH_IDSKUVTEX");
+                entity.Property(e => e.Usr_Stmpdh_IdSKUvtex).HasColumnName("USR_STMPDH_IDSKUVTEX");
 
                 entity.Property(e => e.Usr_Stmpdh_Subcat)
                     .HasMaxLength(6)

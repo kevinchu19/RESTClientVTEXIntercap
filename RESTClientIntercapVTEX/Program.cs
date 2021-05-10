@@ -271,7 +271,7 @@ namespace RESTClientIntercapVTEX
 
                        configuration.CreateMap<Stmpdh, SkuDTO>()
                        .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Stmpdh_IdSKUvtex))
-                       .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Usr_Stmpdh_Father))
+                       //.ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Usr_Stmpdh_Father))
                        .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Stmpdh_Descrp))
                        .ForMember(dest => dest.RefId, opt => opt.MapFrom(src => src.Stmpdh_Indcod))
                        .ForMember(dest => dest.IsKit, opt => opt.MapFrom(src => src.Stmpdh_Kitsfc == "S"))

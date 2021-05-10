@@ -9,6 +9,7 @@ namespace RESTClientIntercapVTEX.Entities
     {
         public string Stmpdh_Tippro { get; set; }
         public string Stmpdh_Artcod { get; set; }
+        public int ProductId { get; set; }
         public string Stmpdh_Descrp { get; set; }
         public string Stmpdh_Indcod { get; set; }
         public string Stmpdh_Kitsfc { get; set; }
