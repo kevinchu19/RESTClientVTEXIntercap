@@ -9,7 +9,7 @@ namespace RESTClientIntercapVTEX.Entities
     {
         public string Usr_Stmppa_Indcod { get; set; }
 
-        public string ProductId { get; set; }
+        public int ProductId { get; set; }
         public int Usr_Stmppa_Orden { get; set; }
         public int Usr_Stmppa_Campo { get; set; }
         public int Usr_Stmppa_Valor { get; set; }
