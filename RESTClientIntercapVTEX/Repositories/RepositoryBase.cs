@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using RESTClientIntercapVTEX.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -30,6 +32,7 @@ namespace RESTClientIntercapVTEX.Repositories
         public void Remove(CancellationToken cancellationToken, TEntity entity) => Context.Set<TEntity>().Remove(entity);
 
         public void RemoveRange(CancellationToken cancellationToken, IEnumerable<TEntity> entities) => Context.Set<TEntity>().RemoveRange(entities);
+
     }
 
 }

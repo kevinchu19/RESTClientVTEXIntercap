@@ -7,6 +7,7 @@ using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
+using Microsoft.Extensions.Configuration;
 
 namespace RESTClientIntercapVTEX.Repositories
 {

@@ -7,17 +7,18 @@ using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
+using Microsoft.Extensions.Configuration;
 
 namespace RESTClientIntercapVTEX.Repositories
 {
-    public class BrandsRepository : RepositoryBase<Usr_Sttmah>, IBrandsRepository
+    public class SKUFilesRepository : RepositoryBase<Usr_Stimpr>, ISKUFilesRepository
     {
-        public BrandsRepository(ApiIntercapContext context) : base(context)
+        public SKUFilesRepository(ApiIntercapContext context) : base(context)
         { }
 
-        public async Task<IEnumerable<Usr_Sttmah>> GetForVTEX(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Usr_Stimpr>> GetForVTEX(CancellationToken cancellationToken)
         {
-            return await Context.Set<Usr_Sttmah>().FromSqlRaw("EXEC Alm_USR_SttmahGetForVTEX").ToListAsync();
+            return await Context.Set<Usr_Stimpr>().FromSqlRaw("EXEC Alm_USR_StimprGetForVTEX").ToListAsync();
         }
     }
 }

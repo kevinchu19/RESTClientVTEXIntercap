@@ -139,6 +139,7 @@ namespace RESTClientIntercapVTEX
                    //Unit of work
                    services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+
                    services.AddAutoMapper(configuration =>
                    {
                        configuration.CreateMap<Usr_Sttgsh, SpecificationGroupDTO>()
@@ -242,6 +243,15 @@ namespace RESTClientIntercapVTEX
                        .ForMember(dest => dest.Score, opt => opt.MapFrom(src => src.Usr_Sttmah_Scores))
                        .ForMember(dest => dest.LinkId, opt => opt.MapFrom(src => src.Usr_Sttmah_Descrp.Replace(' ', '-')));
 
+
+                       configuration.CreateMap<Stmpdh, SkuDTO>()
+                       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Stmpdh_IdSKUvtex))
+                       .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Usr_Stmpdh_Father))
+                       .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Stmpdh_Descrp))
+                       .ForMember(dest => dest.RefId, opt => opt.MapFrom(src => src.Stmpdh_Indcod))
+                       .ForMember(dest => dest.IsKit, opt => opt.MapFrom(src => src.Stmpdh_Kitsfc == "S"));
+                       //.ForMember(dest => dest.MeasurementUnit, opt => opt.MapFrom(src => src.Stmpdh_Unimed));
+
                        configuration.CreateMap<Stmpdh, ProductDTO>()
                        .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Stmpdh_Idvtex))
                        .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Stmpdh_Descrp))
@@ -268,15 +278,6 @@ namespace RESTClientIntercapVTEX
                        .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Usr_Stmpph_Descrp))
                        .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.Usr_St_Debaja == "N"))
                        .ForMember(dest => dest.Stmpdh_Oalias, opt => opt.MapFrom(src => src.Usr_St_Oalias));
-
-                       configuration.CreateMap<Stmpdh, SkuDTO>()
-                       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Stmpdh_IdSKUvtex))
-                       //.ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Usr_Stmpdh_Father))
-                       .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Stmpdh_Descrp))
-                       .ForMember(dest => dest.RefId, opt => opt.MapFrom(src => src.Stmpdh_Indcod))
-                       .ForMember(dest => dest.IsKit, opt => opt.MapFrom(src => src.Stmpdh_Kitsfc == "S"))
-                       .ForMember(dest => dest.CreationDate, opt => opt.MapFrom(src => src.Stmpdh_Fecalt))
-                       .ForMember(dest => dest.MeasurementUnit, opt => opt.MapFrom(src => src.Stmpdh_Unimed));
 
                        configuration.CreateMap<Usr_Sttvai, SpecificationValueDTO>()
                        .ForMember(dest => dest.FieldValueId, opt => opt.MapFrom(src => src.Usr_Sttvai_Idvtex))

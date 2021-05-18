@@ -1,4 +1,5 @@
-﻿using RESTClientIntercapVTEX.Entities;
+﻿using Microsoft.Extensions.Configuration;
+using RESTClientIntercapVTEX.Entities;
 using RESTClientIntercapVTEX.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
     public class UnitOfWork: IUnitOfWork
     {
         public ApiIntercapContext Context { get; }
+        public IConfigurationRoot Configuration { get; }
         private IDepartmentSpecificationsRepository _departmentSpecifications { get; set; }
         public IDepartmentsRepository _department { get; set; }
         public ICategorysRepository _categorys { get; set; }
@@ -34,9 +36,10 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
         public IProductsFatherSpecificationsRepository _productsFatherSpecifications { get; set; }
         public ISKUFilesRepository _SKUFiles { get; set; }
         public ISKUFilesRealRepository _SKUFilesReal { get; set; }
-        public UnitOfWork(ApiIntercapContext context)
+        public UnitOfWork(ApiIntercapContext context, IConfigurationRoot configuration)
         {
             Context = context;
+            Configuration = configuration;
         }
 
         public IDepartmentsRepository Departments
@@ -127,7 +130,7 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
             {
                 if (_productsSKU == null)
                 {
-                    _productsSKU = new ProductsSKURepository(Context);
+                    _productsSKU = new ProductsSKURepository(Context, Configuration);
                 }
                 return _productsSKU;
             }

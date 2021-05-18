@@ -65,9 +65,6 @@ namespace RESTClientIntercapVTEX.Entities
                     .IsUnicode(false)
                     .HasColumnName("STMPDH_ARTCOD");
 
-                entity.Property(e => e.ProductId)
-                    .HasColumnName("ProductId");
-
                 entity.Property(e => e.Stmpdh_Debaja)
                     .HasMaxLength(1)
                     .IsUnicode(false)
@@ -143,7 +140,7 @@ namespace RESTClientIntercapVTEX.Entities
 
                 entity.Property(e => e.Usr_Stmpdh_Idvtex).HasColumnName("USR_STMPDH_IDVTEX");
 
-                entity.Property(e => e.Usr_Stmpdh_IdSKUvtex).HasColumnName("USR_STMPDH_IDSKUVTEX");
+                entity.Property(e => e.Usr_Stmpdh_IdSKUvtex).HasColumnType("int").HasColumnName("USR_STMPDH_IDSKUVTEX");
 
                 entity.Property(e => e.Usr_Stmpdh_Subcat)
                     .HasMaxLength(6)

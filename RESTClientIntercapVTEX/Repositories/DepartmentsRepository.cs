@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using RESTClientIntercapVTEX.Entities;
 using RESTClientIntercapVTEX.Repositories.Interfaces;
 using System;

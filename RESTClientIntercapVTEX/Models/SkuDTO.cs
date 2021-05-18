@@ -7,28 +7,26 @@ namespace RESTClientIntercapVTEX.Models
 {
     public class SkuDTO
     {
-        [JsonIgnore]
+        
         public int Id { get; set; }
         public int ProductId { get; set; }
         public bool IsActive { get; set; } = false;
         public string Name { get; set; }
         public string RefId { get; set; }
-        public decimal PackagedHeight { get; set; }
-        public decimal PackagedLength { get; set; }
-        public decimal PackagedWidth { get; set; }
-        public decimal PackagedWeightKg { get; set; }
-        public decimal Height { get; set; }
-        public decimal Length { get; set; }
-        public decimal Width { get; set; }
-        public decimal WeightKg { get; set; }
-        public decimal CubicWeight { get; set; }
+        public decimal PackagedHeight { get; set; } = 1;
+        public decimal PackagedLength { get; set; } = 1;
+        public decimal PackagedWidth { get; set; } = 1;
+        public decimal PackagedWeightKg { get; set; } = 1000;
+        public decimal Height { get; set; } = 1;
+        public decimal Length { get; set; } = 1;
+        public decimal Width { get; set; } = 1;
+        public decimal WeightKg { get; set; } = 1000;
+        public decimal CubicWeight { get; set; } = 1000;
         public bool IsKit { get; set; }
-        public DateTime CreationDate { get; set; }
-        public decimal RewardValue { get; set; }
-        public DateTime EstimatedDateArrival { get; set; } = DateTime.Now;
-        public string ManufacturerCode { get; set; }
-        public int CommercialConditionId { get; set; }
-        public string MeasurementUnit { get; set; }
+        public string RewardValue { get; set; } = null;
+        public string ManufacturerCode { get; set; } = null;
+        public int CommercialConditionId { get; set; } = 1;
+        public string MeasurementUnit { get; set; } = "un";
         public decimal UnitMultiplier { get; set; } = 1;
         public string ModalType { get; set; } 
         public bool KitItensSellApart { get; set; }
