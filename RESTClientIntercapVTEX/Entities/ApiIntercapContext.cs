@@ -262,6 +262,18 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasColumnName("USR_VTEX_SKUTRA")
                     .IsFixedLength(true);
 
+                entity.Property(e => e.Usr_Vtex_Stktra)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VTEX_STKTRA")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Vtex_Pretra)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VTEX_PRETRA")
+                    .IsFixedLength(true);
+
                 entity.Property(e => e.Usr_Stmpdh_Idvtex).HasColumnName("USR_STMPDH_IDVTEX");
                 
                 entity.Property(e => e.Usr_Stmpdh_IdSKUvtex).HasColumnName("USR_STMPDH_IDSKUVTEX");

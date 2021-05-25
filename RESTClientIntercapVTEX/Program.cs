@@ -132,6 +132,13 @@ namespace RESTClientIntercapVTEX
                    services.AddTransient(provider =>
                        new SKUFilesClient<SKUFileDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:SKU:Path"], _logger));
 
+                   services.AddTransient<InventoryService>();
+                   services.AddTransient(provider =>
+                       new InventoryClient<InventoryDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:Inventory:Path"], _logger));
+
+                   services.AddTransient<PricesService>();
+                   services.AddTransient(provider =>
+                       new PricesClient<PricesDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:Prices:Path"], _logger));
                    // Add app
                    services.AddSingleton<ConsumerBackgroundService>();
 

@@ -19,11 +19,10 @@ namespace RESTClientIntercapVTEX.Services
 
         public SKUSpecificationsService(ProductAndSKUSpecificationsClient<SKUSpecificationDTO> client,
                                 IUnitOfWork repository,
-                                IMapper mapper,
-                                ProductAndSKUSpecificationsClient<SKUSpecificationDTO> SKUspecificationsClient) :
+                                IMapper mapper) :
             base(client, repository, mapper)
         {
-            _SKUspecificationsClient = SKUspecificationsClient;
+            _SKUspecificationsClient = client;
         }
 
         
@@ -65,8 +64,8 @@ namespace RESTClientIntercapVTEX.Services
 
                     Usr_Pratri productSpecificationTransfered = await _repository.ProductsAndSKUSpecifications.Get(cancellationToken, new object[] { item.RowId });
                     Usr_Pratri_Real productSpecificationReal = await _repository.ProductsAndSKUSpecificationsReal
-                                                                    .Get(cancellationToken, new object[] { productSpecificationTransfered.Usr_Pratri_Tippro,
-                                                                                                            productSpecificationTransfered.Usr_Pratri_Artcod,
+                                                                    .Get(cancellationToken, new object[] { productSpecificationTransfered.Usr_Pratri_Tippro.Trim(),
+                                                                                                            productSpecificationTransfered.Usr_Pratri_Artcod.Trim(),
                                                                                                             productSpecificationTransfered.Usr_Pratri_Orden});
 
 

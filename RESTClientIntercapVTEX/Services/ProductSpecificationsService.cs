@@ -19,11 +19,10 @@ namespace RESTClientIntercapVTEX.Services
 
         public ProductSpecificationsService(ProductAndSKUSpecificationsClient<ProductSpecificationDTO> client,
                                 IUnitOfWork repository,
-                                IMapper mapper,
-                                ProductAndSKUSpecificationsClient<ProductSpecificationDTO> specificationsClient) :
+                                IMapper mapper) :
             base(client, repository, mapper)
         {
-            _specificationsClient = specificationsClient;
+            _specificationsClient = client;
         }
 
         
@@ -71,8 +70,8 @@ namespace RESTClientIntercapVTEX.Services
                         case "USR_PRATRI":
                             Usr_Pratri productSpecificationTransfered = await _repository.ProductsAndSKUSpecifications.Get(cancellationToken, new object[] { item.RowId });
                             Usr_Pratri_Real productSpecificationReal = await _repository.ProductsAndSKUSpecificationsReal
-                                                                            .Get(cancellationToken, new object[] { productSpecificationTransfered.Usr_Pratri_Tippro,
-                                                                                                                   productSpecificationTransfered.Usr_Pratri_Artcod,
+                                                                            .Get(cancellationToken, new object[] { productSpecificationTransfered.Usr_Pratri_Tippro.Trim(),
+                                                                                                                   productSpecificationTransfered.Usr_Pratri_Artcod.Trim(),
                                                                                                                    productSpecificationTransfered.Usr_Pratri_Orden});
 
 
@@ -86,7 +85,7 @@ namespace RESTClientIntercapVTEX.Services
                         case "USR_STMPPA":
                             Usr_Stmppa productFatherSpecificationTransfered = await _repository.ProductsFatherSpecifications.Get(cancellationToken, new object[] { item.RowId });
                             Usr_Stmppa_Real productFatherSpecificationReal = await _repository.ProductsFatherSpecificationsReal
-                                                                            .Get(cancellationToken, new object[] { productFatherSpecificationTransfered.Usr_Stmppa_Indcod,
+                                                                            .Get(cancellationToken, new object[] { productFatherSpecificationTransfered.Usr_Stmppa_Indcod.Trim(),
                                                                                                                    productFatherSpecificationTransfered.Usr_Stmppa_Orden});
 
 

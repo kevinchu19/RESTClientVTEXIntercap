@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Data.SqlClient;
+using RESTClientIntercapVTEX.Models;
 
 namespace RESTClientIntercapVTEX.Repositories
 {
@@ -48,7 +49,7 @@ namespace RESTClientIntercapVTEX.Repositories
                     {
                         while (await reader.ReadAsync())
                         {
-                            response.Add(MapToValue(reader));
+                            response.Add(MapToValue<Stmpdh>(reader));
                         }
                     }
                 }
@@ -58,28 +59,73 @@ namespace RESTClientIntercapVTEX.Repositories
 
         }
 
-        private Stmpdh MapToValue(SqlDataReader reader)
+        public async Task<IEnumerable<InventoryDTO>> GetInventoryForVTEX(CancellationToken cancellationToken)
         {
-            Stmpdh respuesta = (Stmpdh)Activator.CreateInstance(typeof(Stmpdh), new object[] { });
-            Type typeResponse = typeof(Stmpdh);
+            List<InventoryDTO> response = new List<InventoryDTO>();
+
+
+            using (SqlConnection sql = new SqlConnection(Configuration.GetConnectionString("DefaultConnectionString")))
+            {
+                using (SqlCommand cmd = new SqlCommand($"ALM_STRMVKGetForVTEX", sql))
+                {
+
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    await sql.OpenAsync();
+
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            response.Add(MapToValue<InventoryDTO>(reader));
+                        }
+                    }
+                }
+            }
+
+            return response;
+        }
+
+        public async Task<IEnumerable<PricesDTO>> GetPricesForVTEX(CancellationToken cancellationToken)
+        {
+            List<PricesDTO> response = new List<PricesDTO>();
+
+
+            using (SqlConnection sql = new SqlConnection(Configuration.GetConnectionString("DefaultConnectionString")))
+            {
+                using (SqlCommand cmd = new SqlCommand($"ALM_STTPREGetForVTEX", sql))
+                {
+
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    await sql.OpenAsync();
+
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            response.Add(MapToValue<PricesDTO>(reader));
+                        }
+                    }
+                }
+            }
+
+            return response;
+        }
+
+        private TResponse MapToValue<TResponse>(SqlDataReader reader)
+        {
+            var respuesta = (TResponse)Activator.CreateInstance(typeof(TResponse), new object[] { });
+            Type typeResponse = typeof(TResponse);
             System.Reflection.PropertyInfo[] listaPropiedades = typeResponse.GetProperties();
             
-            for (int i = 0; i < reader.FieldCount - 1; i++)
-            {
-                switch (listaPropiedades[i].Name)
+            for (int i = 0; i < listaPropiedades.Count(); i++)
+            {          
+                if (reader[listaPropiedades[i].Name] != DBNull.Value)
                 {
-                    case "Activo":
-                        listaPropiedades[i].SetValue(respuesta, (string)reader["DeBaja"] == "S" ? 0 : 1);
-                        break;
-
-                    default:
-                       
-                        if (reader[listaPropiedades[i].Name] != DBNull.Value)
-                        {
-                            listaPropiedades[i].SetValue(respuesta, reader[listaPropiedades[i].Name]);
-                        }
-                        break;
+                    listaPropiedades[i].SetValue(respuesta, reader[listaPropiedades[i].Name]);
                 }
+            
             }
 
             return respuesta;

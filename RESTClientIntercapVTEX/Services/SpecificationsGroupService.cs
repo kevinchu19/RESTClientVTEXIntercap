@@ -64,10 +64,10 @@ namespace RESTClientIntercapVTEX.Services
 
                     Usr_Sttgsh SpecificationGroupTransfered = await _repository.SpecificationsGroup.Get(cancellationToken, new object[] { item.RowId});
                     Usr_Sttgsh_Real SpecificationGroupReal = await _repository.SpecificationsGroupReal
-                                                                            .Get(cancellationToken, new object[] { SpecificationGroupTransfered.Usr_Sttgsh_Deptos,
-                                                                                                                   SpecificationGroupTransfered.Usr_Sttgsh_Catego,
-                                                                                                                   SpecificationGroupTransfered.Usr_Sttgsh_Subcat,
-                                                                                                                   SpecificationGroupTransfered.Usr_Sttgsh_Nombre});
+                                                                            .Get(cancellationToken, new object[] { SpecificationGroupTransfered.Usr_Sttgsh_Deptos.Trim(),
+                                                                                                                   SpecificationGroupTransfered.Usr_Sttgsh_Catego.Trim(),
+                                                                                                                   SpecificationGroupTransfered.Usr_Sttgsh_Subcat.Trim(),
+                                                                                                                   SpecificationGroupTransfered.Usr_Sttgsh_Nombre.Trim()});
                     SpecificationGroupTransfered.Usr_Vtex_Transf = "S";
                     if (succesOperationWithNewID.Success)
                     {

@@ -63,9 +63,9 @@ namespace RESTClientIntercapVTEX.Services
                 {
                        
                     Usr_Sttvai specificationValueTransfered = await _repository.SpecificationValues.Get(cancellationToken, new object[] {item.RowId});
-                    Usr_Sttvai_Real specificationValueReal= await _repository.SpecificationValuesReal.Get(cancellationToken, new object[] { specificationValueTransfered.Usr_Sttvai_Deptos,
-                                                                                                                                            specificationValueTransfered.Usr_Sttvai_Catego,
-                                                                                                                                            specificationValueTransfered.Usr_Sttvai_Subcat,
+                    Usr_Sttvai_Real specificationValueReal= await _repository.SpecificationValuesReal.Get(cancellationToken, new object[] { specificationValueTransfered.Usr_Sttvai_Deptos.Trim(),
+                                                                                                                                            specificationValueTransfered.Usr_Sttvai_Catego.Trim(),
+                                                                                                                                            specificationValueTransfered.Usr_Sttvai_Subcat.Trim(),
                                                                                                                                             specificationValueTransfered.Usr_Sttvai_Fielid,
                                                                                                                                             specificationValueTransfered.Usr_Sttvai_Valor});
                     specificationValueTransfered.Usr_Vtex_Transf = "S";

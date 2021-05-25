@@ -10,7 +10,7 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_Stimpr_Tippro { get; set; }
         public string  Usr_Stimpr_Artcod { get; set; }
         public int SKUId { get; set; }
-        public int Usr_Stimpr_Orden { get; set; }
+        public short Usr_Stimpr_Orden { get; set; }
         public string Usr_Stimpr_Pathim { get; set; }
         public string Usr_Stimpr_Imggra { get; set; }
         public string Usr_Stimpr_Imgdps { get; set; }

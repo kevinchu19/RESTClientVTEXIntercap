@@ -12,5 +12,8 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
     {
         Task<IEnumerable<Stmpdh>> GetProductForVTEX(CancellationToken cancellationToken);
         Task<IEnumerable<Stmpdh>> GetSKUForVTEX(CancellationToken cancellationToken);
+        Task<IEnumerable<InventoryDTO>> GetInventoryForVTEX(CancellationToken cancellationToken);
+        Task<IEnumerable<PricesDTO>> GetPricesForVTEX(CancellationToken cancellationToken);
+
     }
 }

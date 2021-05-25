@@ -11,9 +11,9 @@ namespace RESTClientIntercapVTEX.MapperHelp.SpecificationsGroupResolver
 	{
 		public int Resolve(Usr_Sttgsh source, SpecificationGroupDTO destination, int member, ResolutionContext context)
 		{
-			return Convert.ToInt32(source.Usr_Sttgsh_Deptos +
-								  (source.Usr_Sttgsh_Catego == "Z" ? "" : source.Usr_Sttgsh_Catego) +
-								  (source.Usr_Sttgsh_Subcat == "Z" ? "" : source.Usr_Sttgsh_Subcat));
+			return Convert.ToInt32(source.Usr_Sttgsh_Deptos.Trim() +
+								  (source.Usr_Sttgsh_Catego.Trim() == "Z" ? "" : source.Usr_Sttgsh_Catego.Trim()) +
+								  (source.Usr_Sttgsh_Subcat.Trim() == "Z" ? "" : source.Usr_Sttgsh_Subcat.Trim()));
 		}
 	}
 }

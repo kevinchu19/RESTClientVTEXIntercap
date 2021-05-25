@@ -63,8 +63,8 @@ namespace RESTClientIntercapVTEX.Services
 
                     Stmpdh SKUTransfered = await _repository.ProductsSKU.Get(cancellationToken, new object[] { item.RowId });
                     Stmpdh_Real SKUReal = await _repository.ProductsSKUReal
-                                                                    .Get(cancellationToken, new object[] { SKUTransfered.Stmpdh_Tippro,
-                                                                                                            SKUTransfered.Stmpdh_Artcod });
+                                                                    .Get(cancellationToken, new object[] { SKUTransfered.Stmpdh_Tippro.Trim(),
+                                                                                                            SKUTransfered.Stmpdh_Artcod.Trim() });
 
 
                     SKUTransfered.Usr_Vtex_Skutra = "S";

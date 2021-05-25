@@ -11,9 +11,9 @@ namespace RESTClientIntercapVTEX.MapperHelp.ProductsSKUResolver
 	{
 		public int Resolve(Stmpdh source, ProductDTO destination, int member, ResolutionContext context)
 		{
-			return Convert.ToInt32(source.Usr_Stmpdh_Deptos + 
-								  (source.Usr_Stmpdh_Catego =="Z" ? "":source.Usr_Stmpdh_Catego) +
-								  (source.Usr_Stmpdh_Subcat== "Z" ? "" : source.Usr_Stmpdh_Subcat));
+			return Convert.ToInt32(source.Usr_Stmpdh_Deptos.Trim() + 
+								  (source.Usr_Stmpdh_Catego.Trim() == "Z" ? "":source.Usr_Stmpdh_Catego.Trim()) +
+								  (source.Usr_Stmpdh_Subcat.Trim() == "Z" ? "" : source.Usr_Stmpdh_Subcat.Trim()));
 		}
 	}
 }

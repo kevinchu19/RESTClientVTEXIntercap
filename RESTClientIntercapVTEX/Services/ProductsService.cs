@@ -83,7 +83,7 @@ namespace RESTClientIntercapVTEX.Services
                         case "USR_STMPPH":
                             Usr_Stmpph productFatherTransfered = await _repository.ProductsFather.Get(cancellationToken, new object[] { item.RowId });
                             Usr_Stmpph_Real productFatherReal = await _repository.ProductsFatherReal
-                                                                            .Get(cancellationToken, new object[] { productFatherTransfered.Usr_Stmpph_Indcod});
+                                                                            .Get(cancellationToken, new object[] { productFatherTransfered.Usr_Stmpph_Indcod.Trim() });
 
                             
                             productFatherTransfered.Usr_Vtex_Transf = "S";

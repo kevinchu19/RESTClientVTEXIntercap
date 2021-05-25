@@ -38,8 +38,10 @@ namespace RESTClientIntercapVTEX.BackgroundServices
         public SpecificationValuesService _specificationValuesService { get; }
         public ProductSpecificationsService _productSpecificationsService{ get; }
         public SKUSpecificationsService _SKUSpecificationsService { get; }
-
         public SKUFilesService _SKUFilesService { get; }
+        public InventoryService _inventoryService { get; }
+        public PricesService _pricesService { get; }
+
 
         public ConsumerBackgroundService(Serilog.ILogger logger, CategorysService categoryService, 
                                                                  SpecificationsService specificationService,
@@ -50,7 +52,9 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                                                                  SpecificationValuesService specificationValuesService,
                                                                  ProductSpecificationsService productSpecificationsService,
                                                                  SKUSpecificationsService SKUSpecificationsService,
-                                                                 SKUFilesService SKUFilesService)
+                                                                 SKUFilesService SKUFilesService,
+                                                                 InventoryService inventoryService,
+                                                                 PricesService pricesService)
         {
             _logger = logger;
             _categoryService = categoryService;
@@ -63,6 +67,8 @@ namespace RESTClientIntercapVTEX.BackgroundServices
             _productSpecificationsService = productSpecificationsService;
             _SKUSpecificationsService = SKUSpecificationsService;
             _SKUFilesService = SKUFilesService;
+            _inventoryService = inventoryService;
+            _pricesService = pricesService;
         }
 
 
@@ -95,6 +101,8 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                         await ExecServiceAsync(_productSpecificationsService, stoppingToken);
                         await ExecServiceAsync(_SKUSpecificationsService, stoppingToken);
                         await ExecServiceAsync(_SKUFilesService, stoppingToken);
+                        await ExecServiceAsync(_inventoryService, stoppingToken);
+                        await ExecServiceAsync(_pricesService, stoppingToken);
                     }
                     catch (Exception ex)
                     {

@@ -67,8 +67,8 @@ namespace RESTClientIntercapVTEX.Services
                         case "USR_STTCAA":
                             Usr_Sttcaa DepartmentSpecificationTransfered = await _repository.DepartmentsSpecifications.Get(cancellationToken, new object[] { item.RowId });
                             Usr_Sttcaa_Real DepartmentSpecificationReal = await _repository.DepartmentsSpecificationsReal 
-                                                                                    .Get(cancellationToken, new object[] { DepartmentSpecificationTransfered.Usr_Sttcaa_Deptos,
-                                                                                                                           DepartmentSpecificationTransfered.Usr_Sttcaa_Nombre});
+                                                                                    .Get(cancellationToken, new object[] { DepartmentSpecificationTransfered.Usr_Sttcaa_Deptos.Trim(),
+                                                                                                                           DepartmentSpecificationTransfered.Usr_Sttcaa_Nombre.Trim()});
                             DepartmentSpecificationTransfered.Usr_Vtex_Transf = "S";
                             if (succesOperationWithNewID.Success)
                             {

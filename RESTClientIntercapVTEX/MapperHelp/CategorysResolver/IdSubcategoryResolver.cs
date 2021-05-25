@@ -11,7 +11,7 @@ namespace RESTClientIntercapVTEX.MapperHelp.CategorysResolver
 	{
 		public int Resolve(Usr_Sttcas source, CategoryDTO destination, int member, ResolutionContext context)
 		{
-			return Convert.ToInt32(source.Usr_Sttcas_Deptos + source.Usr_Sttcas_Catego + source.Usr_Sttcas_Subcat);
+			return Convert.ToInt32(source.Usr_Sttcas_Deptos.Trim() + source.Usr_Sttcas_Catego.Trim() + source.Usr_Sttcas_Subcat.Trim());
 		}
 	}
 }

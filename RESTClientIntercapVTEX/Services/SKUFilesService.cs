@@ -22,11 +22,10 @@ namespace RESTClientIntercapVTEX.Services
         public SKUFilesService(SKUFilesClient<SKUFileDTO> client,
                                 IUnitOfWork repository,
                                 IMapper mapper,
-                                SKUFilesClient<SKUFileDTO> SKUFilesClient,
                                 IConfigurationRoot configuration) :
             base(client, repository, mapper)
         {
-            _SKUFilesClient = SKUFilesClient;
+            _SKUFilesClient = client;
             Configuration = configuration;
         }
 
@@ -69,8 +68,8 @@ namespace RESTClientIntercapVTEX.Services
 
                     Usr_Stimpr SKUFileTransfered = await _repository.SKUFiles.Get(cancellationToken, new object[] { item.RowId });
                     Usr_Stimpr_Real SKUFileReal = await _repository.SKUFilesReal
-                                                                    .Get(cancellationToken, new object[] { SKUFileTransfered.Usr_Stimpr_Tippro,
-                                                                                                            SKUFileTransfered.Usr_Stimpr_Artcod,
+                                                                    .Get(cancellationToken, new object[] { SKUFileTransfered.Usr_Stimpr_Tippro.Trim(),
+                                                                                                            SKUFileTransfered.Usr_Stimpr_Artcod.Trim(),
                                                                                                             SKUFileTransfered.Usr_Stimpr_Orden});
 
 

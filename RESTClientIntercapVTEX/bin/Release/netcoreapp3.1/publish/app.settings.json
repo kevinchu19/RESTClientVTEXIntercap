@@ -31,6 +31,12 @@
     },
     "SpecificationValues": {
       "Path": "api/catalog/pvt/specificationvalue"
+    },
+    "Inventory": {
+      "Path": "api/logistics/pvt/inventory/skus/$SkuId/warehouses/$WarehouseId"
+    },
+    "Prices": {
+      "Path": "api/pricing/prices/$SkuId"
     }
 
   },

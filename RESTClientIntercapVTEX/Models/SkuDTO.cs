@@ -7,7 +7,7 @@ namespace RESTClientIntercapVTEX.Models
 {
     public class SkuDTO
     {
-        
+        [JsonIgnore]
         public int Id { get; set; }
         public int ProductId { get; set; }
         public bool IsActive { get; set; } = false;
