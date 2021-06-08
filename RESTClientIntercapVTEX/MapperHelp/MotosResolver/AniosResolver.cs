@@ -14,9 +14,9 @@ namespace RESTClientIntercapVTEX.MapperHelp.MotosResolver
 		public IEnumerable<int> Resolve(Usr_Prmoto source, MotosDocumentDTO destination, IEnumerable<int> member, ResolutionContext context)
 		{
 			int anioDesde = Convert.ToInt32(source.Usr_Prmoto_Adesde);
-			int anioHasta = DateTime.Now.Year;
-
-			int.TryParse(source.Usr_Prmoto_Ahasta, out anioHasta);
+			
+			int.TryParse(source.Usr_Prmoto_Ahasta, out int anioHasta);
+			anioHasta = anioHasta == 0 ? DateTime.Now.Year : anioHasta;
 
 			return Enumerable.Range(anioDesde, anioHasta).ToList();
 		}
