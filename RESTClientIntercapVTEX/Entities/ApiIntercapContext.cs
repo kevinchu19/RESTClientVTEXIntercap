@@ -41,6 +41,8 @@ namespace RESTClientIntercapVTEX.Entities
         public virtual DbSet<Usr_Stmppa> Usr_Stmppa { get; set; }
         public virtual DbSet<Usr_Stimpr_Real> Usr_Stimpr_Real { get; set; }
         public virtual DbSet<Usr_Stimpr> Usr_Stimpr { get; set; }
+        public virtual DbSet<Usr_Prmoto> Usr_Prmoto { get; set; }
+        public virtual DbSet<Usr_Prmoto_Real> Usr_Prmoto_Real { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -159,6 +161,12 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasColumnName("USR_VTEX_SKUTRA")
                     .IsFixedLength(true);
 
+                entity.Property(e => e.Usr_Vtex_Isacti)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VTEX_ISACTI")
+                    .IsFixedLength(true);
+
             });
 
             modelBuilder.Entity<Stmpdh_Real>(entity =>
@@ -272,6 +280,12 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasMaxLength(1)
                     .IsUnicode(false)
                     .HasColumnName("USR_VTEX_PRETRA")
+                    .IsFixedLength(true);
+                
+                entity.Property(e => e.Usr_Vtex_Isacti)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VTEX_ISACTI")
                     .IsFixedLength(true);
 
                 entity.Property(e => e.Usr_Stmpdh_Idvtex).HasColumnName("USR_STMPDH_IDVTEX");
@@ -948,8 +962,6 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasColumnName("USR_STTCAX_FIELDT");
 
                 entity.Property(e => e.Usr_Sttcax_Grunam)
-                    .HasMaxLength(60)
-                    .IsUnicode(false)
                     .HasColumnName("USR_STTCAX_GRUNAM");
 
                 entity.Property(e => e.Usr_Sttcax_Isacti)
@@ -1073,13 +1085,9 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasColumnName("USR_STTCAY_DESCRP");
 
                 entity.Property(e => e.Usr_Sttcay_Fieldt)
-                    .HasMaxLength(1)
-                    .IsUnicode(false)
                     .HasColumnName("USR_STTCAY_FIELDT");
 
                 entity.Property(e => e.Usr_Sttcay_Grunam)
-                    .HasMaxLength(60)
-                    .IsUnicode(false)
                     .HasColumnName("USR_STTCAY_GRUNAM");
 
                 entity.Property(e => e.Usr_Sttcay_Isacti)
@@ -2266,6 +2274,198 @@ namespace RESTClientIntercapVTEX.Entities
 
             });
 
+            modelBuilder.Entity<Usr_Prmoto_Real>(entity =>
+            {
+                entity.HasKey(e => e.Usr_Prmoto_Idmoto);
+
+                entity.ToTable("USR_PRMOTO");
+
+                entity.Property(e => e.Usr_Prmoto_Idmoto)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_IDMOTO");
+
+
+                entity.Property(e => e.Usr_Pr_Debaja)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_DEBAJA")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Pr_Fecalt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_PR_FECALT");
+
+                entity.Property(e => e.Usr_Pr_Fecmod)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_PR_FECMOD");
+
+                entity.Property(e => e.Usr_Pr_Hormov)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_HORMOV");
+
+
+                entity.Property(e => e.Usr_Pr_Module)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_MODULE");
+
+                entity.Property(e => e.Usr_Pr_Oalias)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_OALIAS");
+
+                entity.Property(e => e.Usr_Pr_Ultopr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_ULTOPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Pr_Userid)
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_USERID");
+
+                entity.Property(e => e.Usr_Prmoto_Adesde)
+                    .HasMaxLength(5)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_ADESDE");
+
+                entity.Property(e => e.Usr_Prmoto_Ahasta)
+                    .HasMaxLength(5)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_AHASTA");
+
+                entity.Property(e => e.Usr_Prmoto_Cilind)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_CILIND");
+
+                entity.Property(e => e.Usr_Prmoto_Marca)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_MARCA");
+
+                entity.Property(e => e.Usr_Prmoto_Modelo)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_MODELO");
+
+                entity.Property(e => e.Usr_Prmoto_Tipmot)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_TIPMOT");
+
+                entity.Property(e => e.Usr_Prmoto_Version)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_VERSION");
+
+                entity.Property(e => e.Usr_Vtex_Anohastra).HasColumnName("USR_VTEX_ANOHASTRA");
+
+                entity.Property(e => e.Usr_Vtex_Transf)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VTEX_TRANSF")
+                    .IsFixedLength(true);
+            });
+
+            modelBuilder.Entity<Usr_Prmoto>(entity =>
+            {
+                entity.HasKey(e => e.RowId);
+
+                entity.ToTable("USR_PRMOTOlog");
+
+                entity.Property(e => e.Usr_Prmoto_Idmoto)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_IDMOTO");
+
+
+                entity.Property(e => e.Usr_Pr_Debaja)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_DEBAJA")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Pr_Fecalt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_PR_FECALT");
+
+                entity.Property(e => e.Usr_Pr_Fecmod)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_PR_FECMOD");
+
+                entity.Property(e => e.Usr_Pr_Oalias)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_OALIAS");
+
+                entity.Property(e => e.Usr_Pr_Ultopr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_ULTOPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Pr_Userid)
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_USERID");
+
+                entity.Property(e => e.Usr_Prmoto_Adesde)
+                    .HasMaxLength(5)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_ADESDE");
+
+                entity.Property(e => e.Usr_Prmoto_Ahasta)
+                    .HasMaxLength(5)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_AHASTA");
+
+                entity.Property(e => e.Usr_Prmoto_Cilind)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_CILIND");
+
+                entity.Property(e => e.Usr_Prmoto_Marca)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_MARCA");
+
+                entity.Property(e => e.Usr_Prmoto_Modelo)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_MODELO");
+
+                entity.Property(e => e.Usr_Prmoto_Tipmot)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_TIPMOT");
+
+                entity.Property(e => e.Usr_Prmoto_Version)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_VERSION");
+
+                entity.Property(e => e.Usr_Vtex_Anohastra).HasColumnName("USR_VTEX_ANOHASTRA");
+
+                entity.Property(e => e.Usr_Vtex_Transf)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VTEX_TRANSF")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Sfl_TableOperation)
+                  .HasMaxLength(30)
+                  .IsUnicode(false)
+                  .HasColumnName("Sfl_TableOperation");
+
+                entity.Property(e => e.Sfl_LoginDateTime)
+                   .HasColumnType("datetime")
+                   .HasColumnName("Sfl_LoginDateTime");
+
+            });
 
 
             OnModelCreatingPartial(modelBuilder);

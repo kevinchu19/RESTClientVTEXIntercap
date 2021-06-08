@@ -12,7 +12,7 @@ namespace RESTClientIntercapVTEX.Entities
         public int ProductId { get; set; }
         public int Usr_Stmppa_Orden { get; set; }
         public int Usr_Stmppa_Campo { get; set; }
-        public int Usr_Stmppa_Valor { get; set; }
+        public string Usr_Stmppa_Valor { get; set; }
         public string Usr_Stmppa_Textos { get; set; }
         public DateTime? Usr_St_Fecalt { get; set; }
         public DateTime? Usr_St_Fecmod { get; set; }

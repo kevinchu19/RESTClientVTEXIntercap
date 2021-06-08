@@ -60,26 +60,43 @@ namespace RESTClientIntercapVTEX.Services
 
                 if (succesOperation || succesOperationWithNewID.Success)
                 {
+                    if (item.RowId == 0) //Activacion de SKU
+                    {
+                        Stmpdh_Real SKUReal = await _repository.ProductsSKUReal
+                                                                    .Get(cancellationToken, new object[] { item.RefId.Substring(0,3) ,
+                                                                                                               item.RefId.Substring(3,9) });
 
-                    Stmpdh SKUTransfered = await _repository.ProductsSKU.Get(cancellationToken, new object[] { item.RowId });
-                    Stmpdh_Real SKUReal = await _repository.ProductsSKUReal
-                                                                    .Get(cancellationToken, new object[] { SKUTransfered.Stmpdh_Tippro.Trim(),
+
+                        SKUReal.Usr_Vtex_Isacti = "S";
+
+
+                    } 
+                    else
+                    { 
+                        Stmpdh SKUTransfered = await _repository.ProductsSKU.Get(cancellationToken, new object[] { item.RowId });
+                        Stmpdh_Real SKUReal = await _repository.ProductsSKUReal
+                                                                        .Get(cancellationToken, new object[] { SKUTransfered.Stmpdh_Tippro.Trim(),
                                                                                                             SKUTransfered.Stmpdh_Artcod.Trim() });
 
 
-                    SKUTransfered.Usr_Vtex_Skutra = "S";
-                    if (succesOperationWithNewID.Success)
-                    {
-                        SKUReal.Usr_Stmpdh_IdSKUvtex = succesOperationWithNewID.NewId;
+                        SKUTransfered.Usr_Vtex_Skutra = "S";
+                        if (succesOperationWithNewID.Success)
+                        {
+                            SKUReal.Usr_Stmpdh_IdSKUvtex = succesOperationWithNewID.NewId;
+                        }
                     }
                     
                     await _repository.Complete();
                 }
                 else
                 {
-                    Stmpdh Sku = await _repository.ProductsSKU.Get(cancellationToken, new object[] { item.RowId });
-                    Sku.Usr_Vtex_Skutra = "E";
-                    await _repository.Complete();
+                    if (item.RowId != 0)
+                    {
+                        Stmpdh Sku = await _repository.ProductsSKU.Get(cancellationToken, new object[] { item.RowId });
+                        Sku.Usr_Vtex_Skutra = "E";
+                        await _repository.Complete();
+                    }
+                    
                 }
 
             }

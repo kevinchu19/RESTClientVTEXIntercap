@@ -37,6 +37,12 @@
     },
     "Prices": {
       "Path": "api/pricing/prices/$SkuId"
+    },
+    "ProductSpecifications": {
+      "Path": "api/catalog_system/pvt/products"
+    },
+    "Motos": {
+      "Path": "api/dataentities/MT/documents"
     }
 
   },

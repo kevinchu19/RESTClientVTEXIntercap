@@ -5,21 +5,20 @@ using System.Text.Json.Serialization;
 
 namespace RESTClientIntercapVTEX.Models
 {
-    public class ProductSpecificationDTO
+    public class MotosDocumentDTO
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public IEnumerable<string> Value { get; set; }
-
-        [JsonIgnore]
-        public int ProductId { get; set; }
+        public string idERP { get; set; }
+        public string marca { get; set; }
+        public string modelo { get; set; }
+        public string version { get; set; }
+        public string cilindrada{ get; set; }
+        public IEnumerable<int> anios { get; set; }
         [JsonIgnore]
         public DateTime Sfl_LoginDateTime { get; set; }
         [JsonIgnore]
         public string Sfl_TableOperation { get; set; }
         [JsonIgnore]
-        public string Usr_St_Oalias { get; set; }
-        [JsonIgnore]
         public int RowId { get; set; }
+
     }
 }

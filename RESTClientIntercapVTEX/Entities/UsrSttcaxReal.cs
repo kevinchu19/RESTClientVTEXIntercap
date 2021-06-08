@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace RESTClientIntercapVTEX.Entities
 {
-    public partial class Usr_Sttcax
+    public partial class Usr_Sttcax_Real
     {
         public string Usr_Sttcax_Deptos { get; set; }
         public string Usr_Sttcax_Catego { get; set; }
@@ -31,9 +31,5 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_St_Ultopr { get; set; }
         public string Usr_St_Debaja { get; set; }
         public string Usr_St_Oalias { get; set; }
-        public DateTime Sfl_LoginDateTime { get; set; }
-        public string Sfl_TableOperation { get; set; }
-        public int RowId { get; set; }
-
     }
 }

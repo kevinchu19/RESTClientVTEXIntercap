@@ -50,7 +50,7 @@ namespace RESTClientIntercapVTEX.Services
                 switch (item.Sfl_TableOperation)
                 {
                     case "INSERT":case "UPDATE":
-                        succesOperationWithNewID = await _specificationsClient.PostSpecificationWithNewIDAsync(item,item.ProductId, cancellationToken);
+                        succesOperation = await _specificationsClient.PostProductSpecificationAsync(new List<ProductSpecificationDTO> { item},item.ProductId, cancellationToken);
                         break;
                     case "DELETE":
                         if (item.Id != 0) 
@@ -69,31 +69,12 @@ namespace RESTClientIntercapVTEX.Services
                     {
                         case "USR_PRATRI":
                             Usr_Pratri productSpecificationTransfered = await _repository.ProductsAndSKUSpecifications.Get(cancellationToken, new object[] { item.RowId });
-                            Usr_Pratri_Real productSpecificationReal = await _repository.ProductsAndSKUSpecificationsReal
-                                                                            .Get(cancellationToken, new object[] { productSpecificationTransfered.Usr_Pratri_Tippro.Trim(),
-                                                                                                                   productSpecificationTransfered.Usr_Pratri_Artcod.Trim(),
-                                                                                                                   productSpecificationTransfered.Usr_Pratri_Orden});
-
-
                             productSpecificationTransfered.Usr_Vtex_Transf = "S";
-                            if (succesOperationWithNewID.Success)
-                            {
-                                productSpecificationReal.Usr_Pratri_Idvtex = succesOperationWithNewID.NewId;
-                                productSpecificationTransfered.Usr_Pratri_Idvtex = succesOperationWithNewID.NewId;
-                            }
+                            
                             break;
                         case "USR_STMPPA":
                             Usr_Stmppa productFatherSpecificationTransfered = await _repository.ProductsFatherSpecifications.Get(cancellationToken, new object[] { item.RowId });
-                            Usr_Stmppa_Real productFatherSpecificationReal = await _repository.ProductsFatherSpecificationsReal
-                                                                            .Get(cancellationToken, new object[] { productFatherSpecificationTransfered.Usr_Stmppa_Indcod.Trim(),
-                                                                                                                   productFatherSpecificationTransfered.Usr_Stmppa_Orden});
-
-
                             productFatherSpecificationTransfered.Usr_Vtex_Transf = "S";
-                            if (succesOperationWithNewID.Success)
-                            {
-                                productFatherSpecificationReal.Usr_Stmppa_Idvtex = succesOperationWithNewID.NewId;
-                            }
                             break;
 
                         default:

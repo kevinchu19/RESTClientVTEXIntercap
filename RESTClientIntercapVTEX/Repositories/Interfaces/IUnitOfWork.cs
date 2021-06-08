@@ -31,6 +31,8 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
         IProductsFatherSpecificationsRepository ProductsFatherSpecifications { get; }
         ISKUFilesRepository SKUFiles { get; }
         ISKUFilesRealRepository SKUFilesReal{ get; }
+        IMotosRepository Motos { get; }
+        IMotosRealRepository MotosReal { get; }
         Task<int> Complete();
 
     }

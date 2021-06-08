@@ -42,6 +42,8 @@ namespace RESTClientIntercapVTEX.BackgroundServices
         public InventoryService _inventoryService { get; }
         public PricesService _pricesService { get; }
 
+        public MotosService _motosService { get; }
+
 
         public ConsumerBackgroundService(Serilog.ILogger logger, CategorysService categoryService, 
                                                                  SpecificationsService specificationService,
@@ -54,7 +56,8 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                                                                  SKUSpecificationsService SKUSpecificationsService,
                                                                  SKUFilesService SKUFilesService,
                                                                  InventoryService inventoryService,
-                                                                 PricesService pricesService)
+                                                                 PricesService pricesService,
+                                                                 MotosService motosService)
         {
             _logger = logger;
             _categoryService = categoryService;
@@ -69,6 +72,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
             _SKUFilesService = SKUFilesService;
             _inventoryService = inventoryService;
             _pricesService = pricesService;
+            _motosService = motosService;
         }
 
 
@@ -98,6 +102,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                         await ExecServiceAsync(_productService, stoppingToken);
                         await ExecServiceAsync(_SKUService, stoppingToken);
                         await ExecServiceAsync(_specificationValuesService, stoppingToken);
+                        await ExecServiceAsync(_motosService, stoppingToken);
                         await ExecServiceAsync(_productSpecificationsService, stoppingToken);
                         await ExecServiceAsync(_SKUSpecificationsService, stoppingToken);
                         await ExecServiceAsync(_SKUFilesService, stoppingToken);
@@ -106,7 +111,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                     }
                     catch (Exception ex)
                     {
-                        _logger.Error($"Se produjo un error al enviar datos: {ex.Message}.");
+                        _logger.Error($"Se produjo un error al enviar datos: {ex.Message}, {ex.StackTrace}.");
                     }
                     finally
                     {

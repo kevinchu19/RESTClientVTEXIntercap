@@ -36,6 +36,8 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
         public IProductsFatherSpecificationsRepository _productsFatherSpecifications { get; set; }
         public ISKUFilesRepository _SKUFiles { get; set; }
         public ISKUFilesRealRepository _SKUFilesReal { get; set; }
+        public IMotosRepository _Motos { get; set; }
+        public IMotosRealRepository _MotosReal { get; set; }
         public UnitOfWork(ApiIntercapContext context, IConfigurationRoot configuration)
         {
             Context = context;
@@ -323,6 +325,29 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
                     _SKUFilesReal = new SKUFilesRealRepository(Context);
                 }
                 return _SKUFilesReal;
+            }
+        }
+
+        public IMotosRepository Motos
+        {
+            get
+            {
+                if (_Motos == null)
+                {
+                    _Motos = new MotosRepository(Context);
+                }
+                return _Motos;
+            }
+        }
+        public IMotosRealRepository MotosReal
+        {
+            get
+            {
+                if (_MotosReal == null)
+                {
+                    _MotosReal = new MotosRealRepository(Context);
+                }
+                return _MotosReal;
             }
         }
 

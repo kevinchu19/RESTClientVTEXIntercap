@@ -46,8 +46,11 @@ namespace RESTClientIntercapVTEX.Services
                 // It is not recommend to process direct here, if your systems start to get slow the item will be visible in the queue and you will process more the one time
                 switch (item.Sfl_TableOperation)
                 {
-                    case "INSERT": case "UPDATE":
-                        succesOperationWithNewID = await _SKUspecificationsClient.PostSpecificationWithNewIDAsync(item,item.SKUId, cancellationToken);
+                    case "INSERT": 
+                        succesOperationWithNewID = await _SKUspecificationsClient.PostSKUSpecificationWithNewIDAsync(item,item.SKUId, cancellationToken);
+                        break;
+                    case "UPDATE":
+                        succesOperation = await _SKUspecificationsClient.PutSKUSpecificationAsync(item, item.SKUId.ToString(), cancellationToken);
                         break;
                     case "DELETE":
                         if (item.Id != 0) 

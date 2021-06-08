@@ -20,7 +20,7 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_Sttcay_Topmen { get; set; }
         public string Usr_Sttcay_Sidmen { get; set; }
         public string Usr_Sttcay_Defaul { get; set; }
-        public string Usr_Sttcay_Fieldt { get; set; }
+        public int Usr_Sttcay_Fieldt { get; set; }
         public string Usr_Sttcay_Isacti { get; set; }
         public string Usr_Vtex_Transf { get; set; }
         public int Usr_Sttcay_Grunam { get; set; }

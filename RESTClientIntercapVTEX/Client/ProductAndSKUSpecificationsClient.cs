@@ -19,7 +19,41 @@ namespace RESTClientIntercapVTEX.Client
 
         }
 
-        public async Task<VTEXNewIDResponse> PostSpecificationWithNewIDAsync(TResource data, int Id, CancellationToken cancellationToken)
+        public async Task<bool> PostProductSpecificationAsync(IEnumerable<TResource> data, int Id, CancellationToken cancellationToken)
+        {
+            var contentString = JsonSerializer.Serialize(data);
+
+            var request = new HttpRequestMessage(HttpMethod.Post, $"{_path}/{Id}/specification")
+            {
+                Content = new StringContent(contentString, Encoding.UTF8, "application/json")
+            };
+            request.Headers.Add("X-VTEX-API-AppKey", _appKey);
+            request.Headers.Add("X-VTEX-API-AppToken", _appToken);
+            request.Headers.Add("Accept", "application/json");
+
+            var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+            if (!response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var content = await JsonSerializer.DeserializeAsync<VTEXErrorResponse>(await response.Content.ReadAsStreamAsync());
+                    _logger.Error($"No se pudo dar de alta el recurso {contentString} en la ruta {_path}/{Id}/specification, el statuscode fue `{response.StatusCode}` y el mensaje de VTEX:`{content.Message}`");
+                }
+                catch
+                {
+                    _logger.Error($"No se pudo dar de alta el recurso {contentString} en la ruta {_path}/{Id}/specification, el statuscode fue `{response.StatusCode}`");
+                }
+            }
+            else
+            {
+                _logger.Information($"Recurso {contentString} dado de alta en la ruta {_path}/{Id}/specification exitosamente");
+
+            }
+
+            return response.IsSuccessStatusCode;
+
+        }
+        public async Task<VTEXNewIDResponse> PostSKUSpecificationWithNewIDAsync(TResource data, int Id, CancellationToken cancellationToken)
         {
             var contentString = JsonSerializer.Serialize(data);
 
@@ -63,6 +97,40 @@ namespace RESTClientIntercapVTEX.Client
 
         }
 
+        public async Task<bool> PutSKUSpecificationAsync(TResource data, string id, CancellationToken cancellationToken)
+        {
+            {
+                var contentString = JsonSerializer.Serialize(data);
+                var request = new HttpRequestMessage(HttpMethod.Put, $"{_path}/{id}/specification")
+                {
+                    Content = new StringContent(contentString, Encoding.UTF8, "application/json")
+                };
+                request.Headers.Add("X-VTEX-API-AppKey", _appKey);
+                request.Headers.Add("X-VTEX-API-AppToken", _appToken);
+                request.Headers.Add("Accept", "application/json");
+
+                var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+                if (!response.IsSuccessStatusCode)
+                {
+                    try
+                    {
+                        var content = await JsonSerializer.DeserializeAsync<VTEXErrorResponse>(await response.Content.ReadAsStreamAsync());
+                        _logger.Error($"No se puede actualizar el recurso {contentString} en la ruta {_path}/{id}/specification, el statuscode fue `{response.StatusCode}` y el mensaje de VTEX:`{content.Message}`");
+                    }
+                    catch
+                    {
+                        _logger.Error($"No se puede actualizar el recurso {contentString} en la ruta {_path}/{id}/specification, el statuscode fue `{response.StatusCode}`");
+                    }
+                }
+                else
+                {
+                    _logger.Information($"Recurso {contentString} actualizado en la ruta {_path}/{id}/specification exitosamente ");
+                }
+
+                return response.IsSuccessStatusCode;
+
+            }
+        }
         public async Task<bool> DeleteSpecificationAsync(TResource data, int resourceId, int id, CancellationToken cancellationToken)
         {
             string resource = typeof(TResource) == typeof(ProductSpecificationDTO) ? "product" : "stockkeepingunit";

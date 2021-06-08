@@ -37,6 +37,9 @@
     },
     "Prices": {
       "Path": "api/pricing/prices/$SkuId"
+    },
+    "ProductSpecifications": {
+      "Path": "api/catalog_system/pvt/products"
     }
 
   },

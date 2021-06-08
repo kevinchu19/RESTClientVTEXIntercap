@@ -18,7 +18,7 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_Sttcaa_Topmen { get; set; }
         public string Usr_Sttcaa_Sidmen { get; set; }
         public string Usr_Sttcaa_Defaul { get; set; }
-        public string Usr_Sttcaa_Fieldt { get; set; }
+        public int Usr_Sttcaa_Fieldt { get; set; }
         public string Usr_Sttcaa_Isacti{ get; set; }
         public int Usr_Sttcaa_Grunam { get; set; }
         public int Usr_Sttcaa_Idvtex { get; set; }

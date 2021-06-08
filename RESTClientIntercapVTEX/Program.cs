@@ -122,7 +122,7 @@ namespace RESTClientIntercapVTEX
 
                    services.AddTransient<ProductSpecificationsService>();
                    services.AddTransient(provider =>
-                       new ProductAndSKUSpecificationsClient<ProductSpecificationDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:Products:Path"], _logger));
+                       new ProductAndSKUSpecificationsClient<ProductSpecificationDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:ProductSpecifications:Path"], _logger));
 
                    services.AddTransient<SKUSpecificationsService>();
                    services.AddTransient(provider =>
@@ -139,6 +139,11 @@ namespace RESTClientIntercapVTEX
                    services.AddTransient<PricesService>();
                    services.AddTransient(provider =>
                        new PricesClient<PricesDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:Prices:Path"], _logger));
+
+                   services.AddTransient<MotosService>();
+                   services.AddTransient(provider =>
+                       new MotosClient<MotosDocumentDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:Motos:Path"], _logger));
+
                    // Add app
                    services.AddSingleton<ConsumerBackgroundService>();
 
@@ -256,7 +261,8 @@ namespace RESTClientIntercapVTEX
                        .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Usr_Stmpdh_Father))
                        .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Stmpdh_Descrp))
                        .ForMember(dest => dest.RefId, opt => opt.MapFrom(src => src.Stmpdh_Indcod))
-                       .ForMember(dest => dest.IsKit, opt => opt.MapFrom(src => src.Stmpdh_Kitsfc == "S"));
+                       .ForMember(dest => dest.IsKit, opt => opt.MapFrom(src => src.Stmpdh_Kitsfc == "S"))
+                       .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.Usr_Vtex_Isacti == "S"));
                        //.ForMember(dest => dest.MeasurementUnit, opt => opt.MapFrom(src => src.Stmpdh_Unimed));
 
                        configuration.CreateMap<Stmpdh, ProductDTO>()
@@ -295,10 +301,10 @@ namespace RESTClientIntercapVTEX
                        .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.Usr_Sttvai_Positi));
 
                        configuration.CreateMap<Usr_Pratri, ProductSpecificationDTO>()
-                       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Pratri_Idvtex))
-                       .ForMember(dest => dest.FieldId, opt => opt.MapFrom(src => src.Usr_Pratri_Campo))
-                       .ForMember(dest => dest.FieldValueId, opt => opt.MapFrom(src => src.Usr_Pratri_Valor))
-                       .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Usr_Pratri_Textos));
+                       //.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Pratri_Idvtex))
+                       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Pratri_Campo))
+                       .ForMember(dest => dest.Value, opt => opt.MapFrom<MapperHelp.ProductSpecificationsValuesResolver.ProductSpecificationsValuesResolver>())
+                       .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Usr_Pratri_Textos));
 
 
                        configuration.CreateMap<Usr_Pratri, SKUSpecificationDTO>()
@@ -308,16 +314,23 @@ namespace RESTClientIntercapVTEX
                        .ForMember(dest => dest.SKUId, opt => opt.MapFrom(src => src.ProductId));
 
                        configuration.CreateMap<Usr_Stmppa, ProductSpecificationDTO>()
-                       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Stmppa_Idvtex))
-                       .ForMember(dest => dest.FieldId, opt => opt.MapFrom(src => src.Usr_Stmppa_Campo))
-                       .ForMember(dest => dest.FieldValueId, opt => opt.MapFrom(src => src.Usr_Stmppa_Valor))
-                       .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Usr_Stmppa_Textos));
+                       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Stmppa_Campo))
+                       .ForMember(dest => dest.Value, opt => opt.MapFrom<MapperHelp.ProductFatherSpecificationsValuesResolver.ProductFatherSpecificationsValuesResolver>())
+                       .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Usr_Stmppa_Textos));
 
                        configuration.CreateMap<Usr_Stimpr, SKUFileDTO>()
                        .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Stimpr_Idvtex))
                        .ForMember(dest => dest.IsMain, opt => opt.MapFrom(src => src.Usr_Stimpr_Orden == 1))
                        .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Usr_Stimpr_Name))
                        .ForMember(dest => dest.Url, opt => opt.MapFrom(src => src.Usr_Stimpr_Imgdps));
+
+                       configuration.CreateMap<Usr_Prmoto, MotosDocumentDTO>()
+                       .ForMember(dest => dest.idERP, opt => opt.MapFrom(src => src.Usr_Prmoto_Idmoto))
+                       .ForMember(dest => dest.marca, opt => opt.MapFrom(src => src.Usr_Prmoto_Marca))
+                       .ForMember(dest => dest.modelo, opt => opt.MapFrom(src => src.Usr_Prmoto_Modelo))
+                       .ForMember(dest => dest.cilindrada, opt => opt.MapFrom(src => src.Usr_Prmoto_Cilind))
+                       .ForMember(dest => dest.version, opt => opt.MapFrom(src => src.Usr_Prmoto_Version))
+                       .ForMember(dest => dest.anios, opt => opt.MapFrom<MapperHelp.MotosResolver.AniosResolver>());
                    }
                        , typeof(Program));
 

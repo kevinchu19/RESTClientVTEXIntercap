@@ -45,7 +45,7 @@ namespace RESTClientIntercapVTEX.Services
                 if (succesOperation)
                 {
 
-                    Stmpdh_Real inventoryTransfered = await _repository.ProductsSKUReal.Get(cancellationToken, new object[] { item.Stmpdh_Tippro, item.Stmpdh_Artcod });
+                    Stmpdh_Real inventoryTransfered = await _repository.ProductsSKUReal.Get(cancellationToken, new object[] { item.Stmpdh_Tippro.Trim(), item.Stmpdh_Artcod.Trim() });
                     inventoryTransfered.Usr_Vtex_Stktra= "S";
 
                     await _repository.Complete();
