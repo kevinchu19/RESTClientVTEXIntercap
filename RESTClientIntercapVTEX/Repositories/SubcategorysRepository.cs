@@ -5,6 +5,7 @@ using RESTClientIntercapVTEX.Entities;
 using RESTClientIntercapVTEX.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,9 +17,9 @@ namespace RESTClientIntercapVTEX.Repositories
         public SubcategorysRepository(ApiIntercapContext context) : base(context)
         { }
 
-        public async Task<IEnumerable<Usr_Sttcas>> GetForVTEX(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Usr_Sttcas>> GetForVTEX(CancellationToken cancellationToken, int limit)
         {
-            return await Context.Set<Usr_Sttcas>().FromSqlRaw("EXEC Alm_USR_STTCASGetForVTEX").ToListAsync();
+            return await Context.Set<Usr_Sttcas>().FromSqlInterpolated($"EXEC Alm_USR_STTCASGetForVTEX {limit}").ToListAsync();
         }
     }
 

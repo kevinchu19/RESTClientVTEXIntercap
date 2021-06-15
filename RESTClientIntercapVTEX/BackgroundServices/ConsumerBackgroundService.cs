@@ -16,7 +16,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
     {
 
         // Max execution per period
-        const int MAX_PER_PERIOD = 2;
+        const int MAX_PER_PERIOD = 1;
         // This is the number os concurrent action that will be release in the first few milliseconds of each minute
         // You can set another inital value if you don't want to have a peek in each minute
         const int MAX_ACTION_CONCURRENT = 1;
@@ -88,11 +88,10 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                 while (true)
                 {
                     // waiting an opportunity to run an action
-                    await _semaphoreSlimAction.WaitAsync(stoppingToken);
+                    //await _semaphoreSlimAction.WaitAsync(stoppingToken);
                     // waiting the last period to end
                     await _semaphoreSlimPeriod.WaitAsync(stoppingToken);
 
-                    var hasMoreInThisMinute = false;
                     try
                     {
                         await ExecServiceAsync(_categoryService, stoppingToken);
@@ -108,6 +107,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                         await ExecServiceAsync(_SKUFilesService, stoppingToken);
                         await ExecServiceAsync(_inventoryService, stoppingToken);
                         await ExecServiceAsync(_pricesService, stoppingToken);
+
                     }
                     catch (Exception ex)
                     {
@@ -115,17 +115,18 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                     }
                     finally
                     {
-                        if (hasMoreInThisMinute)
+                        _ = Task.Delay(PERIOD).ContinueWith(task =>
                         {
-                            //_logger.Information("Release action sempahore");
+                            _logger.Debug("Release period sempahore");
+                            _semaphoreSlimPeriod.Release(1);
                             _semaphoreSlimAction.Release(1);
-                        }
+                        });
                     }
                 }
             }
             catch (Exception ex)
             {
-                _logger.Fatal("BackgroundWorker stopped by error `{exMessage}`.", ex.Message);
+                _logger.Fatal($"BackgroundWorker stopped by error {ex.Message}");
                 throw;
             }
         }
@@ -134,22 +135,32 @@ namespace RESTClientIntercapVTEX.BackgroundServices
         {
             using var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(5));
             using var cancellationTokenLinked = CancellationTokenSource.CreateLinkedTokenSource(stoppingToken, cancellationTokenSource.Token);
+            bool hasMoreInThisMinute = true;
 
-            //_logger.Information($"Ejecutando servicio {_service}");
-
-           bool hasMoreInThisMinute = await _service.DequeueProcessAndCheckIfContinueAsync(cancellationTokenLinked.Token);
-            //_logger.Information($"Ejecutado y {(hasMoreInThisMinute ? "tiene" : "no tiene")} más items");
-
-            _ = Task.Delay(PERIOD).ContinueWith(task =>
+            while (hasMoreInThisMinute)
             {
-                //_logger.Debug("Release period sempahore");
-                _semaphoreSlimPeriod.Release(1);
+                // waiting an opportunity to run an action
+                await _semaphoreSlimAction.WaitAsync(stoppingToken);
+
+                //_logger.Information($"Ejecutando servicio {_service}");
+
+                hasMoreInThisMinute = await _service.DequeueProcessAndCheckIfContinueAsync(cancellationTokenLinked.Token);
+                //_logger.Information($"Ejecutado y {(hasMoreInThisMinute ? "tiene" : "no tiene")} más items");
+
                 if (!hasMoreInThisMinute)
                 {
-                    //_logger.Information("Release action sempahore after no more items");
+                    _logger.Information($"Release action sempahore after no more items, {_service.ToString()}");
                     _semaphoreSlimAction.Release(1);
                 }
-            });
+                else
+                {
+                    _ = Task.Delay(TimeSpan.FromSeconds(10)).ContinueWith(task =>
+                    {
+                        _logger.Debug("Release action sempahore to get more items");
+                        _semaphoreSlimAction.Release(1);
+                    });
+                }
+            }
         }
     }
 

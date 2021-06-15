@@ -32,7 +32,7 @@ namespace RESTClientIntercapVTEX.Services
         {
             bool succesOperation;
 
-            var items = await _repository.ProductsSKU.GetPricesForVTEX(cancellationToken);
+            var items = await _repository.ProductsSKU.GetPricesForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE);
 
             if (!items.Any()) return false;
 

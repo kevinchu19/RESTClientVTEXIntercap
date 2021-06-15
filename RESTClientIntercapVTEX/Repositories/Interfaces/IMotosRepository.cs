@@ -10,6 +10,6 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
 {
     public interface IMotosRepository : IRepository<Usr_Prmoto>
     {
-        Task<IEnumerable<Usr_Prmoto>> GetForVTEX(CancellationToken cancellationToken);
+        Task<IEnumerable<Usr_Prmoto>> GetForVTEX(CancellationToken cancellationToken, int limit);
     }
 }

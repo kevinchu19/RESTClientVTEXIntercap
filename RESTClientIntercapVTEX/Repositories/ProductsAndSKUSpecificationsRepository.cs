@@ -17,14 +17,14 @@ namespace RESTClientIntercapVTEX.Repositories
         { }
 
         
-        public async Task<IEnumerable<Usr_Pratri>> GetProductSpecificationForVTEX(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Usr_Pratri>> GetProductSpecificationForVTEX(CancellationToken cancellationToken, int limit)
         {
-            return await Context.Set<Usr_Pratri>().FromSqlRaw("EXEC Alm_USR_PRATRIProductGetForVTEX").ToListAsync();
+            return await Context.Set<Usr_Pratri>().FromSqlInterpolated($"EXEC Alm_USR_PRATRIProductGetForVTEX {limit}").ToListAsync();
         }
 
-        public async Task<IEnumerable<Usr_Pratri>> GetSKUSpecificationForVTEX(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Usr_Pratri>> GetSKUSpecificationForVTEX(CancellationToken cancellationToken, int limit)
         {
-            return await Context.Set<Usr_Pratri>().FromSqlRaw("EXEC Alm_USR_PRATRISKUGetForVTEX").ToListAsync();
+            return await Context.Set<Usr_Pratri>().FromSqlInterpolated($"EXEC Alm_USR_PRATRISKUGetForVTEX {limit}").ToListAsync();
         }
     }
 }

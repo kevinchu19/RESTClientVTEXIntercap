@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rYJoVJf5eEquvkVNloPGpWl6Y6/jCnFNlPc+QhHp8g66QY1BDlKle5bjV+fsMlZeBnAzEOjqk7if14s6FleyeQ==",
+  "dgSpecHash": "96TZBxHeANuZk4OZ/2wTA/PXBSTcMbHyoBnyu816/UQTPoQQCkLkm9XKVDUMUULkpW0FtQadjgSjztemAOOdqw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dattaguest\\source\\repos\\RESTClientIntercapVTEX\\RESTClientIntercapVTEX\\RESTClientIntercapVTEX.csproj",
+  "projectFilePath": "C:\\Users\\dattaguest\\source\\repos\\RestClientIntercapVTEX\\RESTClientIntercapVTEX\\RESTClientIntercapVTEX.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dattaguest\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\dattaguest\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

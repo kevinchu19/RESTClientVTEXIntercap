@@ -29,11 +29,11 @@ namespace RESTClientIntercapVTEX.Services
             bool succesOperation = false;
             VTEXNewIDResponse succesOperationWithNewID = new VTEXNewIDResponse();
 
-            var departmentSpecification = _mapper.Map<IEnumerable<Usr_Sttcaa>, IEnumerable<SpecificationDTO>>(await _repository.DepartmentsSpecifications.GetForVTEX(cancellationToken));
-            var categorySpecification = _mapper.Map<IEnumerable<Usr_Sttcax>, IEnumerable<SpecificationDTO>>(await _repository.CategorySpecifications.GetForVTEX(cancellationToken));
-            var subcategorySpecification = _mapper.Map<IEnumerable<Usr_Sttcay>, IEnumerable<SpecificationDTO>>(await _repository.SubcategorySpecifications.GetForVTEX(cancellationToken));
+            var departmentSpecification = _mapper.Map<IEnumerable<Usr_Sttcaa>, IEnumerable<SpecificationDTO>>(await _repository.DepartmentsSpecifications.GetForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
+            var categorySpecification = _mapper.Map<IEnumerable<Usr_Sttcax>, IEnumerable<SpecificationDTO>>(await _repository.CategorySpecifications.GetForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
+            var subcategorySpecification = _mapper.Map<IEnumerable<Usr_Sttcay>, IEnumerable<SpecificationDTO>>(await _repository.SubcategorySpecifications.GetForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
 
-            IEnumerable<SpecificationDTO> items = departmentSpecification.Concat(categorySpecification).Concat(subcategorySpecification).OrderBy(c => c.Sfl_LoginDateTime);
+            IEnumerable<SpecificationDTO> items = departmentSpecification.Concat(categorySpecification).Concat(subcategorySpecification).OrderBy(c => c.Sfl_LoginDateTime).Take(MAX_ELEMENTS_IN_QUEUE);
             
             if (!items.Any()) return false;
 

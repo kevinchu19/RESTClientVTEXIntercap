@@ -34,24 +34,32 @@ namespace RESTClientIntercapVTEX.Services
         public async Task<bool> DequeueProcessAndCheckIfContinueAsync(CancellationToken cancellationToken)
         {
             bool succesOperation;
-
-            var items = await _repository.ProductsSKU.GetInventoryForVTEX(cancellationToken);
+            string previousTippro = "";
+            string previousArtcod = "";
+            var items = await _repository.ProductsSKU.GetInventoryForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE);
 
             if (!items.Any()) return false;
 
             foreach (var item in items)
             {
+                
                 succesOperation = await _inventoryClient.PutInventoryAsync(item, item.Id, item.WarehouseId,cancellationToken);
                 if (succesOperation)
                 {
 
-                    Stmpdh_Real inventoryTransfered = await _repository.ProductsSKUReal.Get(cancellationToken, new object[] { item.Stmpdh_Tippro.Trim(), item.Stmpdh_Artcod.Trim() });
-                    inventoryTransfered.Usr_Vtex_Stktra= "S";
+                    if ((item.Stmpdh_Tippro != previousTippro || item.Stmpdh_Artcod != previousArtcod) && previousTippro != "")
+                    {
+                        Stmpdh_Real inventoryTransfered = await _repository.ProductsSKUReal.Get(cancellationToken, new object[] { previousTippro.Trim(), previousArtcod.Trim() });
+                        inventoryTransfered.Usr_Vtex_Stktra = "S";
 
-                    await _repository.Complete();
+                        await _repository.Complete();
+                    }
+                    
                 }
-
+                previousTippro = item.Stmpdh_Tippro;
+                previousArtcod = item.Stmpdh_Artcod;
             }
+            
             return items.Count() == MAX_ELEMENTS_IN_QUEUE;
         }
     }

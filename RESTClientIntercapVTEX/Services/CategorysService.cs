@@ -30,11 +30,11 @@ namespace RESTClientIntercapVTEX.Services
         {
             bool succesOperation = false;
 
-            var Categorys = _mapper.Map<IEnumerable<Usr_Sttcah>, IEnumerable<CategoryDTO>>(await _repository.Departments.GetForVTEX(cancellationToken));
-            var categorys  = _mapper.Map<IEnumerable<Usr_Sttcai>, IEnumerable<CategoryDTO>>(await _repository.Categorys.GetForVTEX(cancellationToken));
-            var subcategorys = _mapper.Map<IEnumerable<Usr_Sttcas>, IEnumerable<CategoryDTO>>(await _repository.Subcategorys.GetForVTEX(cancellationToken));
+            var Categorys = _mapper.Map<IEnumerable<Usr_Sttcah>, IEnumerable<CategoryDTO>>(await _repository.Departments.GetForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
+            var categorys  = _mapper.Map<IEnumerable<Usr_Sttcai>, IEnumerable<CategoryDTO>>(await _repository.Categorys.GetForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
+            var subcategorys = _mapper.Map<IEnumerable<Usr_Sttcas>, IEnumerable<CategoryDTO>>(await _repository.Subcategorys.GetForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
 
-            IEnumerable<CategoryDTO> items = Categorys.Concat(categorys).Concat(subcategorys).OrderBy(c => c.Sfl_LoginDateTime);
+            IEnumerable<CategoryDTO> items = Categorys.Concat(categorys).Concat(subcategorys).OrderBy(c => c.Sfl_LoginDateTime).Take(MAX_ELEMENTS_IN_QUEUE);
             
             if (!items.Any()) return false;
 

@@ -16,9 +16,9 @@ namespace RESTClientIntercapVTEX.Repositories
         public CategorysRepository(ApiIntercapContext context) : base(context)
         { }
 
-        public async Task<IEnumerable<Usr_Sttcai>> GetForVTEX(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Usr_Sttcai>> GetForVTEX(CancellationToken cancellationToken, int limit)
         {
-            return await Context.Set<Usr_Sttcai>().FromSqlRaw("EXEC Alm_USR_STTCAIGetForVTEX").ToListAsync();
+            return await Context.Set<Usr_Sttcai>().FromSqlInterpolated($"EXEC Alm_USR_STTCAIGetForVTEX {limit}").ToListAsync();
         }
     }
 }

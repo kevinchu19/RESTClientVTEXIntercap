@@ -10,6 +10,6 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
 {
     public interface ICategorySpecificationsRepository : IRepository<Usr_Sttcax>
     {
-        Task<IEnumerable<Usr_Sttcax>> GetForVTEX(CancellationToken cancellationToken);
+        Task<IEnumerable<Usr_Sttcax>> GetForVTEX(CancellationToken cancellationToken, int limit);
     }
 }

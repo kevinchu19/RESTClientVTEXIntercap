@@ -31,7 +31,7 @@ namespace RESTClientIntercapVTEX.Services
         {
             bool succesOperation = false;
 
-            var items = _mapper.Map<IEnumerable<Usr_Prmoto>, IEnumerable<MotosDocumentDTO>>(await _repository.Motos.GetForVTEX(cancellationToken));
+            var items = _mapper.Map<IEnumerable<Usr_Prmoto>, IEnumerable<MotosDocumentDTO>>(await _repository.Motos.GetForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
 
             if (!items.Any()) return false;
 
@@ -58,7 +58,17 @@ namespace RESTClientIntercapVTEX.Services
                 {
 
                     Usr_Prmoto motoTransfered = await _repository.Motos.Get(cancellationToken, new object[] { item.RowId });
+                    Usr_Prmoto_Real motoReal = await _repository.MotosReal.Get(cancellationToken, new object[] { motoTransfered.Usr_Prmoto_Idmoto});
+
                     motoTransfered.Usr_Vtex_Transf = "S";
+                    if (item.anios.Any())
+                    {
+                        motoReal.Usr_Vtex_Anohastra = item.anios.Max();
+                    } else
+                    {
+                        motoReal.Usr_Vtex_Anohastra = DateTime.Now.Year;
+                    }
+                    
 
                     await _repository.Complete();
                 }

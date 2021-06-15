@@ -16,9 +16,9 @@ namespace RESTClientIntercapVTEX.Repositories
         public ProductsFatherSpecificationsRepository(ApiIntercapContext context) : base(context)
         { }
 
-        public async Task<IEnumerable<Usr_Stmppa>> GetForVTEX(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Usr_Stmppa>> GetForVTEX(CancellationToken cancellationToken, int limit)
         {
-            return await Context.Set<Usr_Stmppa>().FromSqlRaw("EXEC Alm_USR_STMPPAGetForVTEX").ToListAsync();
+            return await Context.Set<Usr_Stmppa>().FromSqlInterpolated($"EXEC Alm_USR_STMPPAGetForVTEX {limit}").ToListAsync();
         }
 
     }

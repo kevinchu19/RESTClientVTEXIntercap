@@ -11,10 +11,14 @@ using Microsoft.Extensions.Configuration;
 
 namespace RESTClientIntercapVTEX.Repositories
 {
-    public class SpecificationValuesRealRepository : RepositoryBase<Usr_Sttvai_Real>, ISpecificationValueRealRepository
+    public class SpecificationValuesRepository : RepositoryBase<Usr_Sttvai>, ISpecificationValueRepository
     {
-        public SpecificationValuesRealRepository(ApiIntercapContext context) : base(context)
+        public SpecificationValuesRepository(ApiIntercapContext context) : base(context)
         { }
 
+        public async Task<IEnumerable<Usr_Sttvai>> GetForVTEX(CancellationToken cancellationToken, int limit)
+        {
+            return await Context.Set<Usr_Sttvai>().FromSqlInterpolated($"EXEC Alm_USR_SttvaiGetForVTEX {limit}").ToListAsync();
+        }
     }
 }

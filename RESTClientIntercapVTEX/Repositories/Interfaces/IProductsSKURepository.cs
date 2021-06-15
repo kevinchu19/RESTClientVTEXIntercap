@@ -10,10 +10,10 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
 {
     public interface IProductsSKURepository : IRepository<Stmpdh>
     {
-        Task<IEnumerable<Stmpdh>> GetProductForVTEX(CancellationToken cancellationToken);
-        Task<IEnumerable<Stmpdh>> GetSKUForVTEX(CancellationToken cancellationToken);
-        Task<IEnumerable<InventoryDTO>> GetInventoryForVTEX(CancellationToken cancellationToken);
-        Task<IEnumerable<PricesDTO>> GetPricesForVTEX(CancellationToken cancellationToken);
+        Task<IEnumerable<Stmpdh>> GetProductForVTEX(CancellationToken cancellationToken, int limit);
+        Task<IEnumerable<Stmpdh>> GetSKUForVTEX(CancellationToken cancellationToken, int limit);
+        Task<IEnumerable<InventoryDTO>> GetInventoryForVTEX(CancellationToken cancellationToken, int limit);
+        Task<IEnumerable<PricesDTO>> GetPricesForVTEX(CancellationToken cancellationToken, int limit);
 
     }
 }

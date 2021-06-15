@@ -9,7 +9,7 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
 { 
     public interface ISpecificationsGroupRepository : IRepository<Usr_Sttgsh>
     {
-        Task<IEnumerable<Usr_Sttgsh>> GetForVTEX(CancellationToken cancellationToken);
+        Task<IEnumerable<Usr_Sttgsh>> GetForVTEX(CancellationToken cancellationToken, int limit);
     }
 
 }

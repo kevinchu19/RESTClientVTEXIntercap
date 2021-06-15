@@ -16,9 +16,9 @@ namespace RESTClientIntercapVTEX.Repositories
         public MotosRepository(ApiIntercapContext context) : base(context)
         { }
 
-        public async Task<IEnumerable<Usr_Prmoto>> GetForVTEX(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Usr_Prmoto>> GetForVTEX(CancellationToken cancellationToken, int limit)
         {
-            return await Context.Set<Usr_Prmoto>().FromSqlRaw("EXEC Alm_USR_PRMOTOGetForVTEX").ToListAsync();
+            return await Context.Set<Usr_Prmoto>().FromSqlInterpolated($"EXEC Alm_USR_PRMOTOGetForVTEX {limit}").ToListAsync();
         }
     }
 }

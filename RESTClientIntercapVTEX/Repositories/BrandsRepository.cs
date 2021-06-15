@@ -16,9 +16,9 @@ namespace RESTClientIntercapVTEX.Repositories
         public BrandsRepository(ApiIntercapContext context) : base(context)
         { }
 
-        public async Task<IEnumerable<Usr_Sttmah>> GetForVTEX(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Usr_Sttmah>> GetForVTEX(CancellationToken cancellationToken, int limit)
         {
-            return await Context.Set<Usr_Sttmah>().FromSqlRaw("EXEC Alm_USR_SttmahGetForVTEX").ToListAsync();
+            return await Context.Set<Usr_Sttmah>().FromSqlInterpolated($"EXEC Alm_USR_SttmahGetForVTEX {limit}").ToListAsync();
         }
     }
 }

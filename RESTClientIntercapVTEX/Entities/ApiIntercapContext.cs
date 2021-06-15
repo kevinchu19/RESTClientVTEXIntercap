@@ -130,7 +130,10 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasColumnName("USR_STMPDH_DEPTOS");
 
 
-                entity.Property(e => e.Usr_Stmpdh_Father).HasColumnName("USR_STMPDH_FATHER");
+                entity.Property(e => e.Usr_Stmpdh_Father).HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STMPDH_FATHER")
+                    .IsFixedLength(true);
 
                 entity.Property(e => e.Usr_Stmpdh_Intnet)
                     .HasMaxLength(1)

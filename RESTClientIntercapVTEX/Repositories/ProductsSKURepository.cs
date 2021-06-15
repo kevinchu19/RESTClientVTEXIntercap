@@ -21,17 +21,17 @@ namespace RESTClientIntercapVTEX.Repositories
             Configuration = configuration;
         }
 
-        public async Task<IEnumerable<Stmpdh>> GetProductForVTEX(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Stmpdh>> GetProductForVTEX(CancellationToken cancellationToken, int limit)
         {
-            return await Context.Set<Stmpdh>().FromSqlRaw("EXEC Alm_StmpdhProductGetForVTEX").ToListAsync();
+            return await Context.Set<Stmpdh>().FromSqlInterpolated($"EXEC Alm_StmpdhProductGetForVTEX {limit}").ToListAsync();
         }
 
         //public async Task<IEnumerable<Stmpdh>> GetSKUForVTEX(CancellationToken cancellationToken)
         //{
-        //    IEnumerable<Stmpdh> a = await Context.Set<Stmpdh>().FromSqlRaw("EXEC Alm_StmpdhSKUGetForVTEX").ToListAsync();
+        //    IEnumerable<Stmpdh> a = await Context.Set<Stmpdh>().FromSqlInterpolated($"EXEC Alm_StmpdhSKUGetForVTEX").ToListAsync();
         //    return a;
         //}
-        public async Task<IEnumerable<Stmpdh>> GetSKUForVTEX(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Stmpdh>> GetSKUForVTEX(CancellationToken cancellationToken, int limit)
         {
             List<Stmpdh> response = new List<Stmpdh>();
 
@@ -42,7 +42,7 @@ namespace RESTClientIntercapVTEX.Repositories
                 {
 
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-
+                    cmd.Parameters.Add(new SqlParameter("@Limit", limit));
                     await sql.OpenAsync();
 
                     using (var reader = await cmd.ExecuteReaderAsync())
@@ -59,7 +59,7 @@ namespace RESTClientIntercapVTEX.Repositories
 
         }
 
-        public async Task<IEnumerable<InventoryDTO>> GetInventoryForVTEX(CancellationToken cancellationToken)
+        public async Task<IEnumerable<InventoryDTO>> GetInventoryForVTEX(CancellationToken cancellationToken, int limit)
         {
             List<InventoryDTO> response = new List<InventoryDTO>();
 
@@ -70,6 +70,7 @@ namespace RESTClientIntercapVTEX.Repositories
                 {
 
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@Limit", limit));
 
                     await sql.OpenAsync();
 
@@ -86,7 +87,7 @@ namespace RESTClientIntercapVTEX.Repositories
             return response;
         }
 
-        public async Task<IEnumerable<PricesDTO>> GetPricesForVTEX(CancellationToken cancellationToken)
+        public async Task<IEnumerable<PricesDTO>> GetPricesForVTEX(CancellationToken cancellationToken, int limit)
         {
             List<PricesDTO> response = new List<PricesDTO>();
 
@@ -97,6 +98,7 @@ namespace RESTClientIntercapVTEX.Repositories
                 {
 
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@Limit", limit));
 
                     await sql.OpenAsync();
 
@@ -123,7 +125,19 @@ namespace RESTClientIntercapVTEX.Repositories
             {          
                 if (reader[listaPropiedades[i].Name] != DBNull.Value)
                 {
-                    listaPropiedades[i].SetValue(respuesta, reader[listaPropiedades[i].Name]);
+                    if (listaPropiedades[i].Name == "Usr_Stmpdh_Father")
+                    {
+                        var a = 1;
+                    }
+                    if (listaPropiedades[i].PropertyType ==typeof(string))
+                    {
+                        listaPropiedades[i].SetValue(respuesta, reader[listaPropiedades[i].Name].ToString());
+                    }
+                    else
+                    {
+                        listaPropiedades[i].SetValue(respuesta, reader[listaPropiedades[i].Name]);
+                    }
+                    
                 }
             
             }

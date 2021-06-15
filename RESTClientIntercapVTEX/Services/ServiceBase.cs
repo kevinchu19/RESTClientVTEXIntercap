@@ -15,7 +15,7 @@ namespace RESTClientIntercapVTEX.Services
     public class ServiceBase<TResource>
     {
 
-        protected const int MAX_ELEMENTS_IN_QUEUE = 25;
+        protected const int MAX_ELEMENTS_IN_QUEUE = 600;
 
         protected readonly ClientBase<TResource> _client;
         protected readonly IUnitOfWork _repository;

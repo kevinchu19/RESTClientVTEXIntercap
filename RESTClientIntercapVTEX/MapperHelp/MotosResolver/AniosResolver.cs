@@ -13,12 +13,24 @@ namespace RESTClientIntercapVTEX.MapperHelp.MotosResolver
 	{
 		public IEnumerable<int> Resolve(Usr_Prmoto source, MotosDocumentDTO destination, IEnumerable<int> member, ResolutionContext context)
 		{
-			int anioDesde = Convert.ToInt32(source.Usr_Prmoto_Adesde);
 			
-			int.TryParse(source.Usr_Prmoto_Ahasta, out int anioHasta);
-			anioHasta = anioHasta == 0 ? DateTime.Now.Year : anioHasta;
+			int.TryParse(source.Usr_Prmoto_Adesde, out int anioDesde);
 
-			return Enumerable.Range(anioDesde, anioHasta).ToList();
+            if (anioDesde == 0)
+            {
+				return new List<int> { };
+			}
+
+			int.TryParse(source.Usr_Prmoto_Ahasta, out int anioHasta);
+		
+			int cantidad = anioHasta == 0 ? DateTime.Now.Year - anioDesde : anioHasta - anioDesde;
+			cantidad = cantidad + 1;
+
+            if (cantidad < 0)
+            {
+				cantidad = 0;
+            }
+			return Enumerable.Range(anioDesde, cantidad).ToList(); ;
 		}
 	}
 }

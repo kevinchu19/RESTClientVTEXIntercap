@@ -32,7 +32,7 @@ namespace RESTClientIntercapVTEX.Services
             bool succesOperation = false;
             VTEXNewIDResponse succesOperationWithNewID = new VTEXNewIDResponse();
 
-            IEnumerable<SkuDTO> items = _mapper.Map<IEnumerable<Stmpdh>, IEnumerable<SkuDTO>>(await _repository.ProductsSKU.GetSKUForVTEX(cancellationToken));
+            IEnumerable<SkuDTO> items = _mapper.Map<IEnumerable<Stmpdh>, IEnumerable<SkuDTO>>(await _repository.ProductsSKU.GetSKUForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
             if (!items.Any()) return false;
 
             foreach (var item in items)

@@ -10,7 +10,7 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
 {
     public interface IProductsAndSKUSpecificationsRepository : IRepository<Usr_Pratri>
     {
-        Task<IEnumerable<Usr_Pratri>> GetProductSpecificationForVTEX(CancellationToken cancellationToken);
-        Task<IEnumerable<Usr_Pratri>> GetSKUSpecificationForVTEX(CancellationToken cancellationToken);
+        Task<IEnumerable<Usr_Pratri>> GetProductSpecificationForVTEX(CancellationToken cancellationToken, int limit);
+        Task<IEnumerable<Usr_Pratri>> GetSKUSpecificationForVTEX(CancellationToken cancellationToken, int limit);
     }
 }

@@ -36,7 +36,7 @@ namespace RESTClientIntercapVTEX.Services
             bool succesOperation = false;
             VTEXNewIDResponse succesOperationWithNewID = new VTEXNewIDResponse();
             
-            var items = _mapper.Map<IEnumerable<Usr_Pratri>, IEnumerable<SKUSpecificationDTO>>(await _repository.ProductsAndSKUSpecifications.GetSKUSpecificationForVTEX(cancellationToken));
+            var items = _mapper.Map<IEnumerable<Usr_Pratri>, IEnumerable<SKUSpecificationDTO>>(await _repository.ProductsAndSKUSpecifications.GetSKUSpecificationForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
 
             if (!items.Any()) return false;
 

@@ -21,7 +21,6 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_Sttcax_Defaul { get; set; }
         public string Usr_Sttcax_Fieldt { get; set; }
         public string Usr_Sttcax_Isacti { get; set; }
-
         public int Usr_Sttcax_Idvtex { get; set; }
         public string Usr_Vtex_Transf { get; set; }
         public string Usr_Sttcax_Grunam { get; set; }

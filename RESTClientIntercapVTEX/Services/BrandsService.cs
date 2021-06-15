@@ -31,7 +31,7 @@ namespace RESTClientIntercapVTEX.Services
         {
             bool succesOperation = false;
 
-            var items = _mapper.Map<IEnumerable<Usr_Sttmah>, IEnumerable<BrandDTO>>(await _repository.Brands.GetForVTEX(cancellationToken));
+            var items = _mapper.Map<IEnumerable<Usr_Sttmah>, IEnumerable<BrandDTO>>(await _repository.Brands.GetForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
             
             if (!items.Any()) return false;
 

@@ -16,9 +16,9 @@ namespace RESTClientIntercapVTEX.Repositories
         public SKUFilesRepository(ApiIntercapContext context) : base(context)
         { }
 
-        public async Task<IEnumerable<Usr_Stimpr>> GetForVTEX(CancellationToken cancellationToken)
+        public async Task<IEnumerable<Usr_Stimpr>> GetForVTEX(CancellationToken cancellationToken, int limit)
         {
-            return await Context.Set<Usr_Stimpr>().FromSqlRaw("EXEC Alm_USR_StimprGetForVTEX").ToListAsync();
+            return await Context.Set<Usr_Stimpr>().FromSqlInterpolated($"EXEC Alm_USR_StimprGetForVTEX {limit}").ToListAsync();
         }
     }
 }

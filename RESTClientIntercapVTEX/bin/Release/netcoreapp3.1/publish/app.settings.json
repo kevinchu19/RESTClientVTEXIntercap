@@ -7,6 +7,7 @@
     "TableName": "RESTClientVTEXLog"
   },
   "VTEX": {
+    "MAX_ELEMENTS_IN_QUEUE": 600,
     "BaseAddress": "https://motomercadoar.vtexcommercestable.com.br",
     "ImagesBasePath": "https://intercap.com.ar/imagenes/productos",
     "AppKey": "vtexappkey-motomercadoar-YGWANH",
@@ -40,6 +41,9 @@
     },
     "ProductSpecifications": {
       "Path": "api/catalog_system/pvt/products"
+    },
+    "Motos": {
+      "Path": "api/dataentities/MT/documents"
     }
 
   },

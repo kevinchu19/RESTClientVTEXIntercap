@@ -36,10 +36,10 @@ namespace RESTClientIntercapVTEX.Services
             bool succesOperation = false;
             VTEXNewIDResponse succesOperationWithNewID = new VTEXNewIDResponse();
             
-            var productSpecifications = _mapper.Map<IEnumerable<Usr_Pratri>, IEnumerable<ProductSpecificationDTO>>(await _repository.ProductsAndSKUSpecifications.GetProductSpecificationForVTEX(cancellationToken));
-            var productFatherSpecifications = _mapper.Map<IEnumerable<Usr_Stmppa>, IEnumerable<ProductSpecificationDTO>>(await _repository.ProductsFatherSpecifications.GetForVTEX(cancellationToken));
+            var productSpecifications = _mapper.Map<IEnumerable<Usr_Pratri>, IEnumerable<ProductSpecificationDTO>>(await _repository.ProductsAndSKUSpecifications.GetProductSpecificationForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
+            var productFatherSpecifications = _mapper.Map<IEnumerable<Usr_Stmppa>, IEnumerable<ProductSpecificationDTO>>(await _repository.ProductsFatherSpecifications.GetForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
             
-            IEnumerable<ProductSpecificationDTO> items = productSpecifications.Concat(productFatherSpecifications).OrderBy(c => c.Sfl_LoginDateTime);
+            IEnumerable<ProductSpecificationDTO> items = productSpecifications.Concat(productFatherSpecifications).OrderBy(c => c.Sfl_LoginDateTime).Take(MAX_ELEMENTS_IN_QUEUE);
 
             if (!items.Any()) return false;
 
