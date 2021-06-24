@@ -33,6 +33,8 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
         public IProductsAndSKUSpecificationsRepository _productsAndSKUSpecifications { get; set; }
         public IProductsAndSKUSpecificationsRealRepository _productsAndSKUSpecificationsReal { get; set; }
         public IProductsFatherSpecificationsRealRepository _productsFatherSpecificationsReal { get; set; }
+        public IProductsFatherMotoSpecificationsRepository _productsFatherMotoSpecifications { get; set; }
+        public IProductsFatherMotoSpecificationsRealRepository _productsFatherMotoSpecificationsReal { get; set; }
         public IProductsFatherSpecificationsRepository _productsFatherSpecifications { get; set; }
         public ISKUFilesRepository _SKUFiles { get; set; }
         public ISKUFilesRealRepository _SKUFilesReal { get; set; }
@@ -292,6 +294,31 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
                 return _productsFatherSpecificationsReal;
             }
         }
+
+
+        public IProductsFatherMotoSpecificationsRepository ProductsFatherMotoSpecifications
+        {
+            get
+            {
+                if (_productsFatherMotoSpecifications == null)
+                {
+                    _productsFatherMotoSpecifications = new ProductsFatherMotoSpecificationsRepository(Context);
+                }
+                return _productsFatherMotoSpecifications;
+            }
+        }
+        public IProductsFatherMotoSpecificationsRealRepository ProductsFatherMotoSpecificationsReal
+        {
+            get
+            {
+                if (_productsFatherMotoSpecificationsReal == null)
+                {
+                    _productsFatherMotoSpecificationsReal = new ProductsFatherMotoSpecificationsRealRepository(Context);
+                }
+                return _productsFatherMotoSpecificationsReal;
+            }
+        }
+
 
         public IProductsFatherSpecificationsRepository ProductsFatherSpecifications
         {

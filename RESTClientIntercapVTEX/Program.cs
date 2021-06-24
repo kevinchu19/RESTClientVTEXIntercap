@@ -262,7 +262,11 @@ namespace RESTClientIntercapVTEX
                        .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Stmpdh_Descrp))
                        .ForMember(dest => dest.RefId, opt => opt.MapFrom(src => src.Stmpdh_Indcod))
                        .ForMember(dest => dest.IsKit, opt => opt.MapFrom(src => src.Stmpdh_Kitsfc == "S"))
-                       .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.Usr_Vtex_Isacti == "S"));
+                       .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.Usr_Vtex_Isacti == "S"))
+                       .ForMember(dest => dest.Height, opt => opt.MapFrom(src => src.PackagedHeight))
+                       .ForMember(dest => dest.Length, opt => opt.MapFrom(src => src.PackagedWeightKg))
+                       .ForMember(dest => dest.Width, opt => opt.MapFrom(src => src.PackagedWidth))
+                       .ForMember(dest => dest.WeightKg, opt => opt.MapFrom(src => src.PackagedWeightKg));
                        //.ForMember(dest => dest.MeasurementUnit, opt => opt.MapFrom(src => src.Stmpdh_Unimed));
 
                        configuration.CreateMap<Stmpdh, ProductDTO>()

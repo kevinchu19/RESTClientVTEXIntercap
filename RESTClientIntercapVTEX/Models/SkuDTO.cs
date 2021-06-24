@@ -21,10 +21,9 @@ namespace RESTClientIntercapVTEX.Models
         public decimal Length { get; set; } = 1;
         public decimal Width { get; set; } = 1;
         public decimal WeightKg { get; set; } = 1000;
-        public decimal CubicWeight { get; set; } = 1000;
         public bool IsKit { get; set; }
         public string RewardValue { get; set; } = null;
-        public string ManufacturerCode { get; set; } = null;
+        public string ManufacturerCode { get; set; }
         public int CommercialConditionId { get; set; } = 1;
         public string MeasurementUnit { get; set; } = "un";
         public decimal UnitMultiplier { get; set; } = 1;

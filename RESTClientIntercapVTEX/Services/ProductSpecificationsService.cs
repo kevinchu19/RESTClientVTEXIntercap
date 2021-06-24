@@ -76,7 +76,10 @@ namespace RESTClientIntercapVTEX.Services
                             Usr_Stmppa productFatherSpecificationTransfered = await _repository.ProductsFatherSpecifications.Get(cancellationToken, new object[] { item.RowId });
                             productFatherSpecificationTransfered.Usr_Vtex_Transf = "S";
                             break;
-
+                        case "USR_PRATRM":
+                            Usr_Pratrm productMotoSpecificationTransfered = await _repository.ProductsFatherMotoSpecifications.Get(cancellationToken, new object[] { item.RowId });
+                            productMotoSpecificationTransfered.Usr_Vtex_Transf = "S";
+                            break;
                         default:
                             break;
                     }
@@ -95,6 +98,12 @@ namespace RESTClientIntercapVTEX.Services
                             Usr_Stmppa productFatherSpecificationTransfered = await _repository.ProductsFatherSpecifications.Get(cancellationToken, new object[] { item.RowId });
                             productFatherSpecificationTransfered.Usr_Vtex_Transf = "E";
                             break;
+
+                        case "USR_PRATRM":
+                            Usr_Pratrm productMotoSpecificationTransfered = await _repository.ProductsFatherMotoSpecifications.Get(cancellationToken, new object[] { item.RowId });
+                            productMotoSpecificationTransfered.Usr_Vtex_Transf = "E";
+                            break;
+
                         default:
                             break;
                     }

@@ -20,6 +20,7 @@ namespace RESTClientIntercapVTEX.Entities
 
         public virtual DbSet<Stmpdh> Stmpdh { get; set; }
         public virtual DbSet<Usr_Pratri> Usr_Pratri { get; set; }
+        public virtual DbSet<Usr_Pratrm> Usr_Pratrm { get; set; }
         public virtual DbSet<Usr_Sttcas> Usr_Sttcas { get; set; }
         public virtual DbSet<Usr_Sttcaa> Usr_Sttcaa { get; set; }
         public virtual DbSet<Usr_Sttcah> Usr_Sttcah { get; set; }
@@ -37,6 +38,7 @@ namespace RESTClientIntercapVTEX.Entities
         public virtual DbSet<Usr_Sttvai> Usr_Sttvai { get; set; }
         public virtual DbSet<Usr_Sttvai_Real> Usr_Sttvai_Real { get; set; }
         public virtual DbSet<Usr_Pratri_Real> Usr_Pratri_Real{ get; set; }
+        public virtual DbSet<Usr_Pratrm_Real> Usr_Pratrm_Real { get; set; }
         public virtual DbSet<Usr_Stmppa_Real> Usr_Stmppa_Real { get; set; }
         public virtual DbSet<Usr_Stmppa> Usr_Stmppa { get; set; }
         public virtual DbSet<Usr_Stimpr_Real> Usr_Stimpr_Real { get; set; }
@@ -375,6 +377,79 @@ namespace RESTClientIntercapVTEX.Entities
                    .HasColumnName("Sfl_LoginDateTime");
 
             });
+
+
+            modelBuilder.Entity<Usr_Pratrm>(entity =>
+            {
+                entity.HasKey(e => new { e.RowId });
+
+                entity.ToTable("USR_PRATRMlog");
+
+                entity.Property(e => e.Usr_Pratrm_Tippro)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRATRM_TIPPRO")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Pratrm_Artcod)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRATRM_ARTCOD");
+
+                entity.Property(e => e.Usr_Pratrm_Orden).HasColumnName("USR_PRATRM_ORDEN");
+
+                entity.Property(e => e.Usr_Pr_Debaja)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_DEBAJA")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Pr_Fecalt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_PR_FECALT");
+
+                entity.Property(e => e.Usr_Pr_Fecmod)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_PR_FECMOD");
+
+
+                entity.Property(e => e.Usr_Pr_Ultopr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_ULTOPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Pr_Userid)
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_USERID");
+
+                entity.Property(e => e.Usr_Pratrm_Campo)
+                    .HasColumnName("USR_PRATRM_CAMPO");
+
+                entity.Property(e => e.Usr_Pratrm_Idvtex).HasColumnName("USR_PRATRM_IDVTEX");
+
+                entity.Property(e => e.Usr_Pratrm_Valor)
+                    .HasColumnName("USR_PRATRM_VALOR");
+
+
+                entity.Property(e => e.Usr_Vtex_Transf)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VTEX_TRANSF")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Sfl_TableOperation)
+                  .HasMaxLength(30)
+                  .IsUnicode(false)
+                  .HasColumnName("Sfl_TableOperation");
+
+                entity.Property(e => e.Sfl_LoginDateTime)
+                   .HasColumnType("datetime")
+                   .HasColumnName("Sfl_LoginDateTime");
+
+            });
+
 
             modelBuilder.Entity<Usr_Sttcas>(entity =>
             {
@@ -1961,6 +2036,77 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasColumnName("USR_VTEX_TRANSF")
                     .IsFixedLength(true);
             });
+
+
+            modelBuilder.Entity<Usr_Pratrm_Real>(entity =>
+            {
+                entity.HasKey(e => new { e.Usr_Pratrm_Tippro, e.Usr_Pratrm_Artcod, e.Usr_Pratrm_Orden });
+
+                entity.ToTable("USR_PRatrm");
+
+                entity.Property(e => e.Usr_Pratrm_Tippro)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRATRM_TIPPRO")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Pratrm_Artcod)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRATRM_ARTCOD");
+
+                entity.Property(e => e.Usr_Pratrm_Orden).HasColumnName("USR_PRATRM_ORDEN");
+
+                entity.Property(e => e.Usr_Pr_Debaja)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_DEBAJA")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Pr_Fecalt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_PR_FECALT");
+
+                entity.Property(e => e.Usr_Pr_Fecmod)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_PR_FECMOD");
+
+
+                entity.Property(e => e.Usr_Pr_Oalias)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_OALIAS");
+
+                entity.Property(e => e.Usr_Pr_Ultopr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_ULTOPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Pr_Userid)
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PR_USERID");
+
+                entity.Property(e => e.Usr_Pratrm_Campo)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRATRM_CAMPO");
+
+                entity.Property(e => e.Usr_Pratrm_Idvtex).HasColumnName("USR_PRATRM_IDVTEX");
+
+                entity.Property(e => e.Usr_Pratrm_Valor)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRATRM_VALOR");
+
+                entity.Property(e => e.Usr_Vtex_Transf)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VTEX_TRANSF")
+                    .IsFixedLength(true);
+            });
+
 
             modelBuilder.Entity<Usr_Stmppa_Real>(entity =>
             {

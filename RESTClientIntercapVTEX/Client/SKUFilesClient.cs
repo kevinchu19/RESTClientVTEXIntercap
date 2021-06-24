@@ -37,17 +37,17 @@ namespace RESTClientIntercapVTEX.Client
                 try
                 {
                     var content = await JsonSerializer.DeserializeAsync<VTEXErrorResponse>(await response.Content.ReadAsStreamAsync());
-                    _logger.Error($"No se pudo dar de alta el recurso {contentString} en la ruta `{_path}`, el statuscode fue `{response.StatusCode}` y el mensaje de VTEX:`{content.Message}`");
+                    _logger.Error($"No se pudo dar de alta el recurso {contentString} en la ruta {_path}/{Id}/file, el statuscode fue `{response.StatusCode}` y el mensaje de VTEX:`{content.Message}`");
                 }
                 catch
                 {
-                    _logger.Error($"No se pudo dar de alta el recurso {contentString} en la ruta `{_path}`, el statuscode fue `{response.StatusCode}`");
+                    _logger.Error($"No se pudo dar de alta el recurso {contentString} en la ruta {_path}/{Id}/file, el statuscode fue `{response.StatusCode}`");
                 }
             }
             else
             {
                 SKUFileDTO responseContent = await JsonSerializer.DeserializeAsync<SKUFileDTO>(await response.Content.ReadAsStreamAsync());
-                _logger.Information($"Recurso {contentString} dado de alta en la ruta {_path} exitosamente y se le dió el id {responseContent.ArchiveId}");
+                _logger.Information($"Recurso {contentString} dado de alta en la ruta {_path}/{Id}/file exitosamente y se le dió el id {responseContent.ArchiveId}");
                 return new VTEXNewIDResponse()
                 {
                     Success = response.IsSuccessStatusCode,

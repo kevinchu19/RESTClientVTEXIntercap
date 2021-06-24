@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using RESTClientIntercapVTEX.Client;
 using RESTClientIntercapVTEX.Entities;
 using RESTClientIntercapVTEX.Models;
 using RESTClientIntercapVTEX.Repositories.Interfaces;
 using RESTClientIntercapVTEX.Services.Interfaces;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +18,16 @@ namespace RESTClientIntercapVTEX.Services
     public class InventoryService : ServiceBase<InventoryDTO>, IServiceVTEX
     {
         public InventoryClient<InventoryDTO> _inventoryClient { get; }
+        public ILogger _logger { get; }
 
         public InventoryService(InventoryClient<InventoryDTO> client,
                                 IUnitOfWork repository,
-                                IMapper mapper) :
+                                IMapper mapper,
+                                Serilog.ILogger logger) :
             base(client, repository, mapper)
         {
             _inventoryClient = client;
+            _logger = logger;
         }
 
 
@@ -53,6 +58,8 @@ namespace RESTClientIntercapVTEX.Services
                         inventoryTransfered.Usr_Vtex_Stktra = "S";
 
                         await _repository.Complete();
+
+                        _logger.Information($"Marca producto {previousTippro} - {previousArtcod} como transferido");
                     }
                     
                 }
