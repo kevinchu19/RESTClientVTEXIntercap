@@ -44,7 +44,11 @@
     },
     "Motos": {
       "Path": "api/dataentities/MT/documents"
+    },
+    "Feed": {
+      "Path": "api/orders/feed"
     }
+
 
   },
   "Logging": {

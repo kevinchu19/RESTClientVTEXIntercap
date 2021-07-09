@@ -23,6 +23,11 @@ namespace RESTClientIntercapVTEX.BackgroundServices
 
 
         // This semaphore is to control the time
+        private static SemaphoreSlim _semaphoreSlimPeriodFeed = new SemaphoreSlim(MAX_PER_PERIOD);
+        // This semaphore is to control the action.
+        private static SemaphoreSlim _semaphoreSlimActionFeed = new SemaphoreSlim(MAX_ACTION_CONCURRENT);
+
+        // This semaphore is to control the time
         private static SemaphoreSlim _semaphoreSlimPeriod = new SemaphoreSlim(MAX_PER_PERIOD);
         // This semaphore is to control the action.
         private static SemaphoreSlim _semaphoreSlimAction = new SemaphoreSlim(MAX_ACTION_CONCURRENT);
@@ -44,6 +49,8 @@ namespace RESTClientIntercapVTEX.BackgroundServices
 
         public MotosService _motosService { get; }
 
+        public FeedService _feedService { get; set; }
+
 
         public ConsumerBackgroundService(Serilog.ILogger logger, CategorysService categoryService, 
                                                                  SpecificationsService specificationService,
@@ -57,7 +64,8 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                                                                  SKUFilesService SKUFilesService,
                                                                  InventoryService inventoryService,
                                                                  PricesService pricesService,
-                                                                 MotosService motosService)
+                                                                 MotosService motosService, 
+                                                                 FeedService feedService)
         {
             _logger = logger;
             _categoryService = categoryService;
@@ -73,6 +81,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
             _inventoryService = inventoryService;
             _pricesService = pricesService;
             _motosService = motosService;
+            _feedService = feedService;
         }
 
 
@@ -87,6 +96,8 @@ namespace RESTClientIntercapVTEX.BackgroundServices
             {
                 while (true)
                 {
+
+                    //await ExecFeedServiceAsync(stoppingToken);
                     // waiting an opportunity to run an action
                     //await _semaphoreSlimAction.WaitAsync(stoppingToken);
                     // waiting the last period to end
@@ -105,8 +116,8 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                         await ExecServiceAsync(_productSpecificationsService, stoppingToken);
                         await ExecServiceAsync(_SKUSpecificationsService, stoppingToken);
                         await ExecServiceAsync(_SKUFilesService, stoppingToken);
-                        await ExecServiceAsync(_inventoryService, stoppingToken);
                         await ExecServiceAsync(_pricesService, stoppingToken);
+                        await ExecServiceAsync(_inventoryService, stoppingToken);
 
                     }
                     catch (Exception ex)
@@ -160,6 +171,63 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                         _semaphoreSlimAction.Release(1);
                     });
                 }
+            }
+        }
+
+        protected async Task ExecFeedServiceAsync(CancellationToken stoppingToken)
+        {
+            if (MAX_PER_PERIOD < MAX_ACTION_CONCURRENT)
+            {
+                throw new Exception("The MAX_PER_PERIOD should be more or equal to MAX_ACTION_CONCURRENT");
+            }
+
+            try
+            {
+                while (true)
+                {
+                    // waiting an opportunity to run an action
+                    await _semaphoreSlimActionFeed.WaitAsync(stoppingToken);
+                    // waiting the last period to end
+                    await _semaphoreSlimPeriodFeed.WaitAsync(stoppingToken);
+
+                    var hasMoreInThisMinute = false;
+                    try
+                    {
+                        using var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(5));
+                        using var cancellationTokenLinked = CancellationTokenSource.CreateLinkedTokenSource(stoppingToken, cancellationTokenSource.Token);
+
+                        
+                        hasMoreInThisMinute = await _feedService.DequeueProcessAndCheckIfContinueAsync(cancellationTokenLinked.Token);
+
+                        _ = Task.Delay(PERIOD).ContinueWith(task =>
+                        {
+                            _logger.Information("Feed: Release period sempahore");
+                            _semaphoreSlimPeriodFeed.Release(1);
+                            if (!hasMoreInThisMinute)
+                            {
+                                _logger.Information("Feed: Release action sempahore after no more items");
+                                _semaphoreSlimActionFeed.Release(1);
+                            }
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.Error($"An error has occurred when processing the feed: {ex.Message}." );
+                    }
+                    finally
+                    {
+                        if (hasMoreInThisMinute)
+                        {
+                            _logger.Information("Feed: Release action sempahore");
+                            _semaphoreSlimActionFeed.Release(1);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Fatal($"BackgroundWorker stopped by error  {ex.Message}.");
+                throw;
             }
         }
     }

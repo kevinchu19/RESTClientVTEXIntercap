@@ -30,10 +30,10 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_Stmpdh_Father { get; set; }
         public int? Usr_Stmpdh_Idvtex { get; set; }
         public int? Usr_Stmpdh_IdSKUvtex { get; set; }
-        public decimal PackagedHeight { get; set; }
-        public decimal PackagedLength { get; set; }
-        public decimal PackagedWidth { get; set; }
-        public decimal PackagedWeightKg { get; set; }
+        public decimal? PackagedHeight { get; set; }
+        public decimal? PackagedLength { get; set; }
+        public decimal? PackagedWidth { get; set; }
+        public decimal? PackagedWeightKg { get; set; }
         public string ManufacturerCode { get; set; }
         public DateTime Sfl_LoginDateTime { get; set; }
         public string Sfl_TableOperation { get; set; }

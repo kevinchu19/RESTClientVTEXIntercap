@@ -144,6 +144,10 @@ namespace RESTClientIntercapVTEX
                    services.AddTransient(provider =>
                        new MotosClient<MotosDocumentDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:Motos:Path"], _logger));
 
+                   services.AddTransient<FeedService>();
+                   services.AddTransient(provider =>
+                       new FeedClient<FeedDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:Feed:Path"], _logger));
+
                    // Add app
                    services.AddSingleton<ConsumerBackgroundService>();
 
@@ -165,7 +169,7 @@ namespace RESTClientIntercapVTEX
                        configuration.CreateMap<Usr_Sttcaa, SpecificationDTO>()
                        .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Sttcaa_Idvtex))
                        .ForMember(dest => dest.FieldTypeId, opt => opt.MapFrom(src => Convert.ToInt32(src.Usr_Sttcaa_Fieldt)))
-                       .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => Convert.ToInt32(src.Usr_Sttcaa_Deptos)))
+                       .ForMember(dest => dest.CategoryId, opt => opt.MapFrom<MapperHelp.SpecificationsResolver.IdDepartmentResolver>())
                        .ForMember(dest => dest.FieldGroupId, opt => opt.MapFrom(src => src.Usr_Sttcaa_Grunam))
                        .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Usr_Sttcaa_Nombre))
                        .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Usr_Sttcaa_Descrp))
