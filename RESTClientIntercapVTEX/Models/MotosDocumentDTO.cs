@@ -12,7 +12,8 @@ namespace RESTClientIntercapVTEX.Models
         public string modelo { get; set; }
         public string version { get; set; }
         public string cilindrada{ get; set; }
-        public IEnumerable<int> anios { get; set; }
+        //public IEnumerable<int> anios { get; set; }
+        public string anios { get; set; }
         [JsonIgnore]
         public DateTime Sfl_LoginDateTime { get; set; }
         [JsonIgnore]

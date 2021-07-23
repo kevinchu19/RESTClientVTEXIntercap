@@ -9,16 +9,16 @@ using System.Text;
 namespace RESTClientIntercapVTEX.MapperHelp.MotosResolver
 
 {
-	public class AniosResolver : IValueResolver<Usr_Prmoto, MotosDocumentDTO, IEnumerable<int>>
+	public class AniosResolver : IValueResolver<Usr_Prmoto, MotosDocumentDTO, string>
 	{
-		public IEnumerable<int> Resolve(Usr_Prmoto source, MotosDocumentDTO destination, IEnumerable<int> member, ResolutionContext context)
+		public string Resolve(Usr_Prmoto source, MotosDocumentDTO destination, string member, ResolutionContext context)
 		{
 			
 			int.TryParse(source.Usr_Prmoto_Adesde, out int anioDesde);
 
             if (anioDesde == 0)
             {
-				return new List<int> { };
+				return "";
 			}
 
 			int.TryParse(source.Usr_Prmoto_Ahasta, out int anioHasta);
@@ -30,7 +30,9 @@ namespace RESTClientIntercapVTEX.MapperHelp.MotosResolver
             {
 				cantidad = 0;
             }
-			return Enumerable.Range(anioDesde, cantidad).ToList(); ;
+			IEnumerable<int> arrayAnios = Enumerable.Range(anioDesde, cantidad).ToList();
+
+			return string.Join("-", arrayAnios);
 		}
 	}
 }
