@@ -148,6 +148,10 @@ namespace RESTClientIntercapVTEX
                    services.AddTransient(provider =>
                        new FeedClient<FeedDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:Feed:Path"], _logger));
 
+                   services.AddTransient<OrderService>();
+                   services.AddTransient(provider =>
+                       new OrderClient<OrderDTO>(new HttpClient() { }, Configuration, Configuration["VTEX:Order:Path"], _logger));
+
                    // Add app
                    services.AddSingleton<ConsumerBackgroundService>();
 
@@ -339,6 +343,9 @@ namespace RESTClientIntercapVTEX
                        .ForMember(dest => dest.cilindrada, opt => opt.MapFrom(src => src.Usr_Prmoto_Cilind))
                        .ForMember(dest => dest.version, opt => opt.MapFrom(src => src.Usr_Prmoto_Version))
                        .ForMember(dest => dest.anios, opt => opt.MapFrom<MapperHelp.MotosResolver.AniosResolver>());
+
+                       configuration.CreateMap<FeedDTO, Usr_Vtexha>()
+                       .ForMember(dest => dest.Usr_Vtexha_Ordid, opt => opt.MapFrom(src => src.OrderId));
                    }
                        , typeof(Program));
 

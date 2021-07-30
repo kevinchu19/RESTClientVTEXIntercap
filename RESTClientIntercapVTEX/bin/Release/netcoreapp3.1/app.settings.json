@@ -47,6 +47,9 @@
     },
     "Feed": {
       "Path": "api/orders/feed"
+    },
+    "Order": {
+      "Path": "api/oms/pvt/orders/$OrderId"
     }
 
 

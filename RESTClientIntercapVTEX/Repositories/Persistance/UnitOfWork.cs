@@ -13,33 +13,37 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
         public ApiIntercapContext Context { get; }
         public IConfigurationRoot Configuration { get; }
         private IDepartmentSpecificationsRepository _departmentSpecifications { get; set; }
-        public IDepartmentsRepository _department { get; set; }
-        public ICategorysRepository _categorys { get; set; }
-        public ISubcategorysRepository _subcategorys { get; set; }
-        public IBrandsRepository _brands { get; set; }
-        public ICategorySpecificationsRepository _categorySpecifications { get; set; }
-        public IProductsFatherRepository _productsFather { get; set; }
-        public IProductsSKURepository _productsSKU { get; set; }
-        public ISpecificationsGroupRepository _specificationsGroup { get; set; }
-        public ISubcategorySpecificationsRepository _subcategorySpecifications { get; set; }
-        public ISpecificationsGroupRealRepository _specificationsGroupReal { get; set; }
-        public IProductsFatherRealRepository _productsFatherReal { get; set; }
-        public IProductsSKURealRepository _productsSKUReal { get; set; }
-        public IDepartmentSpecificationsRealRepository _departmentsSpecificationsReal { get; set; }
-        public ICategorySpecificationsRealRepository _categorySpecificationsReal { get; set; }
-        public ISubcategorySpecificationsRealRepository _subcategorySpecificationsReal { get; set; }
-        public ISpecificationValueRepository _specificationValues { get; set; }
-        public ISpecificationValueRealRepository _specificationValuesReal { get; set; }
-        public IProductsAndSKUSpecificationsRepository _productsAndSKUSpecifications { get; set; }
-        public IProductsAndSKUSpecificationsRealRepository _productsAndSKUSpecificationsReal { get; set; }
-        public IProductsFatherSpecificationsRealRepository _productsFatherSpecificationsReal { get; set; }
-        public IProductsFatherMotoSpecificationsRepository _productsFatherMotoSpecifications { get; set; }
-        public IProductsFatherMotoSpecificationsRealRepository _productsFatherMotoSpecificationsReal { get; set; }
-        public IProductsFatherSpecificationsRepository _productsFatherSpecifications { get; set; }
-        public ISKUFilesRepository _SKUFiles { get; set; }
-        public ISKUFilesRealRepository _SKUFilesReal { get; set; }
-        public IMotosRepository _Motos { get; set; }
-        public IMotosRealRepository _MotosReal { get; set; }
+        private IDepartmentsRepository _department { get; set; }
+        private ICategorysRepository _categorys { get; set; }
+        private ISubcategorysRepository _subcategorys { get; set; }
+        private IBrandsRepository _brands { get; set; }
+        private ICategorySpecificationsRepository _categorySpecifications { get; set; }
+        private IProductsFatherRepository _productsFather { get; set; }
+        private IProductsSKURepository _productsSKU { get; set; }
+        private ISpecificationsGroupRepository _specificationsGroup { get; set; }
+        private ISubcategorySpecificationsRepository _subcategorySpecifications { get; set; }
+        private ISpecificationsGroupRealRepository _specificationsGroupReal { get; set; }
+        private IProductsFatherRealRepository _productsFatherReal { get; set; }
+        private IProductsSKURealRepository _productsSKUReal { get; set; }
+        private IDepartmentSpecificationsRealRepository _departmentsSpecificationsReal { get; set; }
+        private ICategorySpecificationsRealRepository _categorySpecificationsReal { get; set; }
+        private ISubcategorySpecificationsRealRepository _subcategorySpecificationsReal { get; set; }
+        private ISpecificationValueRepository _specificationValues { get; set; }
+        private ISpecificationValueRealRepository _specificationValuesReal { get; set; }
+        private IProductsAndSKUSpecificationsRepository _productsAndSKUSpecifications { get; set; }
+        private IProductsAndSKUSpecificationsRealRepository _productsAndSKUSpecificationsReal { get; set; }
+        private IProductsFatherSpecificationsRealRepository _productsFatherSpecificationsReal { get; set; }
+        private IProductsFatherMotoSpecificationsRepository _productsFatherMotoSpecifications { get; set; }
+        private IProductsFatherMotoSpecificationsRealRepository _productsFatherMotoSpecificationsReal { get; set; }
+        private IProductsFatherSpecificationsRepository _productsFatherSpecifications { get; set; }
+        private ISKUFilesRepository _SKUFiles { get; set; }
+        private ISKUFilesRealRepository _SKUFilesReal { get; set; }
+        private IMotosRepository _Motos { get; set; }
+        private IMotosRealRepository _MotosReal { get; set; }
+        private IOrderHandlerRepository _OrderHandlerRepository { get; set; }
+        private IOrderHeaderRepository _OrderHeaderRepository { get; set; }
+        private IOrderItemsRepository _OrderItemsRepository { get; set; }
+        private IOrderPaymentsRepository _OrderPaymentsRepository { get; set; }
         public UnitOfWork(ApiIntercapContext context, IConfigurationRoot configuration)
         {
             Context = context;
@@ -375,6 +379,48 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
                     _MotosReal = new MotosRealRepository(Context);
                 }
                 return _MotosReal;
+            }
+        }
+
+
+        public IOrderHandlerRepository OrderHandlerRepository {
+            get
+            {
+                if (_OrderHandlerRepository == null)
+                {
+                    _OrderHandlerRepository = new OrderHandlerRepository(Context);
+                }
+                return _OrderHandlerRepository;
+            }
+        }
+        public IOrderHeaderRepository OrderHeaderRepository {
+            get
+            {
+                if (_OrderHeaderRepository == null)
+                {
+                    _OrderHeaderRepository = new OrderHeaderRepository(Context);
+                }
+                return _OrderHeaderRepository;
+            }
+        }
+        public IOrderItemsRepository OrderItemsRepository {
+            get
+            {
+                if (_OrderItemsRepository == null)
+                {
+                    _OrderItemsRepository = new OrderItemsRepository(Context);
+                }
+                return _OrderItemsRepository;
+            }
+        }
+        public IOrderPaymentsRepository OrderPaymentsRepository {
+            get
+            {
+                if (_OrderPaymentsRepository == null)
+                {
+                    _OrderPaymentsRepository = new OrderPaymentsRepository(Context);
+                }
+                return _OrderPaymentsRepository;
             }
         }
 

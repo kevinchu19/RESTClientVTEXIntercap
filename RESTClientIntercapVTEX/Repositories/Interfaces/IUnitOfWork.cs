@@ -35,7 +35,10 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
         IMotosRealRepository MotosReal { get; }
         IProductsFatherMotoSpecificationsRepository ProductsFatherMotoSpecifications { get; }
         IProductsFatherMotoSpecificationsRealRepository ProductsFatherMotoSpecificationsReal { get; }
-
+        IOrderHandlerRepository  OrderHandlerRepository { get; }
+        IOrderHeaderRepository OrderHeaderRepository { get; }
+        IOrderItemsRepository OrderItemsRepository { get; }
+        IOrderPaymentsRepository OrderPaymentsRepository { get; }
         Task<int> Complete();
 
     }

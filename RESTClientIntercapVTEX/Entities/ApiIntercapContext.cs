@@ -45,6 +45,10 @@ namespace RESTClientIntercapVTEX.Entities
         public virtual DbSet<Usr_Stimpr> Usr_Stimpr { get; set; }
         public virtual DbSet<Usr_Prmoto> Usr_Prmoto { get; set; }
         public virtual DbSet<Usr_Prmoto_Real> Usr_Prmoto_Real { get; set; }
+        public virtual DbSet<Sar_Fcrmvh> Sar_Fcrmvh { get; set; }
+        public virtual DbSet<Sar_Fcrmvi> Sar_Fcrmvi { get; set; }
+        public virtual DbSet<Sar_Fcrmvt> Sar_Fcrmvt { get; set; }
+        public virtual DbSet<Usr_Vtexha> Usr_Vtexha { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -2616,6 +2620,587 @@ namespace RESTClientIntercapVTEX.Entities
 
             });
 
+            modelBuilder.Entity<Sar_Fcrmvh>(entity =>
+            {
+                entity.HasKey(e => e.Sar_Fcrmvh_Identi);
+
+                entity.ToTable("SAR_FCRMVH");
+
+                entity.HasMany(e => e.Sar_Fcrmvis)
+                      .WithOne(c => c.Sar_Fcrmvh)
+                      .HasForeignKey(c => c.Sar_Fcrmvi_Identi);
+
+                entity.Property(e => e.Sar_Fcrmvh_Identi)
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_IDENTI");
+
+
+                entity.Property(e => e.Sar_Fc_Debaja)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FC_DEBAJA")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Sar_Fc_Fecalt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("SAR_FC_FECALT");
+
+                entity.Property(e => e.Sar_Fc_Fecmod)
+                    .HasColumnType("datetime")
+                    .HasColumnName("SAR_FC_FECMOD");
+
+
+                entity.Property(e => e.Sar_Fc_Oalias)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FC_OALIAS");
+
+                entity.Property(e => e.Sar_Fc_Ultopr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FC_ULTOPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Sar_Fc_Userid)
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FC_USERID");
+
+                entity.Property(e => e.Sar_Fcrmvh_Cambio)
+                    .HasColumnType("numeric(15, 4)")
+                    .HasColumnName("SAR_FCRMVH_CAMBIO");
+
+                entity.Property(e => e.Sar_Fcrmvh_Camion)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_CAMION");
+
+                entity.Property(e => e.Sar_Fcrmvh_Cirapl)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_CIRAPL");
+
+                entity.Property(e => e.Sar_Fcrmvh_Circom)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_CIRCOM");
+
+                entity.Property(e => e.Sar_Fcrmvh_Cntpdc)
+                    .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_CNTPDC");
+
+                entity.Property(e => e.Sar_Fcrmvh_Codemp)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_CODEMP");
+
+                entity.Property(e => e.Sar_Fcrmvh_Codfcj)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_CODFCJ");
+
+                entity.Property(e => e.Sar_Fcrmvh_Codfor)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_CODFOR");
+
+                entity.Property(e => e.Sar_Fcrmvh_Codfst)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_CODFST");
+
+                entity.Property(e => e.Sar_Fcrmvh_Codfvt)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_CODFVT");
+
+                entity.Property(e => e.Sar_Fcrmvh_Codjob)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_CODJOB");
+
+                entity.Property(e => e.Sar_Fcrmvh_Codlis)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_CODLIS")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Sar_Fcrmvh_Codpai)
+                    .HasMaxLength(3)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_CODPAI");
+
+                entity.Property(e => e.Sar_Fcrmvh_Codpos)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_CODPOS");
+
+                entity.Property(e => e.Sar_Fcrmvh_Cofdeu)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_COFDEU");
+
+                entity.Property(e => e.Sar_Fcrmvh_Coffac)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_COFFAC");
+
+                entity.Property(e => e.Sar_Fcrmvh_Coflis)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_COFLIS");
+
+                entity.Property(e => e.Sar_Fcrmvh_Coniva)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_CONIVA");
+
+                entity.Property(e => e.Sar_Fcrmvh_Deposi)
+                    .HasMaxLength(15)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_DEPOSI");
+
+                entity.Property(e => e.Sar_Fcrmvh_Direcc)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_DIRECC");
+
+                entity.Property(e => e.Sar_Fcrmvh_Direml)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_DIREML");
+
+                entity.Property(e => e.Sar_Fcrmvh_Ejeaut)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_EJEAUT")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Sar_Fcrmvh_Empfcj)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_EMPFCJ");
+
+                entity.Property(e => e.Sar_Fcrmvh_Empfst)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_EMPFST");
+
+                entity.Property(e => e.Sar_Fcrmvh_Empfvt)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_EMPFVT");
+
+                entity.Property(e => e.Sar_Fcrmvh_Errmsg)
+                    .HasColumnType("text")
+                    .HasColumnName("SAR_FCRMVH_ERRMSG");
+
+                entity.Property(e => e.Sar_Fcrmvh_Fchmov)
+                    .HasColumnType("datetime")
+                    .HasColumnName("SAR_FCRMVH_FCHMOV");
+
+                entity.Property(e => e.Sar_Fcrmvh_Genfac)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_GENFAC")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Sar_Fcrmvh_Jurctd)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_JURCTD");
+
+                entity.Property(e => e.Sar_Fcrmvh_Jurisd)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_JURISD");
+
+                entity.Property(e => e.Sar_Fcrmvh_Modfcj)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_MODFCJ");
+
+                entity.Property(e => e.Sar_Fcrmvh_Modfor)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_MODFOR");
+
+                entity.Property(e => e.Sar_Fcrmvh_Modfst)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_MODFST");
+
+                entity.Property(e => e.Sar_Fcrmvh_Modfvt)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_MODFVT");
+
+                entity.Property(e => e.Sar_Fcrmvh_Nombre)
+                    .HasMaxLength(150)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_NOMBRE");
+
+                entity.Property(e => e.Sar_Fcrmvh_Nrocta)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_NROCTA");
+
+                entity.Property(e => e.Sar_Fcrmvh_Nrodo1)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_NRODO1");
+
+                entity.Property(e => e.Sar_Fcrmvh_Nrodo2)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_NRODO2");
+
+                entity.Property(e => e.Sar_Fcrmvh_Nrodoc)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_NRODOC");
+
+                entity.Property(e => e.Sar_Fcrmvh_Nrofcj).HasColumnName("SAR_FCRMVH_NROFCJ");
+
+                entity.Property(e => e.Sar_Fcrmvh_Nrofor).HasColumnName("SAR_FCRMVH_NROFOR");
+
+                entity.Property(e => e.Sar_Fcrmvh_Nrofst).HasColumnName("SAR_FCRMVH_NROFST");
+
+                entity.Property(e => e.Sar_Fcrmvh_Nrofvt).HasColumnName("SAR_FCRMVH_NROFVT");
+
+                entity.Property(e => e.Sar_Fcrmvh_Sector)
+                    .HasMaxLength(15)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_SECTOR");
+
+                entity.Property(e => e.Sar_Fcrmvh_Status)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_STATUS");
+
+                entity.Property(e => e.Sar_Fcrmvh_Sucurs)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_SUCURS");
+
+                entity.Property(e => e.Sar_Fcrmvh_Telefn)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_TELEFN");
+
+                entity.Property(e => e.Sar_Fcrmvh_Textos)
+                    .HasColumnType("text")
+                    .HasColumnName("SAR_FCRMVH_TEXTOS");
+
+                entity.Property(e => e.Sar_Fcrmvh_Tipdo1)
+                    .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_TIPDO1");
+
+                entity.Property(e => e.Sar_Fcrmvh_Tipdo2)
+                    .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_TIPDO2");
+
+                entity.Property(e => e.Sar_Fcrmvh_Tracod)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_TRACOD");
+
+                entity.Property(e => e.Sar_Fcrmvh_Tranum)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_TRANUM");
+
+                entity.Property(e => e.Sar_Fcrmvh_Traurl)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_TRAURL");
+
+                entity.Property(e => e.Sar_Fcrmvh_Vnddor)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVH_VNDDOR");
+            });
+
+            modelBuilder.Entity<Sar_Fcrmvi>(entity =>
+            {
+                entity.HasKey(e => new { e.Sar_Fcrmvi_Identi, e.Sar_Fcrmvi_Nroitm });
+
+                entity.ToTable("SAR_FCRMVI");
+
+                entity.HasOne(e => e.Sar_Fcrmvh)
+                      .WithMany(c => c.Sar_Fcrmvis)
+                      .HasForeignKey(c => c.Sar_Fcrmvi_Identi);
+
+                entity.Property(e => e.Sar_Fcrmvi_Identi)
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVI_IDENTI");
+
+                entity.Property(e => e.Sar_Fcrmvi_Nroitm).HasColumnName("SAR_FCRMVI_NROITM");
+
+                entity.Property(e => e.Sar_Fc_Debaja)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FC_DEBAJA")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Sar_Fc_Fecalt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("SAR_FC_FECALT");
+
+                entity.Property(e => e.Sar_Fc_Fecmod)
+                    .HasColumnType("datetime")
+                    .HasColumnName("SAR_FC_FECMOD");
+
+                entity.Property(e => e.Sar_Fc_Oalias)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FC_OALIAS");
+
+                entity.Property(e => e.Sar_Fc_Ultopr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FC_ULTOPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Sar_Fc_Userid)
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FC_USERID");
+
+                entity.Property(e => e.Sar_Fcrmvi_Artcod)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVI_ARTCOD");
+
+                entity.Property(e => e.Sar_Fcrmvi_Cantid)
+                    .HasColumnType("numeric(18, 4)")
+                    .HasColumnName("SAR_FCRMVI_CANTID");
+
+                entity.Property(e => e.Sar_Fcrmvi_Codapl)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVI_CODAPL")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Sar_Fcrmvi_Codcpt)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVI_CODCPT");
+
+                entity.Property(e => e.Sar_Fcrmvi_Empapl)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVI_EMPAPL");
+
+                entity.Property(e => e.Sar_Fcrmvi_Itmapl).HasColumnName("SAR_FCRMVI_ITMAPL");
+
+                entity.Property(e => e.Sar_Fcrmvi_Modapl)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVI_MODAPL");
+
+                entity.Property(e => e.Sar_Fcrmvi_Nroapl).HasColumnName("SAR_FCRMVI_NROAPL");
+
+                entity.Property(e => e.Sar_Fcrmvi_Pctbf1)
+                    .HasColumnType("numeric(15, 7)")
+                    .HasColumnName("SAR_FCRMVI_PCTBF1");
+
+                entity.Property(e => e.Sar_Fcrmvi_Pctbf2)
+                    .HasColumnType("numeric(15, 7)")
+                    .HasColumnName("SAR_FCRMVI_PCTBF2");
+
+                entity.Property(e => e.Sar_Fcrmvi_Pctbf3)
+                    .HasColumnType("numeric(15, 7)")
+                    .HasColumnName("SAR_FCRMVI_PCTBF3");
+
+                entity.Property(e => e.Sar_Fcrmvi_Precio)
+                    .HasColumnType("numeric(20, 6)")
+                    .HasColumnName("SAR_FCRMVI_PRECIO");
+
+                entity.Property(e => e.Sar_Fcrmvi_Tipcpt)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVI_TIPCPT")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Sar_Fcrmvi_Tippro)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVI_TIPPRO")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Fcrmvi_Origen)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_FCRMVI_ORIGEN");
+
+                entity.Property(e => e.Usr_Fcrmvi_Deposi)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_FCRMVI_DEPOSI");
+
+                entity.Property(e => e.Usr_Fcrmvi_Sector)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_FCRMVI_SECTOR");
+            });
+
+            modelBuilder.Entity<Sar_Fcrmvt>(entity =>
+            {
+                entity.HasKey(e => new { e.Sar_Fcrmvt_Identi, e.Sar_Fcrmvt_Nroitm });
+
+                entity.ToTable("SAR_FCRMVT");
+
+                entity.Property(e => e.Sar_Fcrmvt_Identi)
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVT_IDENTI");
+
+                entity.Property(e => e.Sar_Fcrmvt_Nroitm).HasColumnName("SAR_FCRMVT_NROITM");
+
+                entity.Property(e => e.Sar_Fc_Debaja)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FC_DEBAJA")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Sar_Fc_Fecalt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("SAR_FC_FECALT");
+
+                entity.Property(e => e.Sar_Fc_Fecmod)
+                    .HasColumnType("datetime")
+                    .HasColumnName("SAR_FC_FECMOD");
+
+
+                entity.Property(e => e.Sar_Fc_Oalias)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FC_OALIAS");
+
+                entity.Property(e => e.Sar_Fc_Ultopr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FC_ULTOPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Sar_Fc_Userid)
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FC_USERID");
+
+                entity.Property(e => e.Sar_Fcrmvt_Cambio)
+                    .HasColumnType("numeric(15, 7)")
+                    .HasColumnName("SAR_FCRMVT_CAMBIO");
+
+                entity.Property(e => e.Sar_Fcrmvt_Catego)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVT_CATEGO");
+
+                entity.Property(e => e.Sar_Fcrmvt_Cheque).HasColumnName("SAR_FCRMVT_CHEQUE");
+
+                entity.Property(e => e.Sar_Fcrmvt_Chesuc).HasColumnName("SAR_FCRMVT_CHESUC");
+
+                entity.Property(e => e.Sar_Fcrmvt_Clring).HasColumnName("SAR_FCRMVT_CLRING");
+
+                entity.Property(e => e.Sar_Fcrmvt_Codbco)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVT_CODBCO");
+
+                entity.Property(e => e.Sar_Fcrmvt_Codcpt)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVT_CODCPT");
+
+                entity.Property(e => e.Sar_Fcrmvt_Docfir)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVT_DOCFIR");
+
+                entity.Property(e => e.Sar_Fcrmvt_Fchvnc)
+                    .HasColumnType("datetime")
+                    .HasColumnName("SAR_FCRMVT_FCHVNC");
+
+                entity.Property(e => e.Sar_Fcrmvt_Import)
+                    .HasColumnType("numeric(15, 4)")
+                    .HasColumnName("SAR_FCRMVT_IMPORT");
+
+                entity.Property(e => e.Sar_Fcrmvt_Impuss)
+                    .HasColumnType("numeric(15, 4)")
+                    .HasColumnName("SAR_FCRMVT_IMPUSS");
+
+                entity.Property(e => e.Sar_Fcrmvt_Monext)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVT_MONEXT");
+
+                entity.Property(e => e.Sar_Fcrmvt_Nroint).HasColumnName("SAR_FCRMVT_NROINT");
+
+                entity.Property(e => e.Sar_Fcrmvt_Textos)
+                    .HasColumnType("text")
+                    .HasColumnName("SAR_FCRMVT_TEXTOS");
+
+                entity.Property(e => e.Sar_Fcrmvt_Tipcpt)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("SAR_FCRMVT_TIPCPT")
+                    .IsFixedLength(true);
+            });
+
+            modelBuilder.Entity<Usr_Vtexha>(entity =>
+            {
+                entity.HasKey(e => e.Usr_Vtexha_Ordid);
+
+                entity.ToTable("USR_VTEXHA");
+
+                entity.Property(e => e.Usr_Vtexha_Ordid)
+                    .HasMaxLength(120)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VTEXHA_ORDID");
+
+                entity.Property(e => e.Usr_Vt_Debaja)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VT_DEBAJA")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Vt_Fecalt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_VT_FECALT");
+
+                entity.Property(e => e.Usr_Vt_Fecmod)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_VT_FECMOD");
+
+                entity.Property(e => e.Usr_Vt_Oalias)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VT_OALIAS");
+
+                entity.Property(e => e.Usr_Vt_Ultopr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VT_ULTOPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Vt_Userid)
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VT_USERID");
+
+                entity.Property(e => e.Usr_Vtexha_Status)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VTEXHA_STATUS")
+                    .IsFixedLength(true);
+            });
 
             OnModelCreatingPartial(modelBuilder);
         }

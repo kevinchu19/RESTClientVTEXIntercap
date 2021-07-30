@@ -50,6 +50,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
         public MotosService _motosService { get; }
 
         public FeedService _feedService { get; set; }
+        public OrderService _ordersService { get; set; }
 
 
         public ConsumerBackgroundService(Serilog.ILogger logger, CategorysService categoryService, 
@@ -65,7 +66,8 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                                                                  InventoryService inventoryService,
                                                                  PricesService pricesService,
                                                                  MotosService motosService, 
-                                                                 FeedService feedService)
+                                                                 FeedService feedService,
+                                                                 OrderService ordersService)
         {
             _logger = logger;
             _categoryService = categoryService;
@@ -82,6 +84,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
             _pricesService = pricesService;
             _motosService = motosService;
             _feedService = feedService;
+            _ordersService = ordersService;
         }
 
 
@@ -96,8 +99,14 @@ namespace RESTClientIntercapVTEX.BackgroundServices
             {
                 while (true)
                 {
-
-                    //await ExecFeedServiceAsync(stoppingToken);
+                    try
+                    {
+                        await ExecFeedServiceAsync(stoppingToken);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.Error($"Se produjo un error al enviar datos: {ex.Message}, {ex.StackTrace}.");
+                    }
                     // waiting an opportunity to run an action
                     //await _semaphoreSlimAction.WaitAsync(stoppingToken);
                     // waiting the last period to end
@@ -105,6 +114,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
 
                     try
                     {
+                        await ExecServiceAsync(_ordersService, stoppingToken);
                         await ExecServiceAsync(_categoryService, stoppingToken);
                         await ExecServiceAsync(_brandsService, stoppingToken);
                         await ExecServiceAsync(_specificationGroupService, stoppingToken);
@@ -183,14 +193,15 @@ namespace RESTClientIntercapVTEX.BackgroundServices
 
             try
             {
-                while (true)
+                var hasMoreInThisMinute = true;
+                while (hasMoreInThisMinute)
                 {
                     // waiting an opportunity to run an action
                     await _semaphoreSlimActionFeed.WaitAsync(stoppingToken);
                     // waiting the last period to end
                     await _semaphoreSlimPeriodFeed.WaitAsync(stoppingToken);
 
-                    var hasMoreInThisMinute = false;
+                    
                     try
                     {
                         using var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromMinutes(5));
