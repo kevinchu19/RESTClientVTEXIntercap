@@ -17,7 +17,7 @@ namespace RESTClientIntercapVTEX.Services
     {
         
         public BrandsService(BrandsClient<BrandDTO> client,
-                                IUnitOfWork repository,
+                                IUnitOfWorkProduccion repository,
                                 IMapper mapper) :
             base(client, repository, mapper)
         {}

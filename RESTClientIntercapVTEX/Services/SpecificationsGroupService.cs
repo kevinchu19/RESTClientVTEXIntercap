@@ -17,7 +17,7 @@ namespace RESTClientIntercapVTEX.Services
     {
 
         public SpecificationsGroupService(SpecificationGroupClient<SpecificationGroupDTO> client,
-                                IUnitOfWork repository,
+                                IUnitOfWorkProduccion repository,
                                 IMapper mapper) :
             base(client, repository, mapper)
         { }

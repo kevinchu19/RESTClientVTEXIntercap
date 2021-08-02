@@ -22,7 +22,7 @@ namespace RESTClientIntercapVTEX.Services
         private readonly IMapper _mapper;
         private ILogger _logger;
 
-        public FeedService(FeedClient<FeedDTO> feedClient, IUnitOfWork repository,IMapper mapper, Serilog.ILogger logger)
+        public FeedService(FeedClient<FeedDTO> feedClient, IUnitOfWorkTest repository,IMapper mapper, Serilog.ILogger logger)
         {
             _feedClient = feedClient;
             _repository = repository;

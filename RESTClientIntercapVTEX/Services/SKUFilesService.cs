@@ -20,7 +20,7 @@ namespace RESTClientIntercapVTEX.Services
         public IConfigurationRoot Configuration { get; }
 
         public SKUFilesService(SKUFilesClient<SKUFileDTO> client,
-                                IUnitOfWork repository,
+                                IUnitOfWorkProduccion repository,
                                 IMapper mapper,
                                 IConfigurationRoot configuration) :
             base(client, repository, mapper)

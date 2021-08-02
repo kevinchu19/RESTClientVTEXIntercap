@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RESTClientIntercapVTEX.Repositories.Persistance
 {
-    public class UnitOfWork: IUnitOfWork
+    public class UnitOfWork: IUnitOfWorkProduccion
     {
         public ApiIntercapContext Context { get; }
         public IConfigurationRoot Configuration { get; }
@@ -44,6 +44,9 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
         private IOrderHeaderRepository _OrderHeaderRepository { get; set; }
         private IOrderItemsRepository _OrderItemsRepository { get; set; }
         private IOrderPaymentsRepository _OrderPaymentsRepository { get; set; }
+        private IOrderVtexRepository _OrderVtexRepository { get; set; }
+        private IOrderContactsRepository _OrderContactsRepository { get; set; }
+        private IOrderShippingRepository _OrderShippingRepository { get; set; }
         public UnitOfWork(ApiIntercapContext context, IConfigurationRoot configuration)
         {
             Context = context;
@@ -411,6 +414,42 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
                     _OrderItemsRepository = new OrderItemsRepository(Context);
                 }
                 return _OrderItemsRepository;
+            }
+        }
+
+        public IOrderVtexRepository OrderVtexRepository
+        {
+            get
+            {
+                if (_OrderVtexRepository == null)
+                {
+                    _OrderVtexRepository = new OrderVtexRepository(Context);
+                }
+                return _OrderVtexRepository;
+            }
+        }
+
+        public IOrderContactsRepository OrderContactsRepository
+        {
+            get
+            {
+                if (_OrderContactsRepository == null)
+                {
+                    _OrderContactsRepository = new OrderContactsRepository(Context);
+                }
+                return _OrderContactsRepository;
+            }
+        }
+
+        public IOrderShippingRepository OrderShippingRepository
+        {
+            get
+            {
+                if (_OrderShippingRepository == null)
+                {
+                    _OrderShippingRepository = new OrderShippingRepository(Context);
+                }
+                return _OrderShippingRepository;
             }
         }
         public IOrderPaymentsRepository OrderPaymentsRepository {

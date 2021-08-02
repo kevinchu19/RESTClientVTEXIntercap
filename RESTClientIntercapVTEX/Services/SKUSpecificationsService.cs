@@ -18,7 +18,7 @@ namespace RESTClientIntercapVTEX.Services
         private ProductAndSKUSpecificationsClient<SKUSpecificationDTO> _SKUspecificationsClient { get; }
 
         public SKUSpecificationsService(ProductAndSKUSpecificationsClient<SKUSpecificationDTO> client,
-                                IUnitOfWork repository,
+                                IUnitOfWorkProduccion repository,
                                 IMapper mapper) :
             base(client, repository, mapper)
         {

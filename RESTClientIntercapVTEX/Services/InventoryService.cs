@@ -21,7 +21,7 @@ namespace RESTClientIntercapVTEX.Services
         public ILogger _logger { get; }
 
         public InventoryService(InventoryClient<InventoryDTO> client,
-                                IUnitOfWork repository,
+                                IUnitOfWorkProduccion repository,
                                 IMapper mapper,
                                 Serilog.ILogger logger) :
             base(client, repository, mapper)

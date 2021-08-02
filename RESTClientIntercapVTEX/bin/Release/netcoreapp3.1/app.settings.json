@@ -1,6 +1,8 @@
 {
   "connectionStrings": {
-    "DefaultConnectionString": "Server=.\\SQL2017;Database=ApiIntercap;User Id=sa;Password=Password1!"
+    "DefaultConnectionString": "Server=.\\SQL2017;Database=ApiIntercap;User Id=sa;Password=Password1!",
+    "TestConnectionString": "Server=.\\SQL2017;Database=ApiIntercapTest;User Id=sa;Password=Password1!"
+      //Para reapuntar orders al productivo: Modificar en Servicios y Repository y el using del namespace de entities!!
   },
   "SeriLog": {
     "SerilogConnectionString": "Server=.\\SQL2017;Database=ApiIntercap;User Id=sa;Password=Password1!",

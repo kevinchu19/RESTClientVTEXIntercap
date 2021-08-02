@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RESTClientIntercapVTEX.Models
+namespace RESTClientIntercapVTEX.Models.Order
 {
     public class OrderShippingDataDTO
     {

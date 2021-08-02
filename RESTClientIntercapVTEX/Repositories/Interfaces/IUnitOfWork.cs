@@ -39,7 +39,19 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
         IOrderHeaderRepository OrderHeaderRepository { get; }
         IOrderItemsRepository OrderItemsRepository { get; }
         IOrderPaymentsRepository OrderPaymentsRepository { get; }
+        IOrderVtexRepository OrderVtexRepository { get; }
+        IOrderContactsRepository OrderContactsRepository { get; }
+        IOrderShippingRepository OrderShippingRepository { get; }
         Task<int> Complete();
+
+    }
+
+    public interface IUnitOfWorkProduccion : IUnitOfWork
+    {
+
+    }
+    public interface IUnitOfWorkTest: IUnitOfWork
+    {
 
     }
 }

@@ -6,9 +6,11 @@ using Microsoft.Extensions.Logging;
 using RESTClientIntercapVTEX.BackgroundServices;
 using RESTClientIntercapVTEX.Client;
 using RESTClientIntercapVTEX.Entities;
+using RESTClientIntercapVTEX.Entities.Test;
 using RESTClientIntercapVTEX.MapperHelp.CategorysResolver;
 using RESTClientIntercapVTEX.MapperHelp.SpecificationsResolver;
 using RESTClientIntercapVTEX.Models;
+using RESTClientIntercapVTEX.Models.Order;
 using RESTClientIntercapVTEX.Repositories.Interfaces;
 using RESTClientIntercapVTEX.Repositories.Persistance;
 using RESTClientIntercapVTEX.Services;
@@ -88,6 +90,10 @@ namespace RESTClientIntercapVTEX
                    services.AddDbContext<ApiIntercapContext>(options =>
                        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")).EnableSensitiveDataLogging());
 
+                   services.AddDbContext<ApiIntercapTestContext>(options =>
+                       options.UseSqlServer(Configuration.GetConnectionString("TestConnectionString")).EnableSensitiveDataLogging());
+
+
                    // Add HttpClient
                    services.AddTransient<HttpClient>();
 
@@ -157,9 +163,14 @@ namespace RESTClientIntercapVTEX
 
 
                    //Unit of work
-                   services.AddScoped<IUnitOfWork, UnitOfWork>();
+                   services.AddScoped<IUnitOfWorkProduccion,UnitOfWork>();
+                   //Unit of work test
+                   services.AddScoped<IUnitOfWorkTest,UnitOfWorkTest>();
 
 
+
+
+                   
                    services.AddAutoMapper(configuration =>
                    {
                        configuration.CreateMap<Usr_Sttgsh, SpecificationGroupDTO>()

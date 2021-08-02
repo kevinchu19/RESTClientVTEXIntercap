@@ -15,7 +15,7 @@ namespace RESTClientIntercapVTEX.Services
 {
     public class SpecificationsService:ServiceBase<SpecificationDTO>, IServiceVTEX
     {
-        public SpecificationsService(SpecificationsClient<SpecificationDTO> client, IUnitOfWork repository, IMapper mapper):
+        public SpecificationsService(SpecificationsClient<SpecificationDTO> client, IUnitOfWorkProduccion repository, IMapper mapper):
             base(client, repository, mapper)
         {
 

@@ -16,7 +16,7 @@ namespace RESTClientIntercapVTEX.Services
     public class CategorysService : ServiceBase<CategoryDTO>, IServiceVTEX
     {
         public CategorysService(CategorysClient<CategoryDTO> client, 
-                                IUnitOfWork repository, 
+                                IUnitOfWorkProduccion repository, 
                                 IMapper mapper) :
             base(client, repository, mapper)
         {}

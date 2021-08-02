@@ -10,8 +10,9 @@ using AutoMapper;
 using RESTClientIntercapVTEX.Builder;
 using RESTClientIntercapVTEX.Client;
 using RESTClientIntercapVTEX.Entities;
-using RESTClientIntercapVTEX.Models;
+using RESTClientIntercapVTEX.Models.Order;
 using RESTClientIntercapVTEX.Repositories.Interfaces;
+using RESTClientIntercapVTEX.Repositories.Persistance;
 using RESTClientIntercapVTEX.Services.Interfaces;
 using Serilog;
 
@@ -23,7 +24,7 @@ namespace RESTClientIntercapVTEX.Services
         private readonly OrderClient<OrderDTO> _orderClient;        
         private ILogger _logger;
 
-        public OrderService(OrderClient<OrderDTO> orderClient, IUnitOfWork repository,IMapper mapper, Serilog.ILogger logger):
+        public OrderService(OrderClient<OrderDTO> orderClient, IUnitOfWorkTest repository,IMapper mapper, Serilog.ILogger logger):
             base(orderClient, repository, mapper)
         {
             _orderClient = orderClient;
@@ -38,6 +39,7 @@ namespace RESTClientIntercapVTEX.Services
         {
 
             List<Sar_Fcrmvh> ordersToInsert = new List<Sar_Fcrmvh>();
+            List<Usr_Dspeml> ordersToInsertDs = new List<Usr_Dspeml>();
 
             IEnumerable<Usr_Vtexha> items = await _repository.OrderHandlerRepository.GetToHandle(cancellationToken);
             
@@ -53,7 +55,12 @@ namespace RESTClientIntercapVTEX.Services
                                             .setHeader(order)
                                             .addItems(order.orderId,order.items, order.shippingData)
                                             .Build());
-                    _logger.Information($"Se recuperó la orden {order.orderId}.");
+                    ordersToInsertDs.Add(new UsrDspemlBuilder()
+                                            .setHeader(order)
+                                            .addContacts(order.clientProfileData, order.shippingData.address)
+                                            .addPayments(order.paymentData.transactions)
+                                            .Build());
+                    _logger.Information($"Se recuperó la orden {order.orderId} y fue cargada para su procesamiento.");
                 }
                 
             }
@@ -61,6 +68,7 @@ namespace RESTClientIntercapVTEX.Services
             {
 
                 await _repository.OrderHeaderRepository.AddRange(cancellationToken, ordersToInsert);
+                await _repository.OrderVtexRepository.AddRange(cancellationToken, ordersToInsertDs);
                 await _repository.Complete();
             
             }

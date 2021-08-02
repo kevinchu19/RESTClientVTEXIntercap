@@ -17,7 +17,7 @@ namespace RESTClientIntercapVTEX.Services
     {
 
         public MotosService(MotosClient<MotosDocumentDTO> client,
-                                IUnitOfWork repository,
+                                IUnitOfWorkProduccion repository,
                                 IMapper mapper) :
             base(client, repository, mapper)
         { }

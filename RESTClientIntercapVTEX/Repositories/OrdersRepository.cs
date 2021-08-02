@@ -13,7 +13,7 @@ namespace RESTClientIntercapVTEX.Repositories
 {
     public class OrderHandlerRepository : RepositoryBase<Usr_Vtexha>, IOrderHandlerRepository
     {
-        public OrderHandlerRepository(ApiIntercapContext context) : base(context)
+        public OrderHandlerRepository(DbContext context) : base(context)
         { }
 
         public async Task<IEnumerable<Usr_Vtexha>> GetToHandle(CancellationToken cancellationToken)
@@ -23,18 +23,37 @@ namespace RESTClientIntercapVTEX.Repositories
     }
     public class OrderHeaderRepository : RepositoryBase<Sar_Fcrmvh>, IOrderHeaderRepository
     {
-        public OrderHeaderRepository(ApiIntercapContext context) : base(context)
+        public OrderHeaderRepository(DbContext context) : base(context)
         { }
     }
     public class OrderItemsRepository : RepositoryBase<Sar_Fcrmvi>, IOrderItemsRepository
     {
-        public OrderItemsRepository(ApiIntercapContext context) : base(context)
+        public OrderItemsRepository(DbContext context) : base(context)
         { }
     }
 
-    public class OrderPaymentsRepository : RepositoryBase<Sar_Fcrmvt>, IOrderPaymentsRepository
+    public class OrderPaymentsRepository : RepositoryBase<Usr_Dspaym>, IOrderPaymentsRepository
     {
-        public OrderPaymentsRepository(ApiIntercapContext context) : base(context)
+        public OrderPaymentsRepository(DbContext context) : base(context)
+        { }
+    }
+
+    public class OrderVtexRepository : RepositoryBase<Usr_Dspeml>, IOrderVtexRepository
+    {
+        public OrderVtexRepository(DbContext context) : base(context)
+        { }
+    }
+
+    public class OrderShippingRepository : RepositoryBase<Usr_Dsship>, IOrderShippingRepository
+    {
+        public OrderShippingRepository(DbContext context) : base(context)
+        { }
+
+    }
+
+    public class OrderContactsRepository : RepositoryBase<Usr_Dscont>, IOrderContactsRepository
+    {
+        public OrderContactsRepository(DbContext context) : base(context)
         { }
     }
 }

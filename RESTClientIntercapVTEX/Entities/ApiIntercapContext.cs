@@ -49,7 +49,10 @@ namespace RESTClientIntercapVTEX.Entities
         public virtual DbSet<Sar_Fcrmvi> Sar_Fcrmvi { get; set; }
         public virtual DbSet<Sar_Fcrmvt> Sar_Fcrmvt { get; set; }
         public virtual DbSet<Usr_Vtexha> Usr_Vtexha { get; set; }
-
+        public virtual DbSet<Usr_Dscont> Usr_Dscont { get; set; }
+        public virtual DbSet<Usr_Dspaym> Usr_Dspaym { get; set; }
+        public virtual DbSet<Usr_Dspeml> Usr_Dspeml { get; set; }
+        public virtual DbSet<Usr_Dsship> Usr_Dsship { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -3201,6 +3204,439 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasColumnName("USR_VTEXHA_STATUS")
                     .IsFixedLength(true);
             });
+
+            modelBuilder.Entity<Usr_Dscont>(entity =>
+            {
+                entity.HasKey(e => e.Usr_Dscont_DspemlId);
+
+                entity.ToTable("USR_DSCONT");
+
+                entity.HasOne(e => e.Header)
+                      .WithMany(c => c.Contacts)
+                      .HasForeignKey(c => c.Usr_Dscont_DspemlId);
+
+                entity.Property(e => e.Usr_Dscont_DspemlId)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_DSPEML_ID");
+
+
+                entity.Property(e => e.Usr_Ds_Debaja)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DS_DEBAJA")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Ds_Fecalt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_DS_FECALT");
+
+                entity.Property(e => e.Usr_Ds_Fecmod)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_DS_FECMOD");
+                entity.Property(e => e.Usr_Ds_Oalias)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DS_OALIAS");
+
+                entity.Property(e => e.Usr_Ds_Ultopr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DS_ULTOPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Ds_Userid)
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DS_USERID");
+
+                entity.Property(e => e.Usr_Dscont_Addnot)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_ADDNOT");
+
+                entity.Property(e => e.Usr_Dscont_City)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_CITY");
+
+                entity.Property(e => e.Usr_Dscont_Id)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_ID");
+
+                entity.Property(e => e.Usr_Dscont_Mail)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_MAIL");
+
+                entity.Property(e => e.Usr_Dscont_Name)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_NAME");
+
+                entity.Property(e => e.Usr_Dscont_Person)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_PERSON");
+
+                entity.Property(e => e.Usr_Dscont_Phonen)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_PHONEN");
+
+                entity.Property(e => e.Usr_Dscont_Proapp)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_PROAPP");
+
+                entity.Property(e => e.Usr_Dscont_Proini)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_PROINI");
+
+                entity.Property(e => e.Usr_Dscont_State)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_STATE");
+
+                entity.Property(e => e.Usr_Dscont_Strenu)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_STRENU");
+
+                entity.Property(e => e.Usr_Dscont_Stretn)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_STRETN");
+
+                entity.Property(e => e.Usr_Dscont_Taxid)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_TAXID");
+
+                entity.Property(e => e.Usr_Dscont_Type)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_TYPE");
+
+                entity.Property(e => e.Usr_Dscont_Zipcod)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_ZIPCOD");
+            });
+
+            modelBuilder.Entity<Usr_Dspaym>(entity =>
+            {
+                entity.HasKey(e => new { e.Usr_Dspaym_DspemlId, e.Usr_Dspaym_Inteid });
+
+                entity.ToTable("USR_DSPAYM");
+
+                entity.HasOne(e => e.Header)
+                      .WithMany(c => c.Payments)
+                      .HasForeignKey(c => c.Usr_Dspaym_DspemlId);
+
+                entity.Property(e => e.Usr_Dspaym_DspemlId)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPAYM_DSPEML_ID");
+
+                entity.Property(e => e.Usr_Dspaym_Inteid)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPAYM_INTEID");
+
+                entity.Property(e => e.Usr_Ds_Debaja)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DS_DEBAJA")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Ds_Fecalt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_DS_FECALT");
+
+                entity.Property(e => e.Usr_Ds_Fecmod)
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Usr_Ds_Oalias)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DS_OALIAS");
+
+                entity.Property(e => e.Usr_Ds_Ultopr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DS_ULTOPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Ds_Userid)
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DS_USERID");
+
+                entity.Property(e => e.Usr_Dspaym_Amount)
+                    .HasColumnType("numeric(20, 6)")
+                    .HasColumnName("USR_DSPAYM_AMOUNT");
+
+                entity.Property(e => e.Usr_Dspaym_Date)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_DSPAYM_DATE");
+
+                entity.Property(e => e.Usr_Dspaym_Instal).HasColumnName("USR_DSPAYM_INSTAL");
+
+                entity.Property(e => e.Usr_Dspaym_Method)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPAYM_METHOD");
+
+                entity.Property(e => e.Usr_Dspaym_Notes)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPAYM_NOTES");
+
+                entity.Property(e => e.Usr_Dspaym_Status)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPAYM_STATUS");
+
+                entity.Property(e => e.Usr_Dspaym_Trafee)
+                    .HasColumnType("numeric(20, 6)")
+                    .HasColumnName("USR_DSPAYM_TRAFEE");
+            });
+
+            modelBuilder.Entity<Usr_Dspeml>(entity =>
+            {
+                entity.ToTable("USR_DSPEML");
+
+                entity.HasKey(e => new { e.Usr_Dspeml_Id});
+
+
+                entity.HasMany(e => e.Contacts)
+                      .WithOne(c => c.Header)
+                      .HasForeignKey(c => c.Usr_Dscont_DspemlId);
+                
+                entity.HasMany(e => e.Payments)
+                      .WithOne(c => c.Header)
+                      .HasForeignKey(c => c.Usr_Dspaym_DspemlId);
+
+                entity.HasMany(e => e.ShippingData)
+                      .WithOne(c => c.Header)
+                      .HasForeignKey(c => c.Usr_Dsship_DspemlId);
+
+                entity.Property(e => e.Usr_Dspeml_Id)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_ID");
+
+                entity.Property(e => e.Usr_Ds_Debaja)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DS_DEBAJA")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Ds_Fecalt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_DS_FECALT");
+
+                entity.Property(e => e.Usr_Ds_Fecmod)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_DS_FECMOD");
+
+
+                entity.Property(e => e.Usr_Ds_Oalias)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DS_OALIAS");
+
+                entity.Property(e => e.Usr_Ds_Ultopr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DS_ULTOPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Ds_Userid)
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DS_USERID");
+
+                entity.Property(e => e.Usr_Dspeml_Amount)
+                    .HasColumnType("numeric(20, 6)")
+                    .HasColumnName("USR_DSPEML_AMOUNT");
+
+                entity.Property(e => e.Usr_Dspeml_Cenvin)
+                    .HasColumnType("numeric(20, 6)")
+                    .HasColumnName("USR_DSPEML_CENVIN");
+
+                entity.Property(e => e.Usr_Dspeml_Channe).HasColumnName("USR_DSPEML_CHANNE");
+
+                entity.Property(e => e.Usr_Dspeml_Codfor)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_CODFOR");
+
+                entity.Property(e => e.Usr_Dspeml_Curren)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_CURREN");
+
+                entity.Property(e => e.Usr_Dspeml_Delffs)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_DELFFS");
+
+                entity.Property(e => e.Usr_Dspeml_Delmet)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_DELMET");
+
+                entity.Property(e => e.Usr_Dspeml_Delsta)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_DELSTA");
+
+                entity.Property(e => e.Usr_Dspeml_Fchmov)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_DSPEML_FCHMOV");
+
+                entity.Property(e => e.Usr_Dspeml_Iscanc)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_ISCANC");
+
+                entity.Property(e => e.Usr_Dspeml_Isopen)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_ISOPEN");
+
+                entity.Property(e => e.Usr_Dspeml_Modfor)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_MODFOR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Dspeml_Nrocta)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_NROCTA");
+
+                entity.Property(e => e.Usr_Dspeml_Nrofor).HasColumnName("USR_DSPEML_NROFOR");
+
+                entity.Property(e => e.Usr_Dspeml_Origen)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_ORIGEN");
+
+                entity.Property(e => e.Usr_Dspeml_Paprov)
+                    .HasColumnType("numeric(20, 6)")
+                    .HasColumnName("USR_DSPEML_PAPROV");
+
+                entity.Property(e => e.Usr_Dspeml_Payffs)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_PAYFFS");
+
+                entity.Property(e => e.Usr_Dspeml_Paysta)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_PAYSTA");
+
+                entity.Property(e => e.Usr_Dspeml_Payter)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_PAYTER");
+
+                entity.Property(e => e.Usr_Dspeml_Pdtusr)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_PDTUSR");
+
+                entity.Property(e => e.Usr_Dspeml_Prceti)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_PRCETI");
+
+                entity.Property(e => e.Usr_Dspeml_Prcint)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_PRCINT");
+
+                entity.Property(e => e.Usr_Dspeml_Shicos)
+                    .HasColumnType("numeric(20, 6)")
+                    .HasColumnName("USR_DSPEML_SHICOS");
+
+                entity.Property(e => e.Usr_Dspeml_Wareho)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSPEML_WAREHO");
+            });
+
+            modelBuilder.Entity<Usr_Dsship>(entity =>
+            {
+                entity.HasKey(e => new { e.Usr_Dsship_DspemlId, e.Usr_Dsship_Trackn });
+
+                entity.ToTable("USR_DSSHIP");
+
+                entity.HasOne(e => e.Header)
+                      .WithMany(c => c.ShippingData)
+                      .HasForeignKey(c => c.Usr_Dsship_DspemlId);
+
+                entity.Property(e => e.Usr_Dsship_DspemlId)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSSHIP_DSPEML_ID");
+
+                entity.Property(e => e.Usr_Dsship_Trackn)
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSSHIP_TRACKN");
+
+                entity.Property(e => e.Usr_Ds_Debaja)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DS_DEBAJA")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Ds_Fecalt)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_DS_FECALT");
+
+                entity.Property(e => e.Usr_Ds_Fecmod)
+                    .HasColumnType("datetime")
+                    .HasColumnName("USR_DS_FECMOD");
+
+
+                entity.Property(e => e.Usr_Ds_Oalias)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DS_OALIAS");
+
+                entity.Property(e => e.Usr_Ds_Ultopr)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DS_ULTOPR")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Ds_Userid)
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DS_USERID");
+
+                entity.Property(e => e.Usr_Dsship_Courie)
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSSHIP_COURIE");
+
+                entity.Property(e => e.Usr_Dsship_Lblurl)
+                    .HasColumnType("text")
+                    .HasColumnName("USR_DSSHIP_LBLURL");
+
+                entity.Property(e => e.Usr_Dsship_Traurl)
+                    .HasColumnType("text")
+                    .HasColumnName("USR_DSSHIP_TRAURL");
+            });
+
 
             OnModelCreatingPartial(modelBuilder);
         }

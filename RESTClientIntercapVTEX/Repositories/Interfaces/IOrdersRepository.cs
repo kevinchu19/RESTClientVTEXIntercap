@@ -16,6 +16,12 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
     { }
     public interface IOrderItemsRepository : IRepository<Sar_Fcrmvi>
     { }
-    public interface IOrderPaymentsRepository : IRepository<Sar_Fcrmvt>
+    public interface IOrderPaymentsRepository : IRepository<Usr_Dspaym>
+    { }
+    public interface IOrderVtexRepository : IRepository<Usr_Dspeml>
+    { }
+    public interface IOrderContactsRepository : IRepository<Usr_Dscont>
+    { }
+    public interface IOrderShippingRepository : IRepository<Usr_Dsship>
     { }
 }

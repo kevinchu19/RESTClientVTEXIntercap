@@ -18,7 +18,7 @@ namespace RESTClientIntercapVTEX.Services
         public PricesClient<PricesDTO> _pricesClient { get; }
 
         public PricesService(PricesClient<PricesDTO> client,
-                                IUnitOfWork repository,
+                                IUnitOfWorkProduccion repository,
                                 IMapper mapper) :
             base(client, repository, mapper)
         {

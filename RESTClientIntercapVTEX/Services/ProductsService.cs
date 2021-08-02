@@ -17,7 +17,7 @@ namespace RESTClientIntercapVTEX.Services
     {
 
         public ProductsService(ProductsClient<ProductDTO> client,
-                                IUnitOfWork repository,
+                                IUnitOfWorkProduccion repository,
                                 IMapper mapper) :
             base(client, repository, mapper)
         { }
