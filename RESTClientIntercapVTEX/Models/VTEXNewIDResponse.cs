@@ -8,5 +8,6 @@ namespace RESTClientIntercapVTEX.Models
     {
         public bool Success { get; set; }
         public int NewId { get; set; }
+        public string NewIdString { get; set; }
     }
 }

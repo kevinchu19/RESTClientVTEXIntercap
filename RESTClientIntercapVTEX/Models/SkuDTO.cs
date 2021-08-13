@@ -29,7 +29,7 @@ namespace RESTClientIntercapVTEX.Models
         public decimal UnitMultiplier { get; set; } = 1;
         public string ModalType { get; set; } 
         public bool KitItensSellApart { get; set; }
-        public bool ActivateIfPossible { get; set; } = true;
+        public bool ActivateIfPossible { get; set; } = false;
 
         [JsonIgnore]
         public DateTime Sfl_LoginDateTime { get; set; }

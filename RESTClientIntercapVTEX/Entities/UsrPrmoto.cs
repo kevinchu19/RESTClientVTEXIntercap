@@ -23,6 +23,7 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_Pr_Oalias { get; set; }
         public string Usr_Vtex_Transf { get; set; }
         public int? Usr_Vtex_Anohastra { get; set; }
+        public string Usr_Prmoto_Idvtex { get; set; }
         public DateTime Sfl_LoginDateTime { get; set; }
         public string Sfl_TableOperation { get; set; }
         public int RowId { get; set; }

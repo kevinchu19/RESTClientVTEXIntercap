@@ -30,6 +30,7 @@ namespace RESTClientIntercapVTEX.Services
         public async Task<bool> DequeueProcessAndCheckIfContinueAsync(CancellationToken cancellationToken)
         {
             bool succesOperation = false;
+            VTEXNewIDResponse succesOperationWithNewID = new VTEXNewIDResponse();
 
             var items = _mapper.Map<IEnumerable<Usr_Prmoto>, IEnumerable<MotosDocumentDTO>>(await _repository.Motos.GetForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
 
@@ -42,33 +43,38 @@ namespace RESTClientIntercapVTEX.Services
                 switch (item.Sfl_TableOperation)
                 {
                     case "INSERT":
-                        succesOperation = await _client.PostAsync(item, cancellationToken);
+                        succesOperationWithNewID = await _client.PostWithNewIDAsync(item, cancellationToken);
                         break;
                     case "UPDATE":
-                        succesOperation = await _client.PutAsync(item, item.idERP.ToString(), cancellationToken);
+                        succesOperation = await _client.PutAsync(item, item.DocumentId.ToString(), cancellationToken);
                         break;
                     case "DELETE":
-                        succesOperation = await _client.DeleteAsync(item.idERP.ToString(), cancellationToken);
+                        succesOperation = await _client.DeleteAsync(item.DocumentId.ToString(), cancellationToken);
                         break;
                     default:
                         break;
                 }
 
-                if (succesOperation)
+                if (succesOperation || succesOperationWithNewID.Success)
                 {
-
-                    Usr_Prmoto motoTransfered = await _repository.Motos.Get(cancellationToken, new object[] { item.RowId });
-                    Usr_Prmoto_Real motoReal = await _repository.MotosReal.Get(cancellationToken, new object[] { motoTransfered.Usr_Prmoto_Idmoto});
-
-                    motoTransfered.Usr_Vtex_Transf = "S";
-                    if (item.anios.Any())
+                    if (item.RowId != 0) //Moto sin año hasta
                     {
-                        motoReal.Usr_Vtex_Anohastra = item.anios.Max();
+                        Usr_Prmoto motoTransfered = await _repository.Motos.Get(cancellationToken, new object[] { item.RowId });
+                        motoTransfered.Usr_Vtex_Transf = "S";
+                        motoTransfered.Usr_Prmoto_Idvtex = succesOperationWithNewID.NewIdString;
+                    }
+                        
+                    Usr_Prmoto_Real motoReal = await _repository.MotosReal.Get(cancellationToken, new object[] { item.idERP});
+
+                    motoReal.Usr_Prmoto_Idvtex = succesOperationWithNewID.NewIdString ?? item.DocumentId;
+
+                    if (item.anios != null && item.anios != "")
+                    {
+                        motoReal.Usr_Vtex_Anohastra = Convert.ToInt32(item.anios.Split("-")[item.anios.Split("-").Length-1]);
                     } else
                     {
                         motoReal.Usr_Vtex_Anohastra = DateTime.Now.Year;
                     }
-                    
 
                     await _repository.Complete();
                 }

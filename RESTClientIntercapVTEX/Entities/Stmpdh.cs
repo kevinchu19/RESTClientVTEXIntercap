@@ -35,6 +35,8 @@ namespace RESTClientIntercapVTEX.Entities
         public decimal? PackagedWidth { get; set; }
         public decimal? PackagedWeightKg { get; set; }
         public string ManufacturerCode { get; set; }
+
+        public string Usr_Stmpdh_Keywor{ get; set; }
         public DateTime Sfl_LoginDateTime { get; set; }
         public string Sfl_TableOperation { get; set; }
         public int RowId { get; set; }

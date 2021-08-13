@@ -179,6 +179,11 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasColumnName("USR_VTEX_ISACTI")
                     .IsFixedLength(true);
 
+                entity.Property(e => e.Usr_Stmpdh_Keywor)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_STMPDH_KEYWOR")
+                    .IsFixedLength(true);
             });
 
             modelBuilder.Entity<Stmpdh_Real>(entity =>
@@ -299,6 +304,8 @@ namespace RESTClientIntercapVTEX.Entities
                     .IsUnicode(false)
                     .HasColumnName("USR_VTEX_ISACTI")
                     .IsFixedLength(true);
+
+                
 
                 entity.Property(e => e.Usr_Stmpdh_Idvtex).HasColumnName("USR_STMPDH_IDVTEX");
                 
@@ -2518,6 +2525,12 @@ namespace RESTClientIntercapVTEX.Entities
                     .IsUnicode(false)
                     .HasColumnName("USR_PRMOTO_VERSION");
 
+
+                entity.Property(e => e.Usr_Prmoto_Idvtex)
+                    .HasMaxLength(120)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_IDVTEX");
+
                 entity.Property(e => e.Usr_Vtex_Anohastra).HasColumnName("USR_VTEX_ANOHASTRA");
 
                 entity.Property(e => e.Usr_Vtex_Transf)
@@ -2610,6 +2623,12 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasMaxLength(1)
                     .IsUnicode(false)
                     .HasColumnName("USR_VTEX_TRANSF")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Usr_Prmoto_Idvtex)
+                    .HasMaxLength(120)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_PRMOTO_IDVTEX")
                     .IsFixedLength(true);
 
                 entity.Property(e => e.Sfl_TableOperation)

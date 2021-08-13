@@ -74,7 +74,7 @@ namespace RESTClientIntercapVTEX.Services
             }
             catch (Exception ex )
             {
-                _logger.Fatal($"Error al insertar ordenes: {ex.Message}");
+                _logger.Fatal($"Error al insertar ordenes: {ex.InnerException.InnerException.Message}");
             }
 
             //await _orderClient.CommitAsync(items.Select(item => item.Handle), cancellationToken);

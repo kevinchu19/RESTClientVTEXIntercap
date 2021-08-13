@@ -15,6 +15,7 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_Prmoto_Tipmot { get; set; }
         public string Usr_Prmoto_Adesde { get; set; }
         public string Usr_Prmoto_Ahasta { get; set; }
+        public string Usr_Prmoto_Idvtex { get; set; }
         public DateTime? Usr_Pr_Fecalt { get; set; }
         public DateTime? Usr_Pr_Fecmod { get; set; }
         public string Usr_Pr_Userid { get; set; }

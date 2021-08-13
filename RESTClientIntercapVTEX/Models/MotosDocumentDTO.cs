@@ -7,6 +7,7 @@ namespace RESTClientIntercapVTEX.Models
 {
     public class MotosDocumentDTO
     {
+        public string DocumentId { get; set; }
         public string idERP { get; set; }
         public string marca { get; set; }
         public string modelo { get; set; }

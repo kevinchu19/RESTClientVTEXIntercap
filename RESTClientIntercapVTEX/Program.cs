@@ -299,7 +299,8 @@ namespace RESTClientIntercapVTEX
                        .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Stmpdh_Descrp))
                        .ForMember(dest => dest.ReleaseDate, opt => opt.MapFrom(src => src.Stmpdh_Fecalt))
                        .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Stmpdh_Descrp))
-                       .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.Stmpdh_Debaja == "N"));
+                       .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.Stmpdh_Debaja == "N"))
+                       .ForMember(dest => dest.KeyWords, opt => opt.MapFrom(src => src.Usr_Stmpdh_Keywor));
 
                        configuration.CreateMap<Usr_Stmpph, ProductDTO>()
                        .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Usr_Stmpph_Idvtex))
@@ -353,7 +354,8 @@ namespace RESTClientIntercapVTEX
                        .ForMember(dest => dest.modelo, opt => opt.MapFrom(src => src.Usr_Prmoto_Modelo))
                        .ForMember(dest => dest.cilindrada, opt => opt.MapFrom(src => src.Usr_Prmoto_Cilind))
                        .ForMember(dest => dest.version, opt => opt.MapFrom(src => src.Usr_Prmoto_Version))
-                       .ForMember(dest => dest.anios, opt => opt.MapFrom<MapperHelp.MotosResolver.AniosResolver>());
+                       .ForMember(dest => dest.anios, opt => opt.MapFrom<MapperHelp.MotosResolver.AniosResolver>())
+                       .ForMember(dest => dest.DocumentId, opt => opt.MapFrom(src => src.Usr_Prmoto_Idvtex));
 
                        configuration.CreateMap<FeedDTO, Usr_Vtexha>()
                        .ForMember(dest => dest.Usr_Vtexha_Ordid, opt => opt.MapFrom(src => src.OrderId));
