@@ -36,17 +36,27 @@ namespace RESTClientIntercapVTEX.Client
             request.Headers.Add("X-VTEX-API-AppToken", _appToken);
             request.Headers.Add("Accept", "application/json");
 
-            var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+            HttpResponseMessage response = new HttpResponseMessage();
+
+            try
+            {
+
+                response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+            }
+            catch
+            {
+                _logger.Error($"No se pudo dar de alta el recurso {contentString} en la ruta `{path}`, por error en la conexion`");
+            }
             if (!response.IsSuccessStatusCode)
             {
                 try
                 {
                     var content = await JsonSerializer.DeserializeAsync<VTEXErrorResponse>(await response.Content.ReadAsStreamAsync());
-                    _logger.Error($"No se pudo actualizar el recurso {contentString} en la ruta `{_path}`, el statuscode fue `{response.StatusCode}` y el mensaje de VTEX:`{content.Message}`");
+                    _logger.Error($"No se pudo actualizar el recurso {contentString} en la ruta `{path}`, el statuscode fue `{response.StatusCode}` y el mensaje de VTEX:`{content.Message}`");
                 }
                 catch
                 {
-                    _logger.Error($"No se pudo actualizar el recurso {contentString} en la ruta `{_path}`, el statuscode fue `{response.StatusCode}`");
+                    _logger.Error($"No se pudo actualizar el recurso {contentString} en la ruta `{path}`, el statuscode fue `{response.StatusCode}`");
                 }
             }
             else

@@ -23,12 +23,17 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_Dscont_Type { get; set; }
         public string Usr_Dscont_Proapp { get; set; }
         public string Usr_Dscont_Proini { get; set; }
+        public string Usr_Dscont_Tipdoc { get; set; }
+        public string Usr_Dscont_Nrodoc { get; set; }
+        public string Usr_Dscont_Cndiva { get; set; }
         public DateTime? Usr_Ds_Fecalt { get; set; } = DateTime.Now;
         public DateTime? Usr_Ds_Fecmod { get; set; } = DateTime.Now;
         public string Usr_Ds_Userid { get; set; } = "API";
         public string Usr_Ds_Ultopr { get; set; } = "A";
         public string Usr_Ds_Debaja { get; set; } = "N";
         public string Usr_Ds_Oalias { get; set; } = "USR_DSCONT";
+
+        
 
         public virtual Usr_Dspeml Header { get; set; }
     }

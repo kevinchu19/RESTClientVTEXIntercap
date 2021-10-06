@@ -14,5 +14,7 @@ namespace RESTClientIntercapVTEX.Models.Order
         public string phone { get; set; }
         public string userProfileId { get; set; }
 
+        public string customerClass { get; set; }
+
     }
 }

@@ -61,7 +61,18 @@ namespace RESTClientIntercapVTEX.Client
                 request.Headers.Add("X-VTEX-API-AppToken", _appToken);
                 request.Headers.Add("Accept", "application/json");
 
-                var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+                HttpResponseMessage response = new HttpResponseMessage();
+
+                try
+                {
+
+                    response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+                }
+                catch
+                {
+                    _logger.Error($"No se pudo actualizar el recurso {contentString} en la ruta `{_path}`, por error en la conexion`");
+                }
+
                 if (!response.IsSuccessStatusCode)
                 {
                     try
@@ -95,8 +106,19 @@ namespace RESTClientIntercapVTEX.Client
             request.Headers.Add("X-VTEX-API-AppKey", _appKey);
             request.Headers.Add("X-VTEX-API-AppToken", _appToken);
             request.Headers.Add("Accept", "application/json");
+            HttpResponseMessage response = new HttpResponseMessage();
 
-            var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+            try
+            {
+
+                response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+            }
+            catch
+            {
+                _logger.Error($"No se pudo dar de alta el recurso {contentString} en la ruta `{_path}`, por error en la conexion`");
+            }
+            
+     
             if (!response.IsSuccessStatusCode)
             {
                 try
@@ -127,7 +149,17 @@ namespace RESTClientIntercapVTEX.Client
                 request.Headers.Add("X-VTEX-API-AppToken", _appToken);
                 request.Headers.Add("Accept", "application/json");
 
-                var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+                HttpResponseMessage response = new HttpResponseMessage();
+
+                try
+                {
+
+                    response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+                }
+                catch
+                {
+                    _logger.Error($"No se pudo borrar el recurso {id} en la ruta `{_path}`, por error en la conexion`");
+                }
                 if (!response.IsSuccessStatusCode)
                 {
                     try

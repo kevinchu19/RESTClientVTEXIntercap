@@ -3070,6 +3070,11 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasMaxLength(6)
                     .IsUnicode(false)
                     .HasColumnName("USR_FCRMVI_SECTOR");
+
+                entity.Property(e => e.Usr_Fcrmvi_Selsla)
+                    .HasMaxLength(120)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_FCRMVI_SELSLA");
             });
 
             modelBuilder.Entity<Sar_Fcrmvt>(entity =>
@@ -3344,6 +3349,23 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasMaxLength(250)
                     .IsUnicode(false)
                     .HasColumnName("USR_DSCONT_ZIPCOD");
+
+
+                entity.Property(e => e.Usr_Dscont_Tipdoc)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_TIPDOC");
+
+
+                entity.Property(e => e.Usr_Dscont_Nrodoc)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_NRODOC");
+
+                entity.Property(e => e.Usr_Dscont_Cndiva)
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_DSCONT_CNDIVA");
             });
 
             modelBuilder.Entity<Usr_Dspaym>(entity =>

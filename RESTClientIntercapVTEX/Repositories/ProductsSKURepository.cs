@@ -125,17 +125,21 @@ namespace RESTClientIntercapVTEX.Repositories
             {          
                 if (reader[listaPropiedades[i].Name] != DBNull.Value)
                 {
-                    if (listaPropiedades[i].Name == "Usr_Stmpdh_Father")
-                    {
-                        var a = 1;
-                    }
+                   
                     if (listaPropiedades[i].PropertyType ==typeof(string))
                     {
                         listaPropiedades[i].SetValue(respuesta, reader[listaPropiedades[i].Name].ToString());
                     }
                     else
                     {
-                        listaPropiedades[i].SetValue(respuesta, reader[listaPropiedades[i].Name]);
+                        if (listaPropiedades[i].PropertyType == typeof(bool))
+                        {
+                            listaPropiedades[i].SetValue(respuesta, reader[listaPropiedades[i].Name].ToString() == "S" ? true : false) ;
+                        }
+                        else
+                        {
+                            listaPropiedades[i].SetValue(respuesta, reader[listaPropiedades[i].Name]);
+                        }
                     }
                     
                 }

@@ -45,7 +45,7 @@
       "Path": "api/catalog_system/pvt/products"
     },
     "Motos": {
-      "Path": "api/dataentities/MT/documents"
+      "Path": "api/dataentities/MM/documents"
     },
     "Feed": {
       "Path": "api/orders/feed"
