@@ -76,7 +76,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
             _brandsService = brandsService;
             _productService = productService;
             _SKUService = SKUService;
-            _specificationValuesService = specificationValuesService;
+            //_specificationValuesService = specificationValuesService;
             _productSpecificationsService = productSpecificationsService;
             _SKUSpecificationsService = SKUSpecificationsService;
             _SKUFilesService = SKUFilesService;
@@ -121,13 +121,13 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                         await ExecServiceAsync(_specificationService, stoppingToken);
                         await ExecServiceAsync(_productService, stoppingToken);
                         await ExecServiceAsync(_SKUService, stoppingToken);
-                        await ExecServiceAsync(_specificationValuesService, stoppingToken);
+                        //await ExecServiceAsync(_specificationValuesService, stoppingToken);
                         await ExecServiceAsync(_motosService, stoppingToken);
                         await ExecServiceAsync(_productSpecificationsService, stoppingToken);
                         await ExecServiceAsync(_SKUSpecificationsService, stoppingToken);
                         await ExecServiceAsync(_SKUFilesService, stoppingToken);
-                        await ExecServiceAsync(_pricesService, stoppingToken);
                         await ExecServiceAsync(_inventoryService, stoppingToken);
+                        await ExecServiceAsync(_pricesService, stoppingToken);
 
                     }
                     catch (Exception ex)
