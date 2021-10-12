@@ -54,7 +54,8 @@ namespace RESTClientIntercapVTEX.Builder
                     Sar_Fcrmvi_Cantid = item.quantity,
                     Sar_Fcrmvi_Precio = item.price,
                     Usr_Fcrmvi_Deposi = orderShippingData.logisticsInfo[orderItem.i].deliveryIds[0].warehouseId,
-                    Usr_Fcrmvi_Sector = "0"
+                    Usr_Fcrmvi_Sector = "0",
+                    Usr_Fcrmvi_Selsla = orderShippingData.logisticsInfo[orderItem.i].selectedSla
                 });
             }
             

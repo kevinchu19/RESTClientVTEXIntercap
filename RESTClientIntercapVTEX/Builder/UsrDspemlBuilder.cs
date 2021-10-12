@@ -55,7 +55,7 @@ namespace RESTClientIntercapVTEX.Builder
 
         public UsrDspemlBuilder addContacts (OrderClientProfileDataDTO orderClientProfile,OrderAddressDTO orderShippingData)
         {
-           
+
             Contacts.Add(new Usr_Dscont()
             {
                 Usr_Dscont_Id = orderClientProfile.userProfileId,
@@ -67,8 +67,11 @@ namespace RESTClientIntercapVTEX.Builder
                 Usr_Dscont_State = orderShippingData.state,
                 Usr_Dscont_City = orderShippingData.city,
                 Usr_Dscont_Zipcod = orderShippingData.postalCode,
-                Usr_Dscont_Type = "Customer" 
-            });
+                Usr_Dscont_Type = "Customer",
+                Usr_Dscont_Tipdoc = orderClientProfile.documentType,
+                Usr_Dscont_Nrodoc = orderClientProfile.document,
+                Usr_Dscont_Cndiva = orderClientProfile.customerClass == null || orderClientProfile.document == null ? "C" : orderClientProfile.customerClass
+            }) ;
            
             return this;
         }
