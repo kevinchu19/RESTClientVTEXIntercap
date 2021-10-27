@@ -73,13 +73,13 @@ namespace RESTClientIntercapVTEX.Services
                     } 
                     else
                     { 
-                        Stmpdh SKUTransfered = await _repository.ProductsSKU.Get(cancellationToken, new object[] { item.RowId });
+                        //21/10/2021: Se deja de usar tabla de log para transferir productos
+                        //Stmpdh SKUTransfered = await _repository.ProductsSKU.Get(cancellationToken, new object[] { item.RowId });
                         Stmpdh_Real SKUReal = await _repository.ProductsSKUReal
-                                                                        .Get(cancellationToken, new object[] { SKUTransfered.Stmpdh_Tippro.Trim(),
-                                                                                                            SKUTransfered.Stmpdh_Artcod.Trim() });
+                                                                        .Get(cancellationToken, new object[] { item.Stmpdh_Tippro.Trim(),
+                                                                                                            item.Stmpdh_Artcod.Trim() });
+                        SKUReal.Usr_Vtex_Skutra = "S";
 
-
-                        SKUTransfered.Usr_Vtex_Skutra = "S";
                         if (succesOperationWithNewID.Success)
                         {
                             SKUReal.Usr_Stmpdh_IdSKUvtex = succesOperationWithNewID.NewId;
@@ -92,7 +92,8 @@ namespace RESTClientIntercapVTEX.Services
                 {
                     if (item.RowId != 0)
                     {
-                        Stmpdh Sku = await _repository.ProductsSKU.Get(cancellationToken, new object[] { item.RowId });
+                        Stmpdh_Real Sku = await _repository.ProductsSKUReal.Get(cancellationToken, new object[] { item.Stmpdh_Tippro.Trim(), 
+                                                                                                                  item.Stmpdh_Artcod.Trim() });
                         Sku.Usr_Vtex_Skutra = "E";
                         await _repository.Complete();
                     }

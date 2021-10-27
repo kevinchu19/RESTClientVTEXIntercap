@@ -45,7 +45,7 @@ namespace RESTClientIntercapVTEX.Client
             }
             catch
             {
-                _logger.Error($"No se pudo dar de alta el recurso {contentString} en la ruta `{_path}`, por error en la conexion`");
+                //_logger.Error($"No se pudo dar de alta el recurso {contentString} en la ruta `{_path}`, por error en la conexion`");
             }
             if (!response.IsSuccessStatusCode)
             {

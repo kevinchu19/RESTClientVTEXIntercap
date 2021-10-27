@@ -33,6 +33,7 @@ namespace RESTClientIntercapVTEX.Services
             VTEXNewIDResponse succesOperationWithNewID = new VTEXNewIDResponse();
 
             var productsFather = _mapper.Map<IEnumerable<Usr_Stmpph>, IEnumerable<ProductDTO>>(await _repository.ProductsFather.GetForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
+            var productsSKUA = await _repository.ProductsSKU.GetProductForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE);
             var productsSKU = _mapper.Map<IEnumerable<Stmpdh>, IEnumerable<ProductDTO>>(await _repository.ProductsSKU.GetProductForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
 
             IEnumerable<ProductDTO> items = productsFather.Concat(productsSKU).OrderBy(c => c.Sfl_LoginDateTime).Take(MAX_ELEMENTS_IN_QUEUE);
@@ -67,17 +68,20 @@ namespace RESTClientIntercapVTEX.Services
                     switch (item.Stmpdh_Oalias)
                     {
                         case "STMPDH":
-                            Stmpdh productSKUTransfered = await _repository.ProductsSKU.Get(cancellationToken, new object[] {item.RowId});
+
+                            //21/10/2021: Se deja de utilizar tabla de log para enviar productos
+                            //Stmpdh productSKUTransfered = await _repository.ProductsSKU.Get(cancellationToken, new object[] {item.RowId});
                             Stmpdh_Real productSKUReal = await _repository.ProductsSKUReal
-                                                                            .Get(cancellationToken, new object[] { productSKUTransfered.Stmpdh_Tippro, 
-                                                                                                                   productSKUTransfered.Stmpdh_Artcod });
+                                                                            .Get(cancellationToken, new object[] { item.Stmpdh_Tippro.Trim(), 
+                                                                                                                   item.Stmpdh_Artcod.Trim() });
 
 
-                            productSKUTransfered.Usr_Vtex_Transf = "S";
+                            productSKUReal.Usr_Vtex_Transf = "S";
+                            //productSKUTransfered.Usr_Vtex_Transf = "S";
                             if (succesOperationWithNewID.Success)
                             {
                                 productSKUReal.Usr_Stmpdh_Idvtex = succesOperationWithNewID.NewId;
-                                productSKUTransfered.Usr_Stmpdh_Idvtex = succesOperationWithNewID.NewId;
+                               // productSKUTransfered.Usr_Stmpdh_Idvtex = succesOperationWithNewID.NewId;
                             }
                             break;
                         case "USR_STMPPH":
@@ -103,7 +107,7 @@ namespace RESTClientIntercapVTEX.Services
                     switch (item.Stmpdh_Oalias)
                     {
                         case "STMPDH":
-                            Stmpdh productSKU = await _repository.ProductsSKU.Get(cancellationToken, new object[] {item.RowId});
+                            Stmpdh_Real productSKU = await _repository.ProductsSKUReal.Get(cancellationToken, new object[] {item.Stmpdh_Tippro.Trim(), item.Stmpdh_Artcod.Trim() });
                             productSKU.Usr_Vtex_Transf = "E";
                             break;
                         case "USR_STMPPH":

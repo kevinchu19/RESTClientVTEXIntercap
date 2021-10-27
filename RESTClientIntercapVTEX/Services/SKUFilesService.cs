@@ -44,6 +44,8 @@ namespace RESTClientIntercapVTEX.Services
 
             if (!items.Any()) return false;
 
+            int skuIdAux = 0;
+
             foreach (var item in items)
             {
                 item.Url = $"{Configuration["VTEX:ImagesBasePath"]}/{item.Url}.jpg";

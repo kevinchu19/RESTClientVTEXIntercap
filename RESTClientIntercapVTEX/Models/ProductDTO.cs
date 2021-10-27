@@ -37,5 +37,10 @@ namespace RESTClientIntercapVTEX.Models
         public int RowId { get; set; }
         [JsonIgnore]
         public string Stmpdh_Oalias { get; set; }
+        [JsonIgnore]
+        public string Stmpdh_Tippro { get; set; }
+
+        [JsonIgnore]
+        public string Stmpdh_Artcod { get; set; }
     }
 }

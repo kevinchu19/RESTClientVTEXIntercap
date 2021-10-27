@@ -60,7 +60,7 @@ namespace RESTClientIntercapVTEX.Entities
 
             modelBuilder.Entity<Stmpdh>(entity =>
             {
-                entity.HasKey(e => new { e.RowId });
+                entity.HasKey(e => new { e.Stmpdh_Tippro, e.Stmpdh_Artcod });
 
                 entity.ToTable("STMPDHlog");
 

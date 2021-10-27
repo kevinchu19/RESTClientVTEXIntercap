@@ -29,7 +29,9 @@ namespace RESTClientIntercapVTEX.Models
         public decimal UnitMultiplier { get; set; } = 1;
         public string ModalType { get; set; } 
         public bool KitItensSellApart { get; set; }
-        public bool ActivateIfPossible { get; set; } = false;
+        public bool ActivateIfPossible { get; set; }
+
+
 
         [JsonIgnore]
         public DateTime Sfl_LoginDateTime { get; set; }
@@ -39,6 +41,12 @@ namespace RESTClientIntercapVTEX.Models
         public string Usr_St_Oalias { get; set; }
         [JsonIgnore]
         public int RowId { get; set; }
+
+        [JsonIgnore]
+        public string Stmpdh_Tippro { get; set; }
+
+        [JsonIgnore]
+        public string Stmpdh_Artcod { get; set; }
 
     }
 }

@@ -76,7 +76,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
             _brandsService = brandsService;
             _productService = productService;
             _SKUService = SKUService;
-            //_specificationValuesService = specificationValuesService;
+            _specificationValuesService = specificationValuesService;
             _productSpecificationsService = productSpecificationsService;
             _SKUSpecificationsService = SKUSpecificationsService;
             _SKUFilesService = SKUFilesService;
@@ -101,7 +101,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                 {
                     try
                     {
-                        await ExecFeedServiceAsync(stoppingToken);
+                        //await ExecFeedServiceAsync(stoppingToken);
                     }
                     catch (Exception ex)
                     {
@@ -114,14 +114,14 @@ namespace RESTClientIntercapVTEX.BackgroundServices
 
                     try
                     {
-                        await ExecServiceAsync(_ordersService, stoppingToken);
+                        //await ExecServiceAsync(_ordersService, stoppingToken);
                         await ExecServiceAsync(_categoryService, stoppingToken);
                         await ExecServiceAsync(_brandsService, stoppingToken);
                         await ExecServiceAsync(_specificationGroupService, stoppingToken);
                         await ExecServiceAsync(_specificationService, stoppingToken);
                         await ExecServiceAsync(_productService, stoppingToken);
                         await ExecServiceAsync(_SKUService, stoppingToken);
-                        //await ExecServiceAsync(_specificationValuesService, stoppingToken);
+                        await ExecServiceAsync(_specificationValuesService, stoppingToken);
                         await ExecServiceAsync(_motosService, stoppingToken);
                         await ExecServiceAsync(_productSpecificationsService, stoppingToken);
                         await ExecServiceAsync(_SKUSpecificationsService, stoppingToken);
@@ -212,11 +212,11 @@ namespace RESTClientIntercapVTEX.BackgroundServices
 
                         _ = Task.Delay(PERIOD).ContinueWith(task =>
                         {
-                            _logger.Information("Feed: Release period sempahore");
+                            //_logger.Information("Feed: Release period sempahore");
                             _semaphoreSlimPeriodFeed.Release(1);
                             if (!hasMoreInThisMinute)
                             {
-                                _logger.Information("Feed: Release action sempahore after no more items");
+                              //  _logger.Information("Feed: Release action sempahore after no more items");
                                 _semaphoreSlimActionFeed.Release(1);
                             }
                         });
