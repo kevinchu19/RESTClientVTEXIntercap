@@ -285,7 +285,8 @@ namespace RESTClientIntercapVTEX
                        .ForMember(dest => dest.Height, opt => opt.MapFrom(src => src.PackagedHeight))
                        .ForMember(dest => dest.Length, opt => opt.MapFrom(src => src.PackagedWeightKg))
                        .ForMember(dest => dest.Width, opt => opt.MapFrom(src => src.PackagedWidth))
-                       .ForMember(dest => dest.WeightKg, opt => opt.MapFrom(src => src.PackagedWeightKg));
+                       .ForMember(dest => dest.WeightKg, opt => opt.MapFrom(src => src.PackagedWeightKg))
+                       .ForMember(dest => dest.ActivateIfPossible, opt => opt.MapFrom(src => src.ActivateIfPossible=="S"));
                        //.ForMember(dest => dest.MeasurementUnit, opt => opt.MapFrom(src => src.Stmpdh_Unimed));
 
                        configuration.CreateMap<Stmpdh, ProductDTO>()

@@ -62,7 +62,7 @@ namespace RESTClientIntercapVTEX.Client
             else
             {
                 
-                _logger.Information($"Recurso {contentString} actualizado en la ruta {path} exitosamente.");
+             //   _logger.Information($"Recurso {contentString} actualizado en la ruta {path} exitosamente.");
             }
 
             return response.IsSuccessStatusCode;

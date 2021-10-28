@@ -10,5 +10,8 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
 {
     public interface IProductsSKURealRepository : IRepository<Stmpdh_Real>
     {
+
+        Task<IEnumerable<Stmpdh_Real>> GetSkuForInventory(CancellationToken cancellationToken, int take);
+        Task<IEnumerable<Stmpdh_Real>> GetSkuForFiles(CancellationToken cancellationToken, int take);
     }
 }

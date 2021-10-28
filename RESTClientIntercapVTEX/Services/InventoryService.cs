@@ -39,35 +39,30 @@ namespace RESTClientIntercapVTEX.Services
         public async Task<bool> DequeueProcessAndCheckIfContinueAsync(CancellationToken cancellationToken)
         {
             bool succesOperation;
-            string previousTippro = "";
-            string previousArtcod = "";
-            var items = await _repository.ProductsSKU.GetInventoryForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE);
 
-            if (!items.Any()) return false;
+            var itemsSku = await _repository.ProductsSKUReal.GetSkuForInventory(cancellationToken, MAX_ELEMENTS_IN_QUEUE);
+      
 
-            foreach (var item in items)
+            if (!itemsSku.Any()) return false;
+
+            foreach (var itemSku in itemsSku)
             {
-                
-                succesOperation = await _inventoryClient.PutInventoryAsync(item, item.Id, item.WarehouseId,cancellationToken);
-                if (succesOperation)
+                var itemsInventory = await _repository.ProductsSKU.GetInventoryForVTEX(cancellationToken, itemSku.Usr_Stmpdh_IdSKUvtex);
+                foreach (var item in itemsInventory)
                 {
-
-                    if ((item.Stmpdh_Tippro != previousTippro || item.Stmpdh_Artcod != previousArtcod) && previousTippro != "")
-                    {
-                        Stmpdh_Real inventoryTransfered = await _repository.ProductsSKUReal.Get(cancellationToken, new object[] { previousTippro.Trim(), previousArtcod.Trim() });
-                        inventoryTransfered.Usr_Vtex_Stktra = "S";
-
-                        await _repository.Complete();
-
-                        _logger.Information($"Marca producto {previousTippro} - {previousArtcod} como transferido");
-                    }
-                    
+                    succesOperation = await _inventoryClient.PutInventoryAsync(item, item.Id, item.WarehouseId,cancellationToken);
                 }
-                previousTippro = item.Stmpdh_Tippro;
-                previousArtcod = item.Stmpdh_Artcod;
+
+                Stmpdh_Real inventoryTransfered = await _repository.ProductsSKUReal.Get(cancellationToken, new object[] { itemSku.Stmpdh_Tippro.Trim(), 
+                                                                                                                          itemSku.Stmpdh_Artcod.Trim() });
+                inventoryTransfered.Usr_Vtex_Stktra = "S";
+
+                _logger.Information($"Marca producto {itemSku.Stmpdh_Tippro} - {itemSku.Stmpdh_Artcod} como transferidos");
+                await _repository.Complete();
+
             }
-            
-            return items.Count() == MAX_ELEMENTS_IN_QUEUE;
+           
+            return itemsSku.Count() == MAX_ELEMENTS_IN_QUEUE;
         }
     }
 }

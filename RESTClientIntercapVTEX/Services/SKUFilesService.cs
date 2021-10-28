@@ -37,64 +37,47 @@ namespace RESTClientIntercapVTEX.Services
 
         public async Task<bool> DequeueProcessAndCheckIfContinueAsync(CancellationToken cancellationToken)
         {
-            bool succesOperation = false;
+            bool succesOperation = true;
             VTEXNewIDResponse succesOperationWithNewID = new VTEXNewIDResponse();
-            
-            var items = _mapper.Map<IEnumerable<Usr_Stimpr>, IEnumerable<SKUFileDTO>>(await _repository.SKUFiles.GetForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
 
-            if (!items.Any()) return false;
+            var itemsSku = await _repository.ProductsSKUReal.GetSkuForFiles(cancellationToken, MAX_ELEMENTS_IN_QUEUE);
+            //var items = _mapper.Map<IEnumerable<Usr_Stimpr>, IEnumerable<SKUFileDTO>>(await _repository.SKUFiles.GetForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
 
-            int skuIdAux = 0;
+            if (!itemsSku.Any()) return false;
 
-            foreach (var item in items)
+            foreach (var itemSku in itemsSku)
             {
-                item.Url = $"{Configuration["VTEX:ImagesBasePath"]}/{item.Url}.jpg";
-                switch (item.Sfl_TableOperation)
+                succesOperation = true;
+                await _SKUFilesClient.DeleteAllSkuAsync(itemSku.Usr_Stmpdh_IdSKUvtex, cancellationToken);
+                var itemsFiles = _mapper.Map<IEnumerable<Usr_Stimpr>, IEnumerable<SKUFileDTO>>(await _repository.SKUFiles.GetForVTEX(cancellationToken, itemSku.Usr_Stmpdh_IdSKUvtex));
+                
+                foreach (var item in itemsFiles)
                 {
-                    case "INSERT":
-                    case "UPDATE":
-                        succesOperationWithNewID = await _SKUFilesClient.PostFileWithNewIDAsync(item,item.SKUId, cancellationToken);
-                        break;
-                    case "DELETE":
-                        if (item.Id != 0) 
-                        {
-                            succesOperation = await _SKUFilesClient.DeleteFileAsync(item.SKUId, item.Id, cancellationToken);
-                        }
-                        break;
-                    default:
-                        break;
+                    item.Url= $"{Configuration["VTEX:ImagesBasePath"]}/{item.Url}.jpg";
+                   
+                    succesOperationWithNewID = await _SKUFilesClient.PostFileWithNewIDAsync(item,item.SKUId, cancellationToken);
+                   
+                    if (!succesOperationWithNewID.Success)
+                    {
+                        succesOperation = false;
+                    }   
                 }
 
-                if (succesOperation || succesOperationWithNewID.Success)
+                if (succesOperation)
                 {
-
-                    Usr_Stimpr SKUFileTransfered = await _repository.SKUFiles.Get(cancellationToken, new object[] { item.RowId });
-                    Usr_Stimpr_Real SKUFileReal = await _repository.SKUFilesReal
-                                                                    .Get(cancellationToken, new object[] { SKUFileTransfered.Usr_Stimpr_Tippro.Trim(),
-                                                                                                            SKUFileTransfered.Usr_Stimpr_Artcod.Trim(),
-                                                                                                            SKUFileTransfered.Usr_Stimpr_Orden});
-
-
-                    SKUFileTransfered.Usr_Vtex_Transf = "S";
+                    Stmpdh_Real SkuReal = await _repository.ProductsSKUReal
+                                                                         .Get(cancellationToken, new object[] { itemSku.Stmpdh_Tippro.Trim(),
+                                                                                                                itemSku.Stmpdh_Artcod.Trim()});
                     if (succesOperationWithNewID.Success)
                     {
-                        SKUFileReal.Usr_Stimpr_Idvtex = succesOperationWithNewID.NewId;
-                        SKUFileTransfered.Usr_Stimpr_Idvtex = succesOperationWithNewID.NewId;
+                        SkuReal.Usr_Vtex_Imgtra = "S";
                     }
-                         
-                    await _repository.Complete();
-                }
-                else
-                {
-                    
-                    Usr_Stimpr SKUFileTransfered = await _repository.SKUFiles.Get(cancellationToken, new object[] { item.RowId });
-                    SKUFileTransfered.Usr_Vtex_Transf = "E";
-                    
+
                     await _repository.Complete();
                 }
 
             }
-            return items.Count() == MAX_ELEMENTS_IN_QUEUE;
+            return itemsSku.Count() == MAX_ELEMENTS_IN_QUEUE;
         }
     }
 

@@ -10,6 +10,6 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
 {
     public interface ISKUFilesRepository : IRepository<Usr_Stimpr>
     {
-        Task<IEnumerable<Usr_Stimpr>> GetForVTEX(CancellationToken cancellationToken, int limit);
+        Task<IEnumerable<Usr_Stimpr>> GetForVTEX(CancellationToken cancellationToken, int? limit);
     }
 }

@@ -293,6 +293,12 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasColumnName("USR_VTEX_STKTRA")
                     .IsFixedLength(true);
 
+                entity.Property(e => e.Usr_Vtex_Imgtra)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasColumnName("USR_VTEX_IMGTRA")
+                    .IsFixedLength(true);
+
                 entity.Property(e => e.Usr_Vtex_Pretra)
                     .HasMaxLength(1)
                     .IsUnicode(false)
@@ -2342,7 +2348,7 @@ namespace RESTClientIntercapVTEX.Entities
 
             modelBuilder.Entity<Usr_Stimpr>(entity =>
             {
-                entity.HasKey(e => new { e.RowId });
+                entity.HasKey(e => new { e.Usr_Stimpr_Tippro,e.Usr_Stimpr_Artcod,e.Usr_Stimpr_Orden });
 
                 entity.ToTable("USR_STIMPRlog");
 

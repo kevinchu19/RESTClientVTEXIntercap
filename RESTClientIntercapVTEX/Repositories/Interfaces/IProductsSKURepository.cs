@@ -12,7 +12,7 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
     {
         Task<IEnumerable<Stmpdh>> GetProductForVTEX(CancellationToken cancellationToken, int limit);
         Task<IEnumerable<Stmpdh>> GetSKUForVTEX(CancellationToken cancellationToken, int limit);
-        Task<IEnumerable<InventoryDTO>> GetInventoryForVTEX(CancellationToken cancellationToken, int limit);
+        Task<IEnumerable<InventoryDTO>> GetInventoryForVTEX(CancellationToken cancellationToken, int? skuId );
         Task<IEnumerable<PricesDTO>> GetPricesForVTEX(CancellationToken cancellationToken, int limit);
 
     }

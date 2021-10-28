@@ -73,9 +73,9 @@ namespace RESTClientIntercapVTEX.Client
 
         }
 
-        public async Task<bool> DeleteFileAsync( int resourceId, int id, CancellationToken cancellationToken)
+        public async Task<bool> DeleteAllSkuAsync( int? resourceId, CancellationToken cancellationToken)
         {
-            var request = new HttpRequestMessage(HttpMethod.Delete, $"{_path}/{resourceId}/file/{id}")
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"{_path}/{resourceId}/file")
             { };
             request.Headers.Add("X-VTEX-API-AppKey", _appKey);
             request.Headers.Add("X-VTEX-API-AppToken", _appToken);
@@ -87,16 +87,16 @@ namespace RESTClientIntercapVTEX.Client
                 try
                 {
                     var content = await JsonSerializer.DeserializeAsync<VTEXErrorResponse>(await response.Content.ReadAsStreamAsync());
-                    _logger.Error($"No se puede borrar el recurso {id} en la ruta `{_path}`, el statuscode fue `{response.StatusCode}` y el mensaje de VTEX:`{content.Message}`");
+                    _logger.Error($"No se puede borrar el recurso en la ruta `{_path}/{resourceId}/file`, el statuscode fue `{response.StatusCode}` y el mensaje de VTEX:`{content.Message}`");
                 }
                 catch
                 {
-                    _logger.Error($"No se puede borrar el recurso {id} en la ruta `{_path}`, el statuscode fue `{response.StatusCode}`");
+                    _logger.Error($"No se puede borrar el recurso en la ruta `{_path}/{resourceId}/file`, el statuscode fue `{response.StatusCode}`");
                 }
             }
             else
             {
-                _logger.Information($"Recurso {id} actualizado en la ruta {_path} exitosamente ");
+                _logger.Information($"Se borraron todas las imagenes en la ruta {_path}/{resourceId}/file exitosamente ");
             }
 
             return response.IsSuccessStatusCode;

@@ -59,7 +59,7 @@ namespace RESTClientIntercapVTEX.Repositories
 
         }
 
-        public async Task<IEnumerable<InventoryDTO>> GetInventoryForVTEX(CancellationToken cancellationToken, int limit)
+        public async Task<IEnumerable<InventoryDTO>> GetInventoryForVTEX(CancellationToken cancellationToken, int? skuId)
         {
             List<InventoryDTO> response = new List<InventoryDTO>();
 
@@ -70,7 +70,7 @@ namespace RESTClientIntercapVTEX.Repositories
                 {
 
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@Limit", limit));
+                    cmd.Parameters.Add(new SqlParameter("@SkuId", skuId));
 
                     await sql.OpenAsync();
 

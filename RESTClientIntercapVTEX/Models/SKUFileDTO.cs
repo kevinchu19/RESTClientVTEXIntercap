@@ -24,6 +24,12 @@ namespace RESTClientIntercapVTEX.Models
         public string Sfl_TableOperation { get; set; }
         [JsonIgnore]
         public int RowId { get; set; }
+        [JsonIgnore]
+        public string Usr_Stimpr_Tippro { get; set; }
+
+        [JsonIgnore]
+        public string Usr_Stimpr_Artcod { get; set; }
+        
 
     }
 }
