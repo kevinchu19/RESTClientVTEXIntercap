@@ -188,7 +188,7 @@ namespace RESTClientIntercapVTEX.Repositories.Persistance
             {
                 if (_productsSKUReal == null)
                 {
-                    _productsSKUReal = new ProductsSKURealRepository(Context);
+                    _productsSKUReal = new ProductsSKURealRepository(Context, Configuration);
                 }
                 return _productsSKUReal;
             }

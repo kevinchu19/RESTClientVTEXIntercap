@@ -42,16 +42,33 @@ namespace RESTClientIntercapVTEX.Builder
         public UsrDspemlBuilder setHeader(OrderDTO orderHeader)
         {
             Usr_Dspeml_Id = orderHeader.orderId;
-            Usr_Dspeml_Amount = orderHeader.totals.Where(c => c.id == "Items").FirstOrDefault().value;
-            Usr_Dspeml_Shicos = orderHeader.totals.Where(c => c.id == "Shipping").FirstOrDefault().value;
+            Usr_Dspeml_Amount = orderHeader.totals.Where(c => c.id == "Items").FirstOrDefault().value/100;
+            Usr_Dspeml_Shicos = orderHeader.totals.Where(c => c.id == "Shipping").FirstOrDefault().value/100;
             Usr_Dspeml_Paprov = 0;
             Usr_Dspeml_Fchmov = Convert.ToDateTime(orderHeader.creationDate);
             Usr_Dspeml_Nrocta = "004333";
             Usr_Dspeml_Prcint = "S";
             Usr_Dspeml_Prceti = "S";
             Usr_Dspeml_Cenvin = 0;
+            
             return this;
         }
+
+        //public UsrDspemlBuilder addShipping(List<OrderTotalsDTO> totals)
+        //{
+        //    foreach (OrderTotalsDTO total in totals)
+        //    {
+        //        if (total.id == "Shipping")
+        //        {
+        //            ShippingData.Add(
+        //                    new Usr_Dscont()
+        //                    {
+        //                        shicos
+        //                    }
+        //                )
+        //        }
+        //    }
+        //}
 
         public UsrDspemlBuilder addContacts (OrderClientProfileDataDTO orderClientProfile,OrderAddressDTO orderShippingData)
         {
@@ -85,7 +102,7 @@ namespace RESTClientIntercapVTEX.Builder
                     Payments.Add(new Usr_Dspaym()
                     {
                         Usr_Dspaym_Inteid = payment.id,
-                        Usr_Dspaym_Amount = payment.value,
+                        Usr_Dspaym_Amount = payment.value/100,
                         Usr_Dspaym_Status = "Approved",
                         Usr_Dspaym_Method =payment.paymentSystemName
                     });

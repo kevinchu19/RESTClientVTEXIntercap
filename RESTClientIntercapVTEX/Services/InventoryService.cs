@@ -53,12 +53,17 @@ namespace RESTClientIntercapVTEX.Services
                     succesOperation = await _inventoryClient.PutInventoryAsync(item, item.Id, item.WarehouseId,cancellationToken);
                 }
 
-                Stmpdh_Real inventoryTransfered = await _repository.ProductsSKUReal.Get(cancellationToken, new object[] { itemSku.Stmpdh_Tippro.Trim(), 
-                                                                                                                          itemSku.Stmpdh_Artcod.Trim() });
-                inventoryTransfered.Usr_Vtex_Stktra = "S";
+                //15/01/2022: Reemplazo EF porque no actualiza como transferido
+                //Stmpdh_Real inventoryTransfered = await _repository.'ProductsSKUReal.Get(cancellationToken, new object[] { itemSku.Stmpdh_Tippro.Trim(), 
+                //                                                                                                          itemSku.Stmpdh_Artcod.Trim() });
+                //inventoryTransfered.Usr_Vtex_Stktra = "S";
+                //await _repository.Complete();
+
+                await _repository.ProductsSKUReal.MarcarStockTransferido(cancellationToken, itemSku.Stmpdh_Tippro.Trim(), itemSku.Stmpdh_Artcod.Trim());
 
                 _logger.Information($"Marca producto {itemSku.Stmpdh_Tippro} - {itemSku.Stmpdh_Artcod} como transferidos");
-                await _repository.Complete();
+                
+                
 
             }
            

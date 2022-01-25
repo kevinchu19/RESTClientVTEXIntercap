@@ -9,12 +9,16 @@ using System.Threading.Tasks;
 using System.Threading;
 using Microsoft.Extensions.Configuration;
 
+
 namespace RESTClientIntercapVTEX.Repositories
 {
     public class ProductsFatherRealRepository : RepositoryBase<Usr_Stmpph_Real>, IProductsFatherRealRepository
     {
         public ProductsFatherRealRepository(ApiIntercapContext context) : base(context)
-        { }
+        {
+           
+        }
 
+       
     }
 }

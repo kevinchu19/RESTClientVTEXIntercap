@@ -3009,6 +3009,17 @@ namespace RESTClientIntercapVTEX.Entities
                     .HasColumnType("numeric(18, 4)")
                     .HasColumnName("SAR_FCRMVI_CANTID");
 
+                entity.Property(e => e.Usr_Fcrmvi_Bonice)
+                    .HasColumnType("numeric(18, 6)")
+                    .HasColumnName("USR_FCRMVI_BONICE");
+                entity.Property(e => e.Usr_Fcrmvi_Coecar)
+                    .HasColumnType("numeric(18, 6)")
+                    .HasColumnName("USR_FCRMVI_COECAR");
+
+                entity.Property(e => e.Usr_Fcrmvi_Prevtx)
+                    .HasColumnType("numeric(18, 6)")
+                    .HasColumnName("USR_FCRMVI_PREVTX");
+
                 entity.Property(e => e.Sar_Fcrmvi_Codapl)
                     .HasMaxLength(6)
                     .IsUnicode(false)

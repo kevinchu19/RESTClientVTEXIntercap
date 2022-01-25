@@ -13,5 +13,6 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
 
         Task<IEnumerable<Stmpdh_Real>> GetSkuForInventory(CancellationToken cancellationToken, int take);
         Task<IEnumerable<Stmpdh_Real>> GetSkuForFiles(CancellationToken cancellationToken, int take);
+        Task MarcarStockTransferido(CancellationToken cancellationToken, string tippro, string artcod);
     }
 }

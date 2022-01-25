@@ -28,6 +28,9 @@ namespace RESTClientIntercapVTEX.Entities
         public string Usr_Fcrmvi_Deposi { get; set; }
         public string Usr_Fcrmvi_Sector { get; set; }
         public string Usr_Fcrmvi_Selsla { get; set; }
+        public decimal? Usr_Fcrmvi_Bonice { get; set; }
+        public decimal? Usr_Fcrmvi_Coecar { get; set; }
+        public decimal? Usr_Fcrmvi_Prevtx { get; set; }
 
         public DateTime? Sar_Fc_Fecalt { get; set; } = DateTime.Now;
         public DateTime? Sar_Fc_Fecmod { get; set; } = DateTime.Now;

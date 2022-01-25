@@ -459,6 +459,18 @@ namespace RESTClientIntercapVTEX.Entities.Test
                     .HasMaxLength(6)
                     .IsUnicode(false)
                     .HasColumnName("USR_FCRMVI_SECTOR");
+
+                entity.Property(e => e.Usr_Fcrmvi_Prevtx)
+                    .HasColumnType("numeric(18, 6)")
+                    .HasColumnName("USR_FCRMVI_PREVTX");
+
+                entity.Property(e => e.Usr_Fcrmvi_Bonice)
+                    .HasColumnType("numeric(18, 6)")
+                    .HasColumnName("USR_FCRMVI_BONICE");
+                entity.Property(e => e.Usr_Fcrmvi_Coecar)
+                    .HasColumnType("numeric(18, 6)")
+                    .HasColumnName("USR_FCRMVI_COECAR");
+
             });
 
             modelBuilder.Entity<Sar_Fcrmvt>(entity =>

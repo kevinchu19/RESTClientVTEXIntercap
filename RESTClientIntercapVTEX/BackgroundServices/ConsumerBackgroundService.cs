@@ -101,7 +101,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                 {
                     try
                     {
-                        //await ExecFeedServiceAsync(stoppingToken);
+                        await ExecFeedServiceAsync(stoppingToken);
                     }
                     catch (Exception ex)
                     {
@@ -114,7 +114,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
 
                     try
                     {
-                        //await ExecServiceAsync(_ordersService, stoppingToken);
+                        await ExecServiceAsync(_ordersService, stoppingToken);
                         await ExecServiceAsync(_categoryService, stoppingToken);
                         await ExecServiceAsync(_brandsService, stoppingToken);
                         await ExecServiceAsync(_specificationGroupService, stoppingToken);

@@ -88,10 +88,10 @@ namespace RESTClientIntercapVTEX
 
                    //Add DbContext
                    services.AddDbContext<ApiIntercapContext>(options =>
-                       options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")).EnableSensitiveDataLogging());
+                       options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
 
                    services.AddDbContext<ApiIntercapTestContext>(options =>
-                       options.UseSqlServer(Configuration.GetConnectionString("TestConnectionString")).EnableSensitiveDataLogging());
+                       options.UseSqlServer(Configuration.GetConnectionString("TestConnectionString")));
 
 
                    // Add HttpClient
@@ -365,6 +365,7 @@ namespace RESTClientIntercapVTEX
 
                    services.AddHostedService<ConsumerBackgroundService>();
 
+                   _logger.Information("hola");
 
                });
             //ConfigureServices(services);

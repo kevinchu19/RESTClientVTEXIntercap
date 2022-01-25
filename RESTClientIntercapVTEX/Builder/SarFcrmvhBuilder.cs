@@ -19,7 +19,9 @@ namespace RESTClientIntercapVTEX.Builder
         private string Sar_Fcrmvh_Codemp { get; set; }
         private string Sar_Fcrmvh_Modfor { get; set; }
         private string Sar_Fcrmvh_Codfor { get; set; }
-        
+
+        private string Sar_Fcrmvh_Codlis { get; set; }
+
         private readonly List<Sar_Fcrmvi> Items = new List<Sar_Fcrmvi>();
         
         public SarFcrmvhBuilder()
@@ -36,9 +38,12 @@ namespace RESTClientIntercapVTEX.Builder
             Sar_Fcrmvh_Cirapl = "0220";
             Sar_Fcrmvh_Codemp = "TEM";
             Sar_Fcrmvh_Modfor = "FC";
-            Sar_Fcrmvh_Codfor = "NPVTEX";             
+            Sar_Fcrmvh_Codfor = "NPVTEX";
+            Sar_Fcrmvh_Codlis = "A";
             return this;
         }
+
+        
 
         public SarFcrmvhBuilder addItems(string orderId,IEnumerable<OrderItemsDTO> orderItems, OrderShippingDataDTO orderShippingData)
         {
@@ -52,10 +57,13 @@ namespace RESTClientIntercapVTEX.Builder
                     Sar_Fcrmvi_Tippro = item.refId.Substring(0, 3),
                     Sar_Fcrmvi_Artcod = item.refId.Substring(3, 9),
                     Sar_Fcrmvi_Cantid = item.quantity,
-                    Sar_Fcrmvi_Precio = item.price,
+                    Sar_Fcrmvi_Precio = null,
                     Usr_Fcrmvi_Deposi = orderShippingData.logisticsInfo[orderItem.i].deliveryIds[0].warehouseId,
                     Usr_Fcrmvi_Sector = "0",
-                    Usr_Fcrmvi_Selsla = orderShippingData.logisticsInfo[orderItem.i].selectedSla
+                    Usr_Fcrmvi_Selsla = orderShippingData.logisticsInfo[orderItem.i].selectedSla,
+                    Usr_Fcrmvi_Bonice = 0,
+                    Usr_Fcrmvi_Coecar = 0,
+                    Usr_Fcrmvi_Prevtx = item.price / 100
                 });
             }
             

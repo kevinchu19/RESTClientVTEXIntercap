@@ -58,7 +58,7 @@ namespace RESTClientIntercapVTEX.Entities
         public string Sar_Fcrmvh_Sucurs { get; set; }
         public string Sar_Fcrmvh_Vnddor { get; set; }
         public string Sar_Fcrmvh_Textos { get; set; }
-        public string Sar_Fcrmvh_Ejeaut { get; set; } = "N";
+        public string Sar_Fcrmvh_Ejeaut { get; set; } = "S";
         public string Sar_Fcrmvh_Codjob { get; set; } = "USR_FC";
         public string Sar_Fcrmvh_Cofdeu { get; set; }
         public string Sar_Fcrmvh_Coffac { get; set; }
