@@ -14,5 +14,10 @@ namespace RESTClientIntercapVTEX.Repositories.Interfaces
         Task<IEnumerable<Stmpdh_Real>> GetSkuForInventory(CancellationToken cancellationToken, int take);
         Task<IEnumerable<Stmpdh_Real>> GetSkuForFiles(CancellationToken cancellationToken, int take);
         Task MarcarStockTransferido(CancellationToken cancellationToken, string tippro, string artcod);
+        Task MarcarProductoTransferido(CancellationToken cancellationToken, string tippro, string artcod, int id);
+        Task MarcarSKUTransferido(CancellationToken cancellationToken, string tippro, string artcod, int id);
+        Task MarcarSKUActivado(CancellationToken cancellationToken, string tippro, string artcod);
+        Task MarcarAtributosEnviados(CancellationToken cancellationToken, string tippro, string artcod);
+        Task MarcarPrecioEnviado(CancellationToken cancellationToken, string tippro, string artcod);
     }
 }

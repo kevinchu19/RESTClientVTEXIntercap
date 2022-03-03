@@ -45,5 +45,76 @@ namespace RESTClientIntercapVTEX.Repositories
         }
 
 
+        public async Task MarcarSKUTransferido(CancellationToken cancellationToken, string tippro, string artcod, int id)
+        {
+            using (SqlConnection sql = new SqlConnection(Configuration.GetConnectionString("DefaultConnectionString")))
+            {
+                using (SqlCommand cmd = new SqlCommand($"UPDATE STMPDH SET USR_VTEX_SKUTRA = 'S'" +
+                    (id!=0 ? $", USR_STMPDH_IDSKUVTEX = {id} ":$"") +
+                    $" WHERE STMPDH_TIPPRO = '{tippro}' " +
+                    $" AND STMPDH_ARTCOD = '{artcod}'", sql))
+                {
+                    await sql.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+        }
+
+
+        public async Task MarcarProductoTransferido(CancellationToken cancellationToken, string tippro, string artcod, int id)
+        {
+            using (SqlConnection sql = new SqlConnection(Configuration.GetConnectionString("DefaultConnectionString")))
+            {
+                using (SqlCommand cmd = new SqlCommand($"UPDATE STMPDH SET USR_VTEX_TRANSF = 'S'" +
+                    (id != 0 ? $", USR_STMPDH_IDVTEX = {id} " : $"") +
+                    $"WHERE STMPDH_TIPPRO = '{tippro}' " +
+                    $" AND STMPDH_ARTCOD = '{artcod}'", sql))
+                {
+                    await sql.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+        }
+
+
+        public async Task MarcarSKUActivado(CancellationToken cancellationToken, string tippro, string artcod)
+        {
+            using (SqlConnection sql = new SqlConnection(Configuration.GetConnectionString("DefaultConnectionString")))
+            {
+                using (SqlCommand cmd = new SqlCommand($"UPDATE STMPDH SET USR_VTEX_ISACTI = 'S' WHERE STMPDH_TIPPRO = '{tippro}' " +
+                    $" AND STMPDH_ARTCOD = '{artcod}'", sql))
+                {
+                    await sql.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+        }
+
+        public async Task MarcarAtributosEnviados(CancellationToken cancellationToken, string tippro, string artcod)
+        {
+            using (SqlConnection sql = new SqlConnection(Configuration.GetConnectionString("DefaultConnectionString")))
+            {
+                using (SqlCommand cmd = new SqlCommand($"UPDATE STMPDH SET USR_VTEX_ATRTRA = 'S' WHERE STMPDH_TIPPRO = '{tippro}' " +
+                    $" AND STMPDH_ARTCOD = '{artcod}'", sql))
+                {
+                    await sql.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+        }
+
+        public async Task MarcarPrecioEnviado(CancellationToken cancellationToken, string tippro, string artcod)
+        {
+            using (SqlConnection sql = new SqlConnection(Configuration.GetConnectionString("DefaultConnectionString")))
+            {
+                using (SqlCommand cmd = new SqlCommand($"UPDATE STMPDH SET USR_VTEX_PRETRA = 'S' WHERE STMPDH_TIPPRO = '{tippro}' " +
+                    $" AND STMPDH_ARTCOD = '{artcod}'", sql))
+                {
+                    await sql.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
+        }
+
     }
 }

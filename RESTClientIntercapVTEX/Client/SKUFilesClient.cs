@@ -56,13 +56,27 @@ namespace RESTClientIntercapVTEX.Client
             }
             else
             {
-                SKUFileDTO responseContent = await JsonSerializer.DeserializeAsync<SKUFileDTO>(await response.Content.ReadAsStreamAsync());
-                _logger.Information($"Recurso {contentString} dado de alta en la ruta {_path}/{Id}/file exitosamente y se le dió el id {responseContent.ArchiveId}");
-                return new VTEXNewIDResponse()
+                try
                 {
-                    Success = response.IsSuccessStatusCode,
-                    NewId = responseContent.ArchiveId
-                };
+                    SKUFileDTO responseContent = await JsonSerializer.DeserializeAsync<SKUFileDTO>(await response.Content.ReadAsStreamAsync());
+                    _logger.Information($"Recurso {contentString} dado de alta en la ruta {_path}/{Id}/file exitosamente y se le dió el id {responseContent.ArchiveId}");
+                    return new VTEXNewIDResponse()
+                    {
+                        Success = response.IsSuccessStatusCode,
+                        NewId = responseContent.ArchiveId
+                    };
+                }
+                catch (Exception)
+                {
+                    _logger.Information($"Recurso {contentString} dado de alta en la ruta {_path}/{Id}/file exitosamente, pero no se pudo recuperar el id");
+
+                    return new VTEXNewIDResponse()
+                    {
+                        Success = response.IsSuccessStatusCode,
+                        NewId = 0
+                    };
+                }
+               
             }
 
             return new VTEXNewIDResponse()

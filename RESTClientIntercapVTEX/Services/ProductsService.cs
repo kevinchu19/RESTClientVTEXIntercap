@@ -71,18 +71,20 @@ namespace RESTClientIntercapVTEX.Services
 
                             //21/10/2021: Se deja de utilizar tabla de log para enviar productos
                             //Stmpdh productSKUTransfered = await _repository.ProductsSKU.Get(cancellationToken, new object[] {item.RowId});
-                            Stmpdh_Real productSKUReal = await _repository.ProductsSKUReal
-                                                                            .Get(cancellationToken, new object[] { item.Stmpdh_Tippro.Trim(), 
-                                                                                                                   item.Stmpdh_Artcod.Trim() });
+                            //Stmpdh_Real productSKUReal = await _repository.ProductsSKUReal
+                            //                                                .Get(cancellationToken, new object[] { item.Stmpdh_Tippro.Trim(), 
+                            //                                                                                       item.Stmpdh_Artcod.Trim() });
 
 
-                            productSKUReal.Usr_Vtex_Transf = "S";
-                            //productSKUTransfered.Usr_Vtex_Transf = "S";
-                            if (succesOperationWithNewID.Success)
-                            {
-                                productSKUReal.Usr_Stmpdh_Idvtex = succesOperationWithNewID.NewId;
-                               // productSKUTransfered.Usr_Stmpdh_Idvtex = succesOperationWithNewID.NewId;
-                            }
+                            //productSKUReal.Usr_Vtex_Transf = "S";
+
+                            //if (succesOperationWithNewID.Success)
+                            //{
+                            //    productSKUReal.Usr_Stmpdh_Idvtex = succesOperationWithNewID.NewId;
+
+                            //}
+
+                            await _repository.ProductsSKUReal.MarcarProductoTransferido(cancellationToken, item.Stmpdh_Tippro.Trim(), item.Stmpdh_Artcod.Trim(), succesOperationWithNewID.NewId);
                             break;
                         case "USR_STMPPH":
                             Usr_Stmpph productFatherTransfered = await _repository.ProductsFather.Get(cancellationToken, new object[] { item.RowId });

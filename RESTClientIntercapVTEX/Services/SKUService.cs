@@ -62,31 +62,36 @@ namespace RESTClientIntercapVTEX.Services
                 {
                     if (item.RowId == 0) //Activacion de SKU
                     {
-                        Stmpdh_Real SKUReal = await _repository.ProductsSKUReal
-                                                                    .Get(cancellationToken, new object[] { item.RefId.Substring(0,3) ,
-                                                                                                               item.RefId.Substring(3,9) });
+                        //Stmpdh_Real SKUReal = await _repository.ProductsSKUReal
+                        //                                            .Get(cancellationToken, new object[] { item.RefId.Substring(0,3) ,
+                        //                                                                                       item.RefId.Substring(3,9) });
 
 
-                        SKUReal.Usr_Vtex_Isacti = "S";
+                        //SKUReal.Usr_Vtex_Isacti = "S";
 
-
+                        await _repository.ProductsSKUReal.MarcarSKUActivado(cancellationToken, item.Stmpdh_Tippro.Trim(), item.Stmpdh_Artcod.Trim());
                     } 
                     else
                     { 
                         //21/10/2021: Se deja de usar tabla de log para transferir productos
                         //Stmpdh SKUTransfered = await _repository.ProductsSKU.Get(cancellationToken, new object[] { item.RowId });
-                        Stmpdh_Real SKUReal = await _repository.ProductsSKUReal
-                                                                        .Get(cancellationToken, new object[] { item.Stmpdh_Tippro.Trim(),
-                                                                                                            item.Stmpdh_Artcod.Trim() });
-                        SKUReal.Usr_Vtex_Skutra = "S";
+                        //07/02/2022: Se deja de usar entity framework para actualizar campo
 
-                        if (succesOperationWithNewID.Success)
-                        {
-                            SKUReal.Usr_Stmpdh_IdSKUvtex = succesOperationWithNewID.NewId;
-                        }
+                        //Stmpdh_Real SKUReal = await _repository.ProductsSKUReal
+                        //                                                .Get(cancellationToken, new object[] { item.Stmpdh_Tippro.Trim(),
+                        //                                                                                    item.Stmpdh_Artcod.Trim() });
+                        //SKUReal.Usr_Vtex_Skutra = "S";
+
+                        //if (succesOperationWithNewID.Success)
+                        //{
+                        //    SKUReal.Usr_Stmpdh_IdSKUvtex = succesOperationWithNewID.NewId;
+                        //}
+
+                        await _repository.ProductsSKUReal.MarcarSKUTransferido(cancellationToken, item.Stmpdh_Tippro.Trim(), item.Stmpdh_Artcod.Trim(), succesOperationWithNewID.NewId);
+
                     }
                     
-                    await _repository.Complete();
+                    //await _repository.Complete();
                 }
                 else
                 {

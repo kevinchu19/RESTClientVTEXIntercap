@@ -22,10 +22,10 @@ namespace RESTClientIntercapVTEX.Client
             var request = new HttpRequestMessage(HttpMethod.Get, _path);
             request.Headers.Add("X-VTEX-API-AppKey", _appKey);
             request.Headers.Add("X-VTEX-API-AppToken", _appToken);
-
+            
             var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
-            if (!response.IsSuccessStatusCode) throw new Exception($"Unable to execute GET in the path `{_path}`, the status code was `{response.StatusCode}`");
-
+            if (!response.IsSuccessStatusCode) _logger.Error($"Unable to execute GET in the path `{_path}`, the status code was `{response.StatusCode}`");
+            
             var contentString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var jsonSerializerOptions = new JsonSerializerOptions
             {
