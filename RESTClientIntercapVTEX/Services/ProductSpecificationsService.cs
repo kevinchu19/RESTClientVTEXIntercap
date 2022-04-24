@@ -34,7 +34,7 @@ namespace RESTClientIntercapVTEX.Services
         public async Task<bool> DequeueProcessAndCheckIfContinueAsync(CancellationToken cancellationToken)
         {
             bool succesOperation = false;
-            VTEXNewIDResponse succesOperationWithNewID = new VTEXNewIDResponse();
+           
             
             var productSpecifications = _mapper.Map<IEnumerable<Usr_Pratri>, IEnumerable<ProductSpecificationDTO>>(await _repository.ProductsAndSKUSpecifications.GetProductSpecificationForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
             var productFatherSpecifications = _mapper.Map<IEnumerable<Usr_Stmppa>, IEnumerable<ProductSpecificationDTO>>(await _repository.ProductsFatherSpecifications.GetForVTEX(cancellationToken, MAX_ELEMENTS_IN_QUEUE));
@@ -45,6 +45,7 @@ namespace RESTClientIntercapVTEX.Services
 
             foreach (var item in items)
             {
+                VTEXNewIDResponse succesOperationWithNewID = new VTEXNewIDResponse();
                 // Put in your internal queue to process async
                 // It is not recommend to process direct here, if your systems start to get slow the item will be visible in the queue and you will process more the one time
                 switch (item.Sfl_TableOperation)

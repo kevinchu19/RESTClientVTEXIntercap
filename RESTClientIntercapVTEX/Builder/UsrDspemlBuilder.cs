@@ -101,7 +101,7 @@ namespace RESTClientIntercapVTEX.Builder
                 {
                     Payments.Add(new Usr_Dspaym()
                     {
-                        Usr_Dspaym_Inteid = payment.id,
+                        Usr_Dspaym_Inteid = payment.id == null? Guid.NewGuid().ToString():payment.id,
                         Usr_Dspaym_Amount = payment.value/100,
                         Usr_Dspaym_Status = "Approved",
                         Usr_Dspaym_Method =payment.paymentSystemName

@@ -101,7 +101,7 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                 {
                     try
                     {
-                        await ExecFeedServiceAsync(stoppingToken);
+                        //await ExecFeedServiceAsync(stoppingToken);
                     }
                     catch (Exception ex)
                     {
@@ -227,6 +227,8 @@ namespace RESTClientIntercapVTEX.BackgroundServices
                     }
                     finally
                     {
+                        _logger.Information("Feed: Release period sempahore");
+                        _semaphoreSlimPeriodFeed.Release(1);
                         if (hasMoreInThisMinute)
                         {
                             _logger.Information("Feed: Release action sempahore");

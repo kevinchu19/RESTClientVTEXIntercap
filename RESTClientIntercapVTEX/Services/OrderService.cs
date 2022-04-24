@@ -51,6 +51,8 @@ namespace RESTClientIntercapVTEX.Services
                 if (orderCreada == null)
                 {
                     OrderDTO order = await _orderClient.DequeueOrderAsync(cancellationToken, orderToHandle.Usr_Vtexha_Ordid);
+                    _logger.Information($"Se recuperó la orden {order.orderId} y fue cargada para su procesamiento.");
+
                     ordersToInsert.Add(new SarFcrmvhBuilder()
                                             .setHeader(order)
                                             .addItems(order.orderId,order.items, order.shippingData)
@@ -60,7 +62,7 @@ namespace RESTClientIntercapVTEX.Services
                                             .addContacts(order.clientProfileData, order.shippingData.address)
                                             .addPayments(order.paymentData.transactions)
                                             .Build());
-                    _logger.Information($"Se recuperó la orden {order.orderId} y fue cargada para su procesamiento.");
+                    
                 }
                 
             }

@@ -70,7 +70,7 @@ namespace RESTClientIntercapVTEX.Client
                 }
                 catch
                 {
-                    _logger.Error($"No se pudo actualizar el recurso {contentString} en la ruta `{_path}`, por error en la conexion`");
+                    _logger.Error($"No se pudo actualizar el recurso {contentString} en la ruta `{_path}/{id}`, por error en la conexion`");
                 }
 
                 if (!response.IsSuccessStatusCode)
@@ -78,16 +78,16 @@ namespace RESTClientIntercapVTEX.Client
                     try
                     {
                         var content = await JsonSerializer.DeserializeAsync<VTEXErrorResponse>(await response.Content.ReadAsStreamAsync());
-                        _logger.Error($"No se puede actualizar el recurso {contentString} en la ruta `{_path}`, el statuscode fue `{response.StatusCode}` y el mensaje de VTEX:`{content.Message}`");
+                        _logger.Error($"No se puede actualizar el recurso {contentString} en la ruta `{_path}/{id}`, el statuscode fue `{response.StatusCode}` y el mensaje de VTEX:`{content.Message}`");
                     }
                     catch 
                     {
-                        _logger.Error($"No se puede actualizar el recurso {contentString} en la ruta `{_path}`, el statuscode fue `{response.StatusCode}`");
+                        _logger.Error($"No se puede actualizar el recurso {contentString} en la ruta `{_path}/{id}`, el statuscode fue `{response.StatusCode}`");
                     }
                 }
                 else
                 {
-                    _logger.Information($"Recurso {contentString} actualizado en la ruta {_path} exitosamente ");
+                    _logger.Information($"Recurso {contentString} actualizado en la ruta {_path}/{id} exitosamente ");
                 }
 
                 return response.IsSuccessStatusCode;
